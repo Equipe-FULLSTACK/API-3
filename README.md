@@ -109,6 +109,24 @@ Equipe FULLSTACK - API 3º Semestre
             <a href="https://linkedin.com/in/">Linkedin</a>
           </td>
         </tr>
+         <tr>
+          <td>Ian Porto</td>
+          <td><img src="/readme/" width="75px" height="75px"></td>
+          <td>Desenvolvedor</td>
+          <td>
+            <a href="https://github.com/">Github</a><br>
+            <a href="https://linkedin.com/in/">Linkedin</a>
+          </td>
+        </tr>
+         <tr>
+          <td>Jean Rodrigues</td>
+          <td><img src="/readme/" width="75px" height="75px"></td>
+          <td>Desenvolvedor</td>
+          <td>
+            <a href="https://github.com/JeanRodrigues1">Github</a><br>
+            <a href="https://linkedin.com/in/">Linkedin</a>
+          </td>
+         </tr>
     </tbody>
   </table>
   <br>
