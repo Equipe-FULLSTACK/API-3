@@ -83,12 +83,12 @@ Equipe FULLSTACK - API 3º Semestre
           </td>
         </tr>
         <tr>
-          <td>Leonardo Gazola</td>
-          <td><img src="/readme/leo.jpg" width="75px" height="75px"></td>
+          <td>Juliano Prado</td>
+          <td><img src="/readme/juliano.png" width="75px" height="75px"></td>
           <td>Scrum Master</td>
           <td>
-            <a href="https://github.com/Leonardo-Gazola-Medeiros">Github</a><br>
-            <a href="https://linkedin.com/in/leonardo-gazola/">Linkedin</a>
+            <a href="https://github.com/julianopradoo">Github</a><br>
+            <a href="https://linkedin.com/in/">Linkedin</a>
           </td>
         </tr>
         <tr>
@@ -101,12 +101,12 @@ Equipe FULLSTACK - API 3º Semestre
           </td>
         </tr>
         <tr>
-          <td>Juliano Prado</td>
-          <td><img src="/readme/juliano.png" width="75px" height="75px"></td>
+          <td>Leonardo Gazola</td>
+          <td><img src="/readme/leo.jpg" width="75px" height="75px"></td>
           <td>Desenvolvedor</td>
           <td>
-            <a href="https://github.com/julianopradoo">Github</a><br>
-            <a href="https://linkedin.com/in/">Linkedin</a>
+            <a href="https://github.com/Leonardo-Gazola-Medeiros">Github</a><br>
+            <a href="https://linkedin.com/in/leonardo-gazola/">Linkedin</a>
           </td>
         </tr>
          <tr>
