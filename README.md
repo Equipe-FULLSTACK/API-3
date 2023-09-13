@@ -89,7 +89,10 @@ Para facilitar a comunicação e colaboração, notificações externas via e-ma
 *Escalabilidade*
 - RNF11: A arquitetura da plataforma deve ser dimensionada horizontalmente para suportar um aumento substancial no número de usuários e processos.
 
-**Requisitos de Interface:**
+
+#
+
+## <p align="center">Requisitos de Interface
 
 *Layout e Navegação*
 - RI1: A interface deve ter um layout limpo e organizado, com uma navegação intuitiva para permitir fácil acesso às funcionalidades.
