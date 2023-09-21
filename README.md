@@ -207,11 +207,11 @@ Para facilitar a comunicação e colaboração, notificações externas via e-ma
         </tr>
          <tr>
           <td>Ian Porto</td>
-          <td><img src="/readme/" width="75px" height="75px"></td>
+          <td><img src="/API-3/readme/Ian.jpg" width="75px" height="75px"></td>
           <td>Desenvolvedor</td>
           <td>
-            <a href="https://github.com/">Github</a><br>
-            <a href="https://linkedin.com/in/">Linkedin</a>
+            <a href="https://github.com/ianportods2004">Github</a><br>
+            <a href="https://linkedin.com/in/ian-porto-ds/">Linkedin</a>
           </td>
         </tr>
          <tr>
