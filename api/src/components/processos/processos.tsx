@@ -4,6 +4,25 @@ type Props = {}
 
 const Processos = (props: Props) => {
   return (
+<>
+
+    {/* Sidebar */}
+
+    <aside className="grid-aside">
+      <nav>
+        <ul className="nav-sidebar">
+          <li><a href="#"><img src="/icons/icon_menu.png" alt="menu" className="icon"/></a></li>
+          <li><a href="#"><img src="/icons/icon_lock.png" alt="lock" className="icon"/>Permissões</a></li>
+          <li><a href="#"><img src="/icons/icon_detail.png" alt="detail" className="icon"/>Editar Ordem</a></li>
+          <li><a href="#"><img src="/icons/icon_notification.png" alt="notification" className="icon"/>Notificações</a></li>
+          <li><a href="#"><img src="/icons/icon_graph.png" alt="graph" className="icon"/>Gráficos</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+
+
+    {/* Cards de Processos */}
 
     <main className="grid-main">
         <header>
@@ -315,7 +334,7 @@ const Processos = (props: Props) => {
 
                     <div className="card_body">
                         <span className="card_percent">60%</span>
-                        <ol classNameName="card_bargraph">
+                        <ol className="card_bargraph">
                             <li className="bargraph-item1"></li>
                             <li className="bargraph-item2"></li>
                             <li className="bargraph-item3"></li>
@@ -340,6 +359,17 @@ const Processos = (props: Props) => {
 
         </section>
     </main>
+
+
+    {/* Footer */}
+
+    <footer className="grid-footer"></footer>
+
+
+
+
+
+    </>
   )
 }
 
