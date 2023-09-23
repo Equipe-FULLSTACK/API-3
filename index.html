@@ -25,22 +25,11 @@
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/card.css">
 
-
-    <!--    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <link rel="stylesheet" href="./assets/css/header.css">
-    <link rel="stylesheet" href="./assets/css/acordeon.css">
-    <link rel="stylesheet" href="./assets/css/query.css">
-    <link rel="stylesheet" href="./assets/css/languages.css">
-    <link rel="stylesheet" href="./assets/css/portfolio.css">
-    <link rel="stylesheet" href="./assets/css/experience.css">
-    <link rel="stylesheet" href="./assets/css/skills.css"> -->
     <title>API</title>
 
 </head>
 
-<body>
+<body class="container" id="body-container">
     <header class="grid-header">
         <figure>
             <img src="../assets/img/icons/icon_ionicHealth.png" alt="iconIonicHealth">
@@ -56,8 +45,13 @@
 
     <aside class="grid-aside">
         <nav>
-            <ul class="nav-sidebar">
-                <li><a href="#"><img src="../assets/img/icons/icon_menu.png" alt="menu" class="icon"></a></li>
+            <div class="menu-icon">
+                <a href="#">
+                    <img src="../assets/img/icons/icon_menu.png" alt="menu" class="icon" id="menu-icon">
+                </a>
+
+            </div>
+            <ul class="nav-sidebar" id="menu" style="display: none;">   
                 <li><a href="#"><img src="../assets/img/icons/icon_lock.png" alt="lock" class="icon">Permissões</a></li>
                 <li><a href="#"><img src="../assets/img/icons/icon_detail.png" alt="detail" class="icon">Editar Ordem</a></li>
                 <li><a href="#"><img src="../assets/img/icons/icon_notification.png" alt="notification" class="icon">Notificações</a></li>
@@ -417,14 +411,11 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     
-    <!-- SCRIPT FONT ICONS -->
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
-
+    
     <!-- SCRIPS LOCAL -->
-    <!--   <script src="/assets/js/acordeon.js"></script>
-    <script src="/assets/js/api.js"></script>
-    <script src="/assets/js/main.js"></script> -->
+    <script src="/assets/js/main.js"></script>
+
+
 </body>
 
 </html>
