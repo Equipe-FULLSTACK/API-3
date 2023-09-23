@@ -101,7 +101,7 @@ header>nav{
     background-image: url(/assets/img/icons/icon_User.png);
 }
 
-/* .nav-sidebar{
+.nav-sidebar{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,40 +118,8 @@ header>nav{
   margin-bottom: 2rem;
 }
 
- */
+
  
- .sidebar {
-  position: fixed; /* Mantém a Sidebar fixa na tela */
-  left: 0; /* Coloca a Sidebar no lado esquerdo */
-  top: 0; /* Coloca a Sidebar no topo da tela */
-  bottom: 0; /* Estende a Sidebar até o final da tela */
-  width: 200px; /* Largura da Sidebar (ajuste conforme necessário) */
-  background-color: #333; /* Cor de fundo da Sidebar (ajuste conforme necessário) */
-  color: #fff; /* Cor do texto na Sidebar (ajuste conforme necessário) */
-  padding: 20px; /* Espaçamento interno (ajuste conforme necessário) */
-}
-
-.nav-sidebar {
-  list-style: none;
-  padding: 0;
-}
-
-.nav-sidebar li {
-  margin-bottom: 10px;
-}
-
-.nav-sidebar li a {
-  color: #fff; /* Cor do texto dos links (ajuste conforme necessário) */
-  text-decoration: none;
-}
-
-.icon {
-  width: 24px; /* Largura das imagens dos ícones (ajuste conforme necessário) */
-  height: 24px; /* Altura das imagens dos ícones (ajuste conforme necessário) */
-  margin-right: 10px;
-}
-
-
 
 
 
