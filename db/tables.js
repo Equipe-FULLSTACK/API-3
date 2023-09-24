@@ -9,13 +9,13 @@ var con = mysql.createConnection({
 
 con.connect(function(err) {
 	if (err) throw err;
-	console.log("Conectado!");
+	console.log("Conectado");
 	
 	/**/
 	//USERS
 	var sql = `CREATE TABLE users (
 		id INT NOT NULL AUTO_INCREMENT,
-		admin BOOLEAN, 
+		admin BOOLEAN DEFAULT 0, 
 		name VARCHAR(127),
 		password VARCHAR(64),
 		email VARCHAR(255),
@@ -104,10 +104,7 @@ con.connect(function(err) {
 		type TINYINT NOT NULL, 
 		typeid INT NOT NULL,
 		PRIMARY KEY (id),
-		FOREIGN KEY (user) REFERENCES users(id),
-		CONSTRAINT FK_1 FOREIGN KEY (typeid) REFERENCES processes(id),
-		CONSTRAINT FK_2 FOREIGN KEY (typeid) REFERENCES tasks(id),
-		CONSTRAINT FK_3 FOREIGN KEY (typeid) REFERENCES evidences(id)
+		FOREIGN KEY (user) REFERENCES users(id)
 	)`;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
