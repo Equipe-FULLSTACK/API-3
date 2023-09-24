@@ -1,11 +1,11 @@
 
-Equipe FULLSTACK - API 2º Semestre
+Equipe FULLSTACK - API 3º Semestre
 ==================================
 **********************************
-  Primeira Sprint - 02/04/2023
+  Primeira Sprint - 24/09/2023
   ============================
   ****************************
-###  <div align="center"> Projeto API 2º Semestre: </div>
+###  <div align="center"> Projeto API 3º Semestre: </div>
   ### <div align="center"> FATEC São José dos Campos - Prof. Jessen Vidal </div>
 
 
