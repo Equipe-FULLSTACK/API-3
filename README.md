@@ -1,4 +1,3 @@
-
 Equipe FULLSTACK - API 3º Semestre
 ==================================
 **********************************
@@ -8,6 +7,13 @@ Equipe FULLSTACK - API 3º Semestre
 
 ### <div align="center">Equipe-FULLSTACK </div>
  <div align="center"> <img src="/readme/fullstack.png" width="200" height="200"> </div>
+
+
+   ### <div align="center"> Estado Atual do Projeto: </div>
+  <div align="center">
+  <img src="/readme/index_sprint_1.png" width="640" height="360"><br>
+  <img src="/readme/dados_db.png" width="640" height="360"><br>
+  </div>
  
  
  # <div align="center"> Escopo do Projeto </div>
@@ -129,21 +135,17 @@ Para facilitar a comunicação e colaboração, notificações externas via e-ma
 
   #
   
-  ### <div align="center"> Estado Atual do Projeto: </div>
-  
 
- 
- 
- # <p align="center">Cronograma do Projeto
- 
-  
-  # <p align="center">Tecnologias Utilizadas
- 
   
   
   # <p align="center">Product Backlog
   
+  <div align="center">
 
+  <img src="/readme/backlog_produto.jfif" width="640" height="360"><br>
+
+  </div>
+  
   <br>
   <br>
  
@@ -216,7 +218,7 @@ Para facilitar a comunicação e colaboração, notificações externas via e-ma
         </tr>
          <tr>
           <td>Jean Rodrigues</td>
-          <td><img src="/readme/" width="75px" height="75px"></td>
+          <td><img src="/readme/jean.png" width="75px" height="75px"></td>
           <td>Desenvolvedor</td>
           <td>
             <a href="https://github.com/JeanRodrigues1">Github</a><br>
@@ -238,7 +240,7 @@ Para facilitar a comunicação e colaboração, notificações externas via e-ma
   
   # <p align="center">SPRINTS
 
-  ## <a href="">Primeira Sprint</a>
+  ## <a href="https://github.com/Equipe-FULLSTACK/API-3/tree/Sprint1">Primeira Sprint</a>
   ## <br>
   ## <a href="">Segunda Sprint</a>
   ## <br>
