@@ -84,6 +84,82 @@ app.get("/p", (req, res) => {
 		});
 	});
 });
+app.post("/p", (req, res) => {
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log("Conectado");
+		
+		var sql = "INSERT INTO tasks (process, status, name, deadline, description) VALUES (?)";
+		var values = [req.body.id, req.body.status, req.body.name, req.body.deadline, req.body.description];
+		con.query(sql, [values], function (err, result, fields) {
+			if (err) throw err;
+		});
+		
+		var result2 = 0;
+		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM processes WHERE id = ?';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			result2 = result;
+		});
+		
+		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks WHERE process = ?';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			console.log(result2);
+			
+			res.render('process', { dadost: result, dadosp: result2 });
+		});
+	});
+});
+
+app.get("/t", (req, res) => {
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log("Conectado");
+
+		var result2 = 0;
+		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks WHERE id = ?';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			result2 = result;
+		});
+		
+		var sql = 'SELECT id, task, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, description, type, url FROM evidences WHERE task = ?';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			console.log(result2);
+			
+			res.render('evidences', { dadose: result, dadost: result2 });
+		});
+	});
+});
+app.post("/t", (req, res) => {
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log("Conectado");
+		
+		var sql = "INSERT INTO evidences (task, status, name, description, type, url) VALUES (?)";
+		var values = [req.body.id, req.body.status, req.body.name, req.body.description, req.body.type, req.body.url];
+		con.query(sql, [values], function (err, result, fields) {
+			if (err) throw err;
+		});
+		
+		var result2 = 0;
+		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks WHERE id = ?';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			result2 = result;
+		});
+		
+		var sql = 'SELECT id, task, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, description, type, url FROM evidences WHERE task = ?';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			console.log(result2);
+			
+			res.render('evidences', { dadose: result, dadost: result2 });
+		});
+	});
+});
 
 
 app.listen(PORT, () => {

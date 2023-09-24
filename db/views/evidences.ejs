@@ -2,15 +2,15 @@
 <html lang = "en">
 <head>
   <meta charset = "UTF-8">
-  <title>Tasks</title>
+  <title>Evidences</title>
 </head>
 <body>
-<a href="./">VOLTAR</a>&nbsp; &nbsp; <%= dadosp[0].name.toUpperCase() %>
+<a href="/p?p<%= dadost[0].process %>">VOLTAR</a>&nbsp; &nbsp; <%= dadost[0].name.toUpperCase() %>
 <br>
 	<table>
-	<% if (dadosp.length !== 0) { %>
-			<% dadosp.forEach(function(data, index) { %>
-				<tr><% processo = data.id %>
+	<% if (dadost.length !== 0) { %>
+			<% dadost.forEach(function(data, index) { %>
+				<tr><% task = data.id %>
 				<td><center><%= data.id %></center></td>
 					<td><center><%= data.status %></center></td>
 					<td><center><%= data.name %></center></td>
@@ -25,31 +25,32 @@
 			<th>STATUS</th>
 			<th>NOME</th>
 			<th>CREATED</th>
-			<th>DEADLINE</th>
 			<th>DESCRIPTION</th>
-			<th>EVIDENCES</th>
+			<th>TYPE</th>
+			<th>URL</th>
 		</tr>
-		<% if (dadost.length !== 0) { %>
-			<% dadost.forEach(function(data, index) { %>
+		<% if (dadose.length !== 0) { %>
+			<% dadose.forEach(function(data, index) { %>
 				<tr>
 					<td><center><%= data.id %></center></td>
 					<td><center><%= data.status %></center></td>
 					<td><center><%= data.name %></center></td>
 					<td><center><%= data.created %></center></td>
-					<td><center><%= data.deadline %></center></td>
 					<td><center><%= data.description %></center></td>
-					<td><center><a href="/t?t<%= data.id %>">Visualizar</a></center></td>
+					<td><center><%= data.type %></center></td>
+					<td><center><%= data.url %></center></td>
 				</tr>
 			<% }); %>
 		<% } %>
 		<form action="" method="POST"><tr>
 		
-			<td><input type="hidden" id="name" name="id" value=<%= processo %>></td>
+			<td><input type="hidden" id="name" name="id" value=<%= task %>></td>
 			<td><input type="text" id="status" name="status"></td>
 			<td><input type="text" id="name" name="name"></td>
 			<td></td>
-			<td><input type="text" id="deadline" name="deadline"></td>
 			<td><input type="text" id="description" name="description"></td>
+			<td><input type="text" id="type" name="type"></td>
+			<td><input type="text" id="url" name="url"></td>
 			<td><button type="submit">ADICIONAR</button></td>
 			<br>
 		<tr></form>
