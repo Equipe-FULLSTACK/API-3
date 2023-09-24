@@ -35,23 +35,45 @@ app.get("/", (req, res) => {
 		if (err) throw err;
 		console.log("Conectado");
 		
-		var sql = 'SELECT * FROM processes';
+		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM processes';
 		con.query(sql, function (err, result, fields) {
 			if (err) throw err;
-			res.render('index', { title: 'Teste', dados: result});
+			//console.log(result);
+			res.render('index', { dadosp: result });
+		});
+	});
+});
+app.post("/", (req, res) => {
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log("Conectado");
+		
+		var sql = 'INSERT INTO processes (status, name, deadline, description) VALUES (?)';
+		var values = [req.body.status, req.body.name, req.body.deadline, req.body.description];
+		con.query(sql, [values], function (err, result, fields) {
+			if (err) throw err;
+		});
+		
+		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM processes';
+		con.query(sql, function (err, result, fields) {
+			if (err) throw err;
+			//console.log(result);
+			res.render('index', { dadosp: result });
 		});
 	});
 });
 
-app.get("/processo", (req, res) => {
+app.get("/p", (req, res) => {
 	con.connect(function(err) {
 		if (err) throw err;
 		console.log("Conectado");
-		console.log(req.query.id);
-		var sql = 'SELECT * FROM tasks WHERE process = ?';
-		con.query(sql, 2, function (err, result, fields) {
+
+		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM tasks WHERE process = ?';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
-			res.render('process', { title: 'Teste', tasks: result});
+			console.log(result);
+			
+			res.render('process', { dadost: result });
 		});
 	});
 });

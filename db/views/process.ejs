@@ -2,16 +2,32 @@
 <html lang = "en">
 <head>
   <meta charset = "UTF-8">
-  <title>Formulario</title>
+  <title>Tasks</title>
 </head>
 <body>
 <a href="./">VOLTAR</a><br><br>
 	TASKS: <br>
-	<% if (tasks.length !== 0) { %>
-		<% tasks.forEach(function(data, index) { %>
-			<a href="/tasks?id=<%= data.id %>"> 
-			<%= data.id %> - <%= data.name %>
-			</a><br>
-		<% }); %>
-	<% } %>
+	
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>STATUS</th>
+			<th>NOME</th>
+			<th>CREATED</th>
+			<th>DEADLINE</th>
+			<th>DESCRIPTION</th>
+		</tr>
+		<% if (dadost.length !== 0) { %>
+			<% dadost.forEach(function(data, index) { %>
+				<tr>
+					<td><center><%= data.id %></center></td>
+					<td><center><%= data.status %></center></td>
+					<td><center><%= data.name %></center></td>
+					<td><center><%= data.created %></center></td>
+					<td><center><%= data.deadline %></center></td>
+					<td><center><%= data.description %></center></td>
+				</tr>
+			<% }); %>
+		<% } %>
+	</table>
 </body>
