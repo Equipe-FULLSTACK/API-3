@@ -1,20 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 
+import "./index.css";
+import Processos from "./components/processos/processos.tsx";
 
-
-import './index.css'
-import Navbar from './components/navbar/navbar.tsx'
-import Processos from './components/processos/processos.tsx'
-
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-
-    <Navbar />
-    <body>
-    <Processos />
-    
+    <body className="container" id="body-container">
+      <Processos />
     </body>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
