@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 		if (err) throw err;
 		console.log("Conectado");
 		
-		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM processes';
+		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM processes';
 		con.query(sql, function (err, result, fields) {
 			if (err) throw err;
 			//console.log(result);
@@ -54,7 +54,7 @@ app.post("/", (req, res) => {
 			if (err) throw err;
 		});
 		
-		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM processes';
+		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM processes';
 		con.query(sql, function (err, result, fields) {
 			if (err) throw err;
 			//console.log(result);
@@ -69,13 +69,13 @@ app.get("/p", (req, res) => {
 		console.log("Conectado");
 
 		var result2 = 0;
-		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM processes WHERE id = ?';
+		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM processes WHERE id = ?';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
 			result2 = result;
 		});
 		
-		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM tasks WHERE process = ?';
+		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks WHERE process = ?';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
 			console.log(result2);
