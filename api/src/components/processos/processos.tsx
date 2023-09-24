@@ -1,9 +1,11 @@
 
-type Props = {};
 
-const Processos = (props: Props) => {
+
+
+const Processos = () => {
   return (
-    <>
+    <div className="container" id="body-container">
+      
       {/* Navbar */}
       
       <header className="grid-header">
@@ -21,12 +23,13 @@ const Processos = (props: Props) => {
 
       <aside className="grid-aside">
         <nav>
-          <ul className="nav-sidebar">
-            <li>
-              <a href="#">
-                <img src="/icons/icon_menu.png" alt="menu" className="icon" />
-              </a>
-            </li>
+        <div className="menu-icon">
+                <a href="#">
+                    <img src="/icons/icon_menu.png" alt="menu" className="icon" id="menu-icon"/>
+                </a>
+
+            </div>
+            <ul className="nav-sidebar" id="menu" style={{display: 'none'}}>  
             <li>
               <a href="#">
                 <img src="/icons/icon_lock.png" alt="lock" className="icon" />
@@ -513,7 +516,7 @@ const Processos = (props: Props) => {
       {/* Footer */}
 
       <footer className="grid-footer"></footer>
-  </>
+  </div>
   );
 };
 

@@ -126,7 +126,7 @@ header>nav{
     align-items: center;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url(/assets/img/icons/icon_User.png);
+    background-image: url(../img/icons/icon_User.png);
 }
 
 .nav-sidebar{
@@ -321,7 +321,7 @@ main>section>ol{
     position: absolute;
     right: 0px;
     color:var(--font-primary-color);
-    background-image: url(/assets/img/icons/icon_search.png);
+    background-image: url(../img/icons/icon_search.png);
     background-size: 1.5rem;
     background-repeat: no-repeat;
     background-color:var(--bg-tertiary-color);
