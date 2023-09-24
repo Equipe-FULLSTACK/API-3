@@ -27,34 +27,29 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname,'./')));
 app.use(helmet());
 app.use(limiter);
-app.set('view engine', 'ejs');
 
 
-app.get("/", (req, res) => {
+app.post("/process", (req, res) => {
 	con.connect(function(err) {
 		if (err) throw err;
 		console.log("Conectado");
 		
-		var sql = 'SELECT * FROM processes';
-		con.query(sql, function (err, result, fields) {
+		if (req.body.processID == '') {
+			var sql = 'SELECT * FROM processes';
+		} else {
+			var sql = 'SELECT * FROM processes WHERE id = ?;';
+		}
+		con.query(sql, [req.body.processID], function (err, result, fields) {
 			if (err) throw err;
-			res.render('index', { title: 'Teste', dados: result});
+			console.log([req.body.processID]);
+			res.json(result);
 		});
 	});
+});
+app.get("/process", (req, res) => {
+	res.sendFile(path.join(__dirname,'./process.html'));
 });
 
-app.get("/processo", (req, res) => {
-	con.connect(function(err) {
-		if (err) throw err;
-		console.log("Conectado");
-		console.log(req.query.id);
-		var sql = 'SELECT * FROM tasks WHERE process = ?';
-		con.query(sql, 2, function (err, result, fields) {
-			if (err) throw err;
-			res.render('process', { title: 'Teste', tasks: result});
-		});
-	});
-});
 
 
 app.listen(PORT, () => {

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset = "UTF-8">
+  <title>Formulario</title>
+</head>
+<body>
+<a href="./">VOLTAR</a><br><br>
+	TASKS: <br>
+	<% if (tasks.length !== 0) { %>
+		<% tasks.forEach(function(data, index) { %>
+			<a href="/tasks?id=<%= data.id %>"> 
+			<%= data.id %> - <%= data.name %>
+			</a><br>
+		<% }); %>
+	<% } %>
+</body>
