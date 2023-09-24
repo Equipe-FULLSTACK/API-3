@@ -21,7 +21,6 @@
 		<% if (dadosp.length !== 0) { %>
 			<% dadosp.forEach(function(data, index) { %>
 				<tr>
-					<% total = index + 1%>
 					<td><center><%= data.id %></center></td>
 					<td><center><%= data.status %></center></td>
 					<td><center><%= data.name %></center></td>
@@ -33,7 +32,7 @@
 			<% }); %>
 		<% } %>
 		<form action="" method="POST"><tr>
-			<td><center><%= total + 1 %></center></td>
+			<td></td>
 			<td><input type="text" id="status" name="status"></td>
 			<td><input type="text" id="name" name="name"></td>
 			<td></td>

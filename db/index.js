@@ -68,12 +68,19 @@ app.get("/p", (req, res) => {
 		if (err) throw err;
 		console.log("Conectado");
 
+		var result2 = 0;
+		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM processes WHERE id = ?';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			result2 = result;
+		});
+		
 		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d") AS created, DATE_FORMAT(deadline, "%y-%m-%d") AS deadline, description FROM tasks WHERE process = ?';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
-			console.log(result);
+			console.log(result2);
 			
-			res.render('process', { dadost: result });
+			res.render('process', { dadost: result, dadosp: result2 });
 		});
 	});
 });
