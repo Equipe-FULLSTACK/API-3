@@ -15,7 +15,7 @@ Equipe FULLSTACK - API 3º Semestre
   #### <div align="center"> Sprint Review 1 </div>
   <div align="center">
   
-  [<img src="https://i.ytimg.com/vi/JI90kSsBTpQ/hqdefault.jpg?s…Rh_ICAoKDAP&rs=AOn4CLDMNYU7TdEJH4mhknJojJJoiBQ2vg" width="600" height="400" />](https://www.youtube.com/watch?v=JI90kSsBTpQ)
+  [<img src="https://i.ytimg.com/vi/D25dlZTuNJY/hqdefault.jpg?s…RhDIFQoZTAP&rs=AOn4CLCwS-tO39o4oldZxXAQP_gPy8t2jA" width="600" height="400" />](https://www.youtube.com/watch?v=D25dlZTuNJY)
 
   </div>
 
