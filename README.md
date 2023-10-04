@@ -10,6 +10,16 @@ Equipe FULLSTACK - API 3º Semestre
 
 
    ### <div align="center"> Estado Atual do Projeto: </div>
+  <br>
+
+  #### <div align="center"> Sprint Review 1 </div>
+  <div align="center">
+  
+  [<img src="https://i.ytimg.com/vi/D25dlZTuNJY/hqdefault.jpg?s…RhDIFQoZTAP&rs=AOn4CLCwS-tO39o4oldZxXAQP_gPy8t2jA" width="600" height="400" />](https://www.youtube.com/watch?v=D25dlZTuNJY)
+
+  </div>
+
+  <br>
   <div align="center">
   <img src="/readme/index_sprint_1.png" width="640" height="360"><br>
   <img src="/readme/dados_db.png" width="640" height="360"><br>
