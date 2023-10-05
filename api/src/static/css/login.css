@@ -80,6 +80,7 @@
     position: relative;
     height: 46px;
     border-radius: 9px;
+    color: #1D1E20;
 }
 
 .login-form input::placeholder {
