@@ -1,73 +1,13 @@
+import React from 'react';
 
 
+interface dataProcess {
+  name: string;
+}
 
-
-const Processos = () => {
+const Process: React.FC<dataProcess> = ({name}) => {
   return (
-    <div className="container" id="body-container">
-      
-      {/* Navbar */}
-      
-      <header className="grid-header">
-        <figure>
-          <img src="/icons/icon_ionicHealth.png" alt="iconIonicHealth" />
-        </figure>
-        <nav>
-          <span>
-            <h3 className="user-name">João Santos da Silva</h3>
-          </span>
-        </nav>
-      </header>
-
-      {/* Sidebar */}
-
-      <aside className="grid-aside">
-        <nav>
-        <div className="menu-icon">
-                <a href="#">
-                    <img src="/icons/icon_menu.png" alt="menu" className="icon" id="menu-icon"/>
-                </a>
-
-            </div>
-            <ul className="nav-sidebar" id="menu" style={{display: 'none'}}>  
-            <li>
-              <a href="#">
-                <img src="/icons/icon_lock.png" alt="lock" className="icon" />
-                Permissões
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img
-                  src="/icons/icon_detail.png"
-                  alt="detail"
-                  className="icon"
-                />
-                Editar Ordem
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img
-                  src="/icons/icon_notification.png"
-                  alt="notification"
-                  className="icon"
-                />
-                Notificações
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="/icons/icon_graph.png" alt="graph" className="icon" />
-                Gráficos
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-
-      {/* Cards de Processos */}
-
+    <>
       <main className="grid-main">
         <header>
           <span>
@@ -512,12 +452,8 @@ const Processos = () => {
           </ol>
         </section>
       </main>
-
-      {/* Footer */}
-
-      <footer className="grid-footer"></footer>
-  </div>
-  );
+    </>
+  )
 };
+export default Process;
 
-export default Processos;
