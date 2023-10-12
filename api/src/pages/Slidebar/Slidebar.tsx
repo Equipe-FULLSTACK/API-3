@@ -1,10 +1,14 @@
 import React from 'react';
 
-type Props = {};
 
-const Sidebar = (props: Props) => {
+interface dataSideBar {
+  name: string;
+}
+
+const SideBar: React.FC<dataSideBar> = ({name}) => {
   return (
-    <aside className="grid-aside">
+    <>
+      <aside className="grid-aside">
       <nav>
         <ul className="nav-sidebar">
           <li><a href="#"><img src="/icons/icon_menu.png" alt="menu" className="icon"/></a></li>
@@ -14,8 +18,9 @@ const Sidebar = (props: Props) => {
           <li><a href="#"><img src="/icons/icon_graph.png" alt="graph" className="icon"/>Gráficos</a></li>
         </ul>
       </nav>
-    </aside>
-  );
-}
+      </aside>
+    </>
+  )
+};
+export default SideBar;
 
-export default Sidebar;
