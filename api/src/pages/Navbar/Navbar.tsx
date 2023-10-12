@@ -11,7 +11,7 @@ const NavBar: React.FC<dataNavBar> = ({name}) => {
     <>
       <header className="grid-header">
       <figure>
-        <img src="/icons/icon_ionicHealth.png" alt="iconIonicHealth" />
+        <img src="../../assets/icons/icon_ionicHealth.png" alt="iconIonicHealth" />
       </figure>
       <nav>
         <span>
