@@ -53,14 +53,6 @@ export const Menu = styled.a`
     color: ${props => props.theme.colors.fontSecondarycolor};
 `
 
-
-
-
-
-
-
-
-
 export const UserName = styled.span`
     color: ${props => props.theme.colors.fontSecondarycolor};
     

@@ -13,6 +13,7 @@ import lock from '../../assets/icons/icon_lock.png'
 import detail from '../../assets/icons/icon_detail.png'
 import notification from '../../assets/icons/icon_notification.png'
 import graph from '../../assets/icons/icon_graph.png'
+import Process from '../Process/Process';
 
 interface dataSideBar {
   name: string;
@@ -26,12 +27,12 @@ const SideBar: React.FC<dataSideBar> = ({name}) => {
 
   const toggleDisplay = (e) => {
     e.preventDefault()
-    if (display==='none') {
-      setDisplay('block')
-    } else {
-      setDisplay('none')
+      if (display==='none') {
+        setDisplay('block')
+      } else {
+        setDisplay('none')
+      }
     }
-  }
 
   return (
       <Wrapper flexDirection='row' justifyContent='flex-start' padding='1rem'>
@@ -40,15 +41,15 @@ const SideBar: React.FC<dataSideBar> = ({name}) => {
           <Menu href="" onClick={toggleDisplay}><img src={menu} alt="lock"/></Menu>
           <Wrapper display={display} flexDirection='column' flexWrap='wrap' alignItems='flex-start' justifyContent='center' padding='1rem'>
               <Link href='#'><img src={lock} alt="lock"/>Permissões</Link>
-              <Link href='#'><img src={detail} alt="lock"/>Editar Orde</Link>
+              <Link href='#'><img src={detail} alt="lock"/>Editar Ordem</Link>
               <Link href='#'><img src={notification} alt="lock"/>Notificações</Link>
               <Link href='#'><img src={graph} alt="lock"/>Gráficos</Link>
           </Wrapper>
 
         </Wrapper>
-
+          
         <Wrapper>
-
+          <Process/>
         </Wrapper>
 
       </Wrapper>
