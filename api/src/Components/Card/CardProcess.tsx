@@ -1,8 +1,8 @@
 import React from 'react';
 import { CardWrapper, CardHeader, ProcessName, ProcessStatus, CardSubtitle, ProcessDate, ProcessHour, CardBody, CardBargraph, CardPercent, BargraphItem, CardFooter, Button } from './styles'; // Importe os estilos do arquivo de estilos
-import Bargraph from '../BarGraph/BarGraph';
+import Bargraph from '../../Components/BarGraph/BarGraph';
 import dark from '../../styles/Theme/dark';
-import ButtonDefault from '../Button/ButtonDefault/ButtonDefault';
+import ButtonDefault from '../../Components/Button/ButtonDefault/ButtonDefault';
 
 interface dataCard {
   processName: string;
