@@ -1,6 +1,5 @@
 
-
-const Login = () => {
+export default function Login() {
     return (
 
         <div className="login-container" id="fundo">
@@ -28,17 +27,15 @@ const Login = () => {
 
                     <input type="text" name="senha" id="senha" placeholder="Senha"/>
                     <div className="login-form-recuperar">
-                        Esqueceu sua senha?
+                        <a className="login-form-recuperar" href="/recuperar_senha">Esqueceu sua senha?</a>
                     </div>
                     <button type="submit">Entrar</button>
 
                 </form>
                 <div className="login-criar-conta">
-                    Não possui acesso? <a href="">Criar conta</a>
+                    Não possui acesso? <a href="/cadastro">Criar conta</a>
                 </div>
             </div>
         </div>
     );
-};
-
-export default Login;
+}

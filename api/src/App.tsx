@@ -1,14 +1,19 @@
-import React from 'react';
-import GlobalStyle from "./styles/global.ts"
-import Navbar from "./components/Navbar"
-import Menubar from "./components/Menubar"
-import PageBody from "./components/PageBody"
+import { Routes, Route } from "react-router-dom"
+import Login from './pages/Login'
+import { Cadastro } from './pages/Cadastro'
+import Process from "./pages/Process"
 
+function App() {
 
-const App:React.FC = ()=> (
-  <>
-    <GlobalStyle/>
-  </>
-)
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/processos" element={<Process />} />
+      </Routes>
+    </>
+  )
+}
 
-export default App;
+export default App

@@ -1,0 +1,114 @@
+.login-fundo {
+    background-color: #292A2D;
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100%;
+
+}
+
+.login-container{
+    
+    margin: auto;
+    position: relative;
+    text-align: center;
+    top: 10%;
+    bottom: 10%;
+    width: 33%;
+    height: 80%; 
+    
+}
+
+.login-imagem {
+    
+    margin: auto;
+    position: relative;
+    top: 14%;
+
+}
+
+.login-form {
+    
+    margin: auto;
+    position: relative;
+    top: 20%;
+    width: 70%;
+}
+
+.login-header-main {
+    
+    margin: auto;
+    position: relative;
+    text-align: justify;
+    color: #54C5CE;
+    font-size: 28px;
+    
+}
+
+.login-header-second {
+    
+    margin:auto;
+    position: relative;
+    text-align: left;
+    color: #58595B;
+    font-size: 16px;
+    margin-top: 3%;
+}
+
+.login-form-container {
+    
+    margin: auto;
+    position: relative;
+    text-align: left;
+    margin-top: 8%;
+}
+
+.login-form-container p {
+    color: #9AF0E8;
+    font-size: 14px;
+}
+
+.login-form-recuperar {
+    color: #54C5CE;
+    margin: auto;
+    margin-top: 1%;
+    text-align: right;
+    font-size: 11px;
+}
+
+.login-form input {
+    width: 100%;
+    position: relative;
+    height: 46px;
+    border-radius: 9px;
+    color: #1D1E20;
+}
+
+.login-form input::placeholder {
+    color: #1D1E20;
+    padding-left: 10px;
+    font-size: 15px;
+}
+
+.login-form button {
+    text-align: center;
+    color: #54C5CE;
+    width: 100%;
+    height: 50px;
+    margin-top: 2%;
+    background-color: #333333;
+    border-radius: 90px;
+}
+
+.login-criar-conta {
+    text-align: center;
+    margin: auto;
+    margin-top: 14%;
+    color: #58595B;
+    font-size: 14px;
+    
+}
+
+.login-criar-conta a {
+    color: #54C5CE;
+    font-size: 14px;
+}

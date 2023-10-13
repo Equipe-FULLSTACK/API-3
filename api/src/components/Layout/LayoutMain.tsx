@@ -2,7 +2,7 @@ import React from 'react';
 
 /* Pages Imports */
 import SideBar from '../Slidebar/Slidebar';
-import Process from '../Process/Process';
+import Process from '../../pages/Process';
 
 
 interface dataLayoutMain {
