@@ -17,6 +17,14 @@ export const Wrapper = styled(NavItemWrapper)`
     background-color: ${(props)=>props.backgroundColor ? props.backgroundColor  : ''}
 `
 
+export const Divider = styled.div`
+    width:100%;
+    border-bottom: 2px solid ${props => props.theme.colors.bgTertiarycolor};
+    margin-bottom: 1rem;
+    background-color: ${props => props.theme.colors.bgPrimarycolor};
+`
+
+
 export const ProcessActive = styled.h4`
     font-style: oblique;
     color: ${props => props.theme.colors.fontSecondarycolor};

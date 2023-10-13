@@ -11,6 +11,7 @@ export const CardWrapper = styled.li`
   border-radius: 1rem;
   margin: 0 1rem 1rem 1rem;
   padding: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1), 0 3px 6px rgba(0, 0, 0, .05);
 `;
 
 export const CardHeader = styled.div`
@@ -90,17 +91,11 @@ export const CardPercent = styled.span`
   font-size: 0.7rem;
 `;
 
-export const BargraphItem = styled.li`
-  border-radius: 12px;
-  border: 1px solid  ${props => props.theme.colors.bgPrimarycolor};
-  background-color: ${props => props.theme.colors.alertRedColor};
-`;
-
 export const CardFooter = styled.div`
   margin: 0 0 1rem 0;
   display: flex;
   align-content: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const Button = styled.button`
@@ -134,7 +129,7 @@ export const Button = styled.button`
 
 export const CardFooterButton = styled(Button)`
   &:hover {
-    color: ${props => props.theme.colors.fontSecondarycolor};;
+    color: ${props => props.theme.colors.fontSecondarycolor};
     opacity: 0.9;
   }
 

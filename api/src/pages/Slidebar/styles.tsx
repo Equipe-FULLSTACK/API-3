@@ -10,6 +10,7 @@ export const Container = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+
     /* width: 200px; */
 `
 
@@ -35,21 +36,20 @@ export const Link = styled.a`
     justify-content: left;
     text-decoration: none;
     text-align: center;
-    padding: 1rem;
+    padding: 0.5rem;
     color: ${props => props.theme.colors.fontSecondarycolor};
 
     &>img{
-        margin-right: 1rem
+        margin-right: 0.5rem
     }
 `
-
 export const Menu = styled.a`
     
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.5rem;
     color: ${props => props.theme.colors.fontSecondarycolor};
 `
 

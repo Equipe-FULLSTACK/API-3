@@ -5,6 +5,7 @@ import {
   Wrapper,
   Link,
   Menu,
+  Container,
 } from "./styles"
 //TODO CRIANDO STYLES NAVBAR
 
@@ -35,20 +36,21 @@ const SideBar: React.FC<dataSideBar> = ({pageName}) => {
     }
 
   return (
-      <Wrapper flexDirection='row' justifyContent='flex-start' padding='1rem'>
-        <Wrapper>
-          <Menu href="" onClick={toggleDisplay}><img src={menu} alt="lock"/></Menu>
+      <Container>
+        <Wrapper flexDirection='row' justifyContent='flex-start' padding='1rem'>
+          <Wrapper>
+            <Menu href="" onClick={toggleDisplay}><img src={menu} alt="lock"/></Menu>
 
-          <Wrapper display={display} flexDirection='column' flexWrap='wrap' alignItems='flex-start' justifyContent='center' padding='1rem'>
-              <Link href='#'><img src={lock} alt="lock"/>Permissões</Link>
-              <Link href='#'><img src={detail} alt="lock"/>Editar Ordem</Link>
-              <Link href='#'><img src={notification} alt="lock"/>Notificações</Link>
-              <Link href='#'><img src={graph} alt="lock"/>Gráficos</Link>
+            <Wrapper display={display} flexDirection='column' flexWrap='wrap' alignItems='flex-start' justifyContent='center' padding='1rem'>
+                <Link href='#'><img src={lock} alt="lock"/>Permissões</Link>
+                <Link href='#'><img src={detail} alt="lock"/>Editar Ordem</Link>
+                <Link href='#'><img src={notification} alt="lock"/>Notificações</Link>
+                <Link href='#'><img src={graph} alt="lock"/>Gráficos</Link>
+            </Wrapper>
+
           </Wrapper>
-
         </Wrapper>
-
-      </Wrapper>
+      </Container>
 
   )
 }

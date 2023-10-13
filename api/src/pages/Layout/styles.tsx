@@ -9,10 +9,10 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     /* width: 200px; */
+    
 `
-
-export const BackgroundUpdate = styled.div`
-    background-color: ${props => props.theme.colors.bgPrimarycolor};
+export const Divider = styled.div`
+    border-bottom: 2px solid ${props => props.theme.colors.bgTertiarycolor};
 `
 
 export const Wrapper = styled(NavItemWrapper)`
@@ -29,3 +29,5 @@ export const Wrapper = styled(NavItemWrapper)`
     width: 100%;
     }
 ` 
+
+

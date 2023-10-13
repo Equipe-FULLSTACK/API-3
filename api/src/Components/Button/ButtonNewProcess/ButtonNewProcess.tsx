@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import { BtnNewProcess } from './styles'; // Importe o estilo do arquivo de estilos
+import { BtnNewProcess } from './styles';
 
 const ButtonNewProcess = () => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handleButtonClick = () => {
-    // Lógica a ser executada quando o botão for clicado
     setIsPressed(!isPressed); // Alterna o estado pressionado/não pressionado
   };
 
   const handleButtonMouseEnter = () => {
-    // Lógica a ser executada quando o cursor passar sobre o botão
-    // Por exemplo, você pode adicionar um efeito de foco
+   
   };
 
   const handleButtonMouseLeave = () => {
-    // Lógica a ser executada quando o cursor sair do botão
-    // Por exemplo, você pode remover o efeito de foco
+    
   };
 
   return (
