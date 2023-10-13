@@ -12,6 +12,9 @@ interface Props{
     minWidth?:string;
     margin?: string;
     padding?: string;
+    width?: string;
+    height?: string;
+    backgroundColor?:string;
 }
 export const PageItemWrapper:React.FC <Props> = ({className, children}) => {
     return (

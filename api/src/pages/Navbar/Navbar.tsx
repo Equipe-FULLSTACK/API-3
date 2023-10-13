@@ -12,14 +12,16 @@ import logo from '../../assets/icons/logo_ionic_health.png'
 
 
 interface dataNavBar {
-  name: string;
+  userName: string;
+  pageName: string;
 }
 
-const NavBar: React.FC<dataNavBar> = ({name}) => {
+const NavBar: React.FC<dataNavBar> = ({userName, pageName}) => {
   return (
     <Container>
-    <Logo src={logo} alt="iconIonicHealth"/>
-    <UserName>{name}</UserName>
+      {/* {pageName} */}
+      <Logo src={logo} alt="iconIonicHealth"/>
+      <UserName>{userName}</UserName>
     </Container>
   )
 };

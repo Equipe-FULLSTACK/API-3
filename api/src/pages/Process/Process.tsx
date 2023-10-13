@@ -1,459 +1,57 @@
 import React from 'react';
+import styled from 'styled-components';
+import { useState } from 'react';
+
+import {
+  Wrapper,
+  ProcessActive,
+} from "./styles"
+
+import CardProcess from '../../Components/Card/CardProcess';
+import ButtonNewProcess from '../../Components/Button/ButtonNewProcess/ButtonNewProcess';
+import SearchComponent from '../../Components/Button/ButtonSearch/ButtonSearch';
 
 
 interface dataProcess {
-  name: string;
+  pageName: string;
 }
 
-const Process: React.FC<dataProcess> = ({name}) => {
+const Process: React.FC<dataProcess> = ({pageName}) => {
+
+// ESTRUTURA EXIBIR E OCULTAR MENU LATERAL //
+  const [display, setDisplay] = useState('none');
+
+  const toggleDisplay = (e) => {
+    e.preventDefault()
+      if (display==='none') {
+        setDisplay('block')
+      } else {
+        setDisplay('none')
+      }
+    }
+
   return (
-    <>
-      <main className="grid-main">
-        <header>
-          <span>
-            <h4 className="process-active">Processos Ativos</h4>
-          </span>
-
-          <button
-            type="button"
-            className="btn-newProcess"
-            data-bs-toggle="button"
-            aria-pressed="false"
-            autoComplete="off"
-          >
-            Novo Processo
-          </button>
-
-          <div className="search-box">
-            <button className="btn-search">
-              <i className="fas fa-search"></i>
-            </button>
-            <input
-              type="text"
-              className="input-search"
-              placeholder="Pesquisar"
-            />
-          </div>
-        </header>
-
-        <section>
-          <ol>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-
-            <li className="card">
-              <div className="card-header">
-                <span className="process-name">Processo 01</span>
-                <span className="process-status">Atrasado</span>
-              </div>
-
-              <div className="card_subtitle">
-                <span className="process-date">12 de Setembro, 2023</span>
-                <span className="process-hour">23:00</span>
-              </div>
-
-              <div className="card_body">
-                <span className="card_percent">60%</span>
-                <ol className="card_bargraph">
-                  <li className="bargraph-item1"></li>
-                  <li className="bargraph-item2"></li>
-                  <li className="bargraph-item3"></li>
-                </ol>
-              </div>
-
-              <div className="card_footer">
-                <button
-                  type="button"
-                  className="btn-detail"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Detalhe
-                </button>
-                <button
-                  type="button"
-                  className="btn-help"
-                  data-bs-toggle="button"
-                  aria-pressed="false"
-                  autoComplete="off"
-                >
-                  Ajuda
-                </button>
-              </div>
-            </li>
-          </ol>
-        </section>
-      </main>
-    </>
+          <Wrapper 
+            flexDirection='column'
+            justifyContent='center'
+            alignItems='center'
+            padding='2rem' margin='0 auto'
+            width='100%'
+            backgroundColor=''
+            >
+            <Wrapper
+              flexDirection='row'
+              justifyContent='space-between'
+              alignItems='center'
+              padding=''
+              margin='0 0 2rem 0'
+              width='100%'>
+                <ProcessActive>Processos Ativos</ProcessActive>
+                <ButtonNewProcess>Novo Processo</ButtonNewProcess>
+                <SearchComponent/>
+            </Wrapper>
+            <CardProcess processName='Processo 01' processDate='14 de novembro 2023' processStatus='Atrasada' processHour='12:00'/>
+          </Wrapper>
   )
-};
+}
 export default Process;
-

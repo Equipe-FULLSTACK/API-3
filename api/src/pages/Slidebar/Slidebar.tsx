@@ -16,10 +16,10 @@ import graph from '../../assets/icons/icon_graph.png'
 import Process from '../Process/Process';
 
 interface dataSideBar {
-  name: string;
+  pageName: string;
 }
 
-const SideBar: React.FC<dataSideBar> = ({name}) => {
+const SideBar: React.FC<dataSideBar> = ({pageName}) => {
 
 
 // ESTRUTURA EXIBIR E OCULTAR MENU LATERAL //
@@ -36,9 +36,9 @@ const SideBar: React.FC<dataSideBar> = ({name}) => {
 
   return (
       <Wrapper flexDirection='row' justifyContent='flex-start' padding='1rem'>
-
         <Wrapper>
           <Menu href="" onClick={toggleDisplay}><img src={menu} alt="lock"/></Menu>
+
           <Wrapper display={display} flexDirection='column' flexWrap='wrap' alignItems='flex-start' justifyContent='center' padding='1rem'>
               <Link href='#'><img src={lock} alt="lock"/>Permissões</Link>
               <Link href='#'><img src={detail} alt="lock"/>Editar Ordem</Link>
@@ -46,10 +46,6 @@ const SideBar: React.FC<dataSideBar> = ({name}) => {
               <Link href='#'><img src={graph} alt="lock"/>Gráficos</Link>
           </Wrapper>
 
-        </Wrapper>
-          
-        <Wrapper>
-          <Process/>
         </Wrapper>
 
       </Wrapper>
