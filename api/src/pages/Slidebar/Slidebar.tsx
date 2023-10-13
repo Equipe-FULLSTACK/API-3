@@ -1,26 +1,58 @@
 import React from 'react';
+import { useState } from 'react';
 
+import {
+  Wrapper,
+  Link,
+  Menu,
+} from "./styles"
+//TODO CRIANDO STYLES NAVBAR
+
+import menu from '../../assets/icons/icon_menu.png'
+import lock from '../../assets/icons/icon_lock.png'
+import detail from '../../assets/icons/icon_detail.png'
+import notification from '../../assets/icons/icon_notification.png'
+import graph from '../../assets/icons/icon_graph.png'
 
 interface dataSideBar {
   name: string;
 }
 
 const SideBar: React.FC<dataSideBar> = ({name}) => {
-  return (
-    <>
-      <aside className="grid-aside">
-      <nav>
-        <ul className="nav-sidebar">
-          <li><a href="#"><img src="/icons/icon_menu.png" alt="menu" className="icon"/></a></li>
-          <li><a href="#"><img src="/icons/icon_lock.png" alt="lock" className="icon"/>Permissões</a></li>
-          <li><a href="#"><img src="/icons/icon_detail.png" alt="detail" className="icon"/>Editar Ordem</a></li>
-          <li><a href="#"><img src="/icons/icon_notification.png" alt="notification" className="icon"/>Notificações</a></li>
-          <li><a href="#"><img src="/icons/icon_graph.png" alt="graph" className="icon"/>Gráficos</a></li>
-        </ul>
-      </nav>
-      </aside>
-    </>
-  )
-};
-export default SideBar;
 
+
+// ESTRUTURA EXIBIR E OCULTAR MENU LATERAL //
+  const [display, setDisplay] = useState('none');
+
+  const toggleDisplay = (e) => {
+    e.preventDefault()
+    if (display==='none') {
+      setDisplay('block')
+    } else {
+      setDisplay('none')
+    }
+  }
+
+  return (
+      <Wrapper flexDirection='row' justifyContent='flex-start' padding='1rem'>
+
+        <Wrapper>
+          <Menu href="" onClick={toggleDisplay}><img src={menu} alt="lock"/></Menu>
+          <Wrapper display={display} flexDirection='column' flexWrap='wrap' alignItems='flex-start' justifyContent='center' padding='1rem'>
+              <Link href='#'><img src={lock} alt="lock"/>Permissões</Link>
+              <Link href='#'><img src={detail} alt="lock"/>Editar Orde</Link>
+              <Link href='#'><img src={notification} alt="lock"/>Notificações</Link>
+              <Link href='#'><img src={graph} alt="lock"/>Gráficos</Link>
+          </Wrapper>
+
+        </Wrapper>
+
+        <Wrapper>
+
+        </Wrapper>
+
+      </Wrapper>
+
+  )
+}
+export default SideBar;

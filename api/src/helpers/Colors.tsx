@@ -4,14 +4,12 @@ interface Props{
     className?: string;
     display?: string;
     flexDirection?: string;
-    justifyContent: string;
     alignItems?: string;
     alignContent?: string;
     flexWrap?: string;
     maxWidth?: string;
     minWidth?:string;
     margin?: string;
-    padding?: string;
 }
 export const PageItemWrapper:React.FC <Props> = ({className, children}) => {
     return (

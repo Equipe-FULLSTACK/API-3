@@ -1,6 +1,15 @@
 
 import React from 'react';
 
+import {
+  Container,
+  Logo,
+  UserName
+} from "./styles"
+//TODO CRIANDO STYLES NAVBAR
+
+import logo from '../../assets/icons/logo_ionic_health.png'
+
 
 interface dataNavBar {
   name: string;
@@ -8,18 +17,10 @@ interface dataNavBar {
 
 const NavBar: React.FC<dataNavBar> = ({name}) => {
   return (
-    <>
-      <header className="grid-header">
-      <figure>
-        <img src="../../assets/icons/icon_ionicHealth.png" alt="iconIonicHealth" />
-      </figure>
-      <nav>
-        <span>
-          <h3 className="user-name">{name}</h3>
-        </span>
-      </nav>
-    </header>
-    </>
+    <Container>
+    <Logo src={logo} alt="iconIonicHealth"/>
+    <UserName>{name}</UserName>
+    </Container>
   )
 };
 export default NavBar;
