@@ -2,7 +2,7 @@ import React from 'react'
 
 interface Props{
     className?: string;
-    fontSize?: any;
+    fontSize?: string;
     color?: string;
 }
 export const PageText:React.FC <Props> = ({className, children}) => {

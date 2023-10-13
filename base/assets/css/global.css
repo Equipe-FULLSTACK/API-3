@@ -94,13 +94,13 @@ body{
 }
 
 
-/* HEADER */
+/* /* HEADER
 header{
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid var(--bg-tertiary-color);
     
-}
+} */
 
 header>figure{
     margin: 1rem 2rem;

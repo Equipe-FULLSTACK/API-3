@@ -1,25 +1,28 @@
 
 import React from 'react';
 
+import {
+  Container,
+  Logo,
+  UserName
+} from "./styles"
+//TODO CRIANDO STYLES NAVBAR
+
+import logo from '../../assets/icons/logo_ionic_health.png'
+
 
 interface dataNavBar {
-  name: string;
+  userName: string;
+  pageName: string;
 }
 
-const NavBar: React.FC<dataNavBar> = ({name}) => {
+const NavBar: React.FC<dataNavBar> = ({userName, pageName}) => {
   return (
-    <>
-      <header className="grid-header">
-      <figure>
-        <img src="../../assets/icons/icon_ionicHealth.png" alt="iconIonicHealth" />
-      </figure>
-      <nav>
-        <span>
-          <h3 className="user-name">{name}</h3>
-        </span>
-      </nav>
-    </header>
-    </>
+    <Container>
+      {/* {pageName} */}
+      <Logo src={logo} alt="iconIonicHealth"/>
+      <UserName>{userName}</UserName>
+    </Container>
   )
 };
 export default NavBar;

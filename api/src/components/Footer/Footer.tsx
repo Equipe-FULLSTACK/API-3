@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface dataFooter {
-  name: string;
+  pageName: string;
 }
 
-const Footer: React.FC<dataFooter> = ({ name }) => {
+const Footer: React.FC<dataFooter> = ({ pageName }) => {
   const styleComponent: React.CSSProperties = {
     
   };
 
   return (
     <div style={styleComponent}>
-      <p>Olá, {name}!</p>
+      <p>{pageName}</p>
     </div>
   );
 };
