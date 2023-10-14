@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import dataProcess from '../Data/DataProcess/dataProcess'
+
 
 import {
   Wrapper,
@@ -12,12 +14,20 @@ import ButtonNewProcess from '../../Components/Button/ButtonNewProcess/ButtonNew
 import SearchComponent from '../../Components/Button/ButtonSearch/ButtonSearch';
 import dark from '../../styles/Theme/dark';
 
-interface dataProcess {
-  pageName: string;
+
+interface Process {
+  processId: number;
+  processName: string;
+  processStatus: string;
+  processDateFinshed: string;
+  processHourFinshed: string;
+  processPercentExecuted?: number;
+  processTasks?: number;
+  pageName?: string; // Propriedade opcional
   bg: string;
 }
 
-const Process: React.FC<dataProcess> = ({pageName, bg}) => {
+const Process: React.FC<Process> = ({pageName, bg}) => {
 
 bg = dark.colors.bgPrimarycolor;
 
@@ -52,7 +62,7 @@ bg = dark.colors.bgPrimarycolor;
                 width='100%'
                 backgroundColor={bg}>
                   <ProcessActive>Processos Ativos</ProcessActive>
-                  <ButtonNewProcess>Novo Processo</ButtonNewProcess>
+                  <a href="/cadastro"><ButtonNewProcess>Novo Processo</ButtonNewProcess></a>
                   <SearchComponent/>
               </Wrapper>
               <Divider/>
@@ -60,18 +70,18 @@ bg = dark.colors.bgPrimarycolor;
               flexDirection='row'
               backgroundColor={bg}
               >
-                <CardProcess processName='Processo 01' processDate='14 de novembro 2023' processStatus='Atrasada' processHour='12:00'/>
-                <CardProcess processName='Processo 02' processDate='14 de novembro 2023' processStatus='Andamento' processHour='12:00'/>
-                <CardProcess processName='Processo 03' processDate='14 de novembro 2023' processStatus='Andamento' processHour='12:00'/>
-                <CardProcess processName='Processo 04' processDate='14 de novembro 2023' processStatus='Andamento' processHour='12:00'/>
-                <CardProcess processName='Processo 05' processDate='14 de novembro 2023' processStatus='Completada' processHour='12:00'/>
-                <CardProcess processName='Processo 06' processDate='14 de novembro 2023' processStatus='Completada' processHour='12:00'/>
-                <CardProcess processName='Processo 07' processDate='14 de novembro 2023' processStatus='Completada' processHour='12:00'/>
-                <CardProcess processName='Processo 08' processDate='14 de novembro 2023' processStatus='Atrasada' processHour='12:00'/>
-                <CardProcess processName='Processo 09' processDate='14 de novembro 2023' processStatus='Atrasada' processHour='12:00'/>
-                <CardProcess processName='Processo 10' processDate='14 de novembro 2023' processStatus='Atrasada' processHour='12:00'/>
-                <CardProcess processName='Processo 11' processDate='14 de novembro 2023' processStatus='Atrasada' processHour='12:00'/>
-                <CardProcess processName='Processo 12' processDate='14 de novembro 2023' processStatus='Atrasada' processHour='12:00'/>
+                {dataProcess.map((process: Process) => (
+                  <li key={process.processId}>
+                    <CardProcess processId={process.processId} 
+                      processName={process.processName} 
+                      processDate={process.processDateFinshed} 
+                      processStatus={process.processStatus} 
+                      processHour={process.processHourFinshed}
+                    />
+                  </li>
+                ))}
+
+
               </Wrapper>
             </Wrapper>
           </>
