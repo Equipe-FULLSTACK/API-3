@@ -33,6 +33,7 @@ const ValueIndicator = styled.div<{ fillPercentage: number }>`
   padding: 5px 10px;
   font-weight: regular;
   font-size: 8px;
+  background-color: transparent;
 `;
 
 const Bargraph: React.FC<BargraphProps> = ({ value, minValue, maxValue, backgroundColor, fillBackgroundColor }) => {

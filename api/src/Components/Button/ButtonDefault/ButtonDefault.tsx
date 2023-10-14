@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyledButton } from './styles'; // Importe o estilo do arquivo de estilos
 
 
-
+//TODO TIPAR AS FUNÇÕES DE EVENTOS DOS BOTOES
 interface ButtonProps {
   label: string;
   onClick?: () => void;

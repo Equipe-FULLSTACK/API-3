@@ -5,6 +5,8 @@ import dark from '../../styles/Theme/dark';
 import ButtonDefault from '../Button/ButtonDefault/ButtonDefault';
 import dataTask from '../Data/DataTask/dataTask'
 
+import BotaoModal from '../Modal/BotãoModal'; // IMPORTAÇÃO BOTÃO REDUX PARA ALTERAÇÃO MODAL EM TODAS AS JANELAS
+
 interface dataCard {
   processId: number;
   processName: string;
@@ -68,7 +70,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
 
       <CardFooter>
         {/* TODO INSERIR FUNÇÕES DO BOTÃO */}
-        <ButtonDefault label='Detalhe'></ButtonDefault>
+        <BotaoModal label={'Detalhe'} tagButton={'Processo_'+processId}/>
       </CardFooter>
     </CardWrapper>
   );

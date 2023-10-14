@@ -10,17 +10,24 @@ import dark from './styles/Theme/dark.ts';
 import HomePage from './Components/Layout/HomePage.tsx';
 
 
+import { Provider } from 'react-redux';
+import store from './store/index.ts';
+
+
 const App:React.FC = ()=> (
 
   <>
     <ThemeProvider theme={dark}>
       <GlobalStyle/>
+      <Provider store={store}>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/processos" element={<HomePage />} />
         </Routes>
+      </Provider>
     </ThemeProvider>
   </>
 )
+
 export default App;
