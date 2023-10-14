@@ -1,0 +1,146 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: helvetica;
+}
+
+.modal{
+    background-color: #58595B;
+    padding: 15px;
+    max-width: 720px;
+    height: 520px;
+    margin: 0 auto;
+}
+
+.ProcessModal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+}
+
+.subProcessModal{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
+
+.status{
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.Datahora{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: .8rem;
+
+}
+
+
+header {
+    background-color:#58595B;
+    color: #fff;
+    padding: 5px;
+}
+
+.mainModal header {
+    font-size: 25px;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    color:#54c5cd
+
+}
+
+
+#btnAdc{
+    font-size: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #333;
+    color:#54c5cd;
+}
+
+
+
+main{
+    background-color: #333;
+    color: #fff;
+    max-width: 950px;
+    height: 350px;
+    text-align: center;
+}
+
+table {
+    width: 95%;
+    font-size: 16px;
+    margin: 5px;;
+}
+
+th{
+    padding: 5px;
+}
+
+td{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.listHead{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.listBody{
+    border-bottom: 2px solid #fff;
+    padding: 10px;
+    margin-bottom:  px;
+}
+
+#status01{
+    padding: 1px;
+    background-color: #54c5cd;
+    border-radius: 5px;
+    color: black;
+}
+
+#status02{
+    padding: 1px;
+    background-color: #fbfb38;
+    border-radius: 5px;
+    color: black;
+}
+
+#status03{
+    padding: 0px;
+    background-color: #ff6961;
+    border-radius: 5px;
+    color: black
+}
+
+.arquivo{
+    display:flex;
+    justify-content: center;
+    
+}
+
+#btnArq{
+    display:flex;
+    justify-content: center;
+    width: 150px;
+    height: 40px;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 15px;
+}
+

@@ -1,26 +1,57 @@
 // ModalComponent.tsx
 import React from 'react';
-import * as S from './styles';
+import './style.css'
 
 const ModalProcess: React.FC = () => {
   return (
-    <S.ModalWrapper>
-      <S.ModalContent>
-        <header>
-          <S.ProcessModal>
-            <div className="subProcessModal">
-              <S.ProcessModalTitle>Processo 1</S.ProcessModalTitle>
-              <div className="Datahora">
-                <span>11/10/2023</span>
-                <span>19:00</span>
-              </div>
+    <>
+     <header>
+        <div classname="ProcessModal">
+            <div classname="subProcessModal">
+                <h2>Processo 1</h2>
+                <div classname="Datahora">
+                    <span>11/10/2023</span>
+                    <span>19:00</span>
+                </div>
             </div>
-            <S.Status>Atrasada</S.Status>
-          </S.ProcessModal>
+            <span classname="status">Atrasada</span>
+        </div>
+    </header>
+
+    <main classname="mainModal">
+        <header>
+            <span>Tarefas (03)</span>
+            <button id="btnAdc">+</button>
         </header>
-        {/* Restante do seu conteúdo */}
-      </S.ModalContent>
-    </S.ModalWrapper>
+        <section classname="listTodo">
+            <table>
+                <thead classname="listHead"> 
+                    <tr>
+                        <th>ID</th><th>Data</th><th>Tarefa</th><th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody classname="listBody">
+                    <tr>
+                        <td>01</td><td>11/10/2023</td><td>Criar código html</td><td id="status01">concluida</td>
+                    </tr>
+                    <tr>
+                        <td>02</td><td>11/10/2023</td><td>Criar código css</td><td id="status02">Andamento</td>
+                    </tr>
+                    <tr>
+                        <td>03</td><td>11/10/2023</td><td>Criar modelo da pagina</td><td id="status03">Pendente</td>
+                    </tr>
+                </tbody>
+            
+            </table>
+        </section>
+    </main>
+
+    <footer classname="footermodal">
+        <div classname="arquivo">
+            <button id="btnArq">ARQUIVADOS</button>
+        </div>
+    </footer>
+    </>
   );
 };
 
