@@ -21,7 +21,7 @@ const HomePage: React.FC<dataHomePage> = ({ name }) => {
     
     return (
         <>
-        <NavBar userName={"Thiago Carvalho Silva"} pageName={'NavBar'}/>
+        <NavBar userName={"Juliano Prado"} pageName={'NavBar'}/>
         <Divider/>
             <Wrapper 
                 display='flex'
