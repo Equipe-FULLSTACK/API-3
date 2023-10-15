@@ -12,9 +12,16 @@ Equipe FULLSTACK - API 3º Semestre
 
   #### <div align="center"> Estado do Projeto ao final da Segunda Sprint: </div>
   
-  <div align="center"> <img src="/readme/Pag_Principal "width="640" height="360"> </div>
-  <div align="center"> <img src="/readme/layout_aula_tarefas.png "width="640" height="360"> </div>
-  <div align="center"> <img src="/readme/estilos.gif "width="640" height="360"> </div>
+  <div align="center"> <img src="/readme/login.png "width="640" height="360"> </div>
+  <br>
+  <div align="center"> <img src="/readme/cadastro.png "width="640" height="360"> </div>
+  <br>
+  <div align="center"> <img src="/readme/processos.png "width="640" height="360"> </div>
+  <br>
+  <div align="center"> <img src="/readme/processos_abas.png "width="640" height="360"> </div>
+  <br>
+  <div align="center"> <img src="/readme/processos_modais.png "width="640" height="360"> </div>
+  <br>
   
   
 
@@ -35,14 +42,12 @@ Ao longo da Sprint, foi feito um levantamento de requisitos e implementadas nova
 - Ajustes na tela de Processos
 - Visualização dos dados contidos no back-end da aplicação por meio do front-end
 - Visualização dos Processos ativos por meio do display de modais contendo informações e tasks dos Processos
-
-  <div align="center"> <img src="/readme/Pag_Principal "width="640" height="360"> </div>
   
 
 ### <p align = "center">Gráfico de Burndown
 
 
-### <p align = "center">![image](https://user-images.githubusercontent.com/125655127/233860802-684291fb-5e86-4f63-b877-b902f0926ec2.png)
+### <p align = "center">![image]()
   
   
   # <p align="center">SPRINTS
