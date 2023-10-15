@@ -2,6 +2,7 @@ export function Cadastro() {
     return (
         <div>
         <h1>Cadastro de usuário</h1>
+            <p>Aqui fica uma breve apresentação da página</p>
             <div>userName</div>
             <input type="text"/>
             <div>userTag</div>
