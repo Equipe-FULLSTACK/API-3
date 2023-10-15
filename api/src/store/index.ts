@@ -19,7 +19,7 @@ interface FecharModalAction extends Action {
 
 const initialState: AppState = {
   modalAberto: false,
-  tamanhoModal: '800px',
+  tamanhoModal: '1200px',
 };
 
 const reducer = (
