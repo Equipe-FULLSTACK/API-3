@@ -1,7 +1,7 @@
 .login-fundo {
     background-color: #292A2D;
     box-sizing: border-box;
-    height: 100vh;
+    height: 150vh;
     width: 100%;
 
 }
@@ -132,3 +132,117 @@
 
 /* CSS tela Cadastro de usuário */
 
+.login-containerC{
+    
+    margin: auto;
+    position: relative;
+    text-align: center;
+    top: 10%;
+    bottom: 10%;
+    width: 33%;
+    height: 80%; 
+    background-color: #292A2D;
+    
+}
+
+.login-imagemC {
+    
+    margin: auto;
+    position: relative;
+    top: 14%;
+    background-color: #292A2D;
+    color: #292A2D;
+
+}
+
+.login-imagemC img {
+    background-color: #292A2D;
+}
+
+.login-formC {
+    
+    margin: auto;
+    position: relative;
+    top: 20%;
+    width: 70%;
+    background-color: #292A2D;
+}
+
+.login-header-mainC {
+    
+    margin: auto;
+    position: relative;
+    text-align: justify;
+    color: #54C5CE;
+    font-size: 28px;
+    background-color: #292A2D;
+}
+
+.login-header-secondC {
+    
+    margin:auto;
+    position: relative;
+    text-align: left;
+    color: #58595B;
+    font-size: 16px;
+    margin-top: 3%;
+    background-color: #292A2D;
+}
+
+.login-form-containerC {
+    
+    margin: auto;
+    position: relative;
+    text-align: left;
+    margin-top: 8%;
+    background-color: #292A2D;
+}
+
+.login-form-containerC p {
+    color: #9AF0E8;
+    font-size: 14px;
+    background-color: #292A2D;
+}
+
+.login-formC input {
+    width: 100%;
+    position: relative;
+    height: 46px;
+    border-radius: 9px;
+    color: white;
+    background-color: white;
+}
+
+.login-formC input::placeholder {
+    color: #1D1E20;
+    padding-left: 10px;
+    font-size: 15px;
+    
+}
+
+.login-formC button {
+    text-align: center;
+    color: #54C5CE;
+    width: 100%;
+    height: 50px;
+    margin-top: 2%;
+    background-color: #333333;
+    border-radius: 90px;
+    
+}
+
+.login-criar-contaC {
+    text-align: center;
+    margin: auto;
+    margin-top: 14%;
+    color: #58595B;
+    font-size: 14px;
+    background-color: #292A2D;
+    
+}
+
+.login-criar-contaC a {
+    color: #54C5CE;
+    font-size: 14px;
+    
+}
