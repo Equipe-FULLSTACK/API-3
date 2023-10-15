@@ -13,13 +13,13 @@ export default function Login() {
                 <div className="login-header-second">
                     Acesso sistema de gerenciamento de processos e tarefas da empresa
                 </div>
-                <form action="post">
+                <form className="login-form-container" action="post">
 
                     <div className="login-form-container">
                         <p>Login</p>
                     </div>
 
-                    <input type="text" name="login" id="login" placeholder="Login"/>
+                    <input className="login-input" type="text" name="login" id="login" placeholder="Login"/>
 
                     <div className="login-form-container">
                         <p>Senha</p>

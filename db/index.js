@@ -18,8 +18,9 @@ const limiter = rateLimit({
 
 var con = mysql.createConnection({
 	host: "localhost",
-	user: "fullstack",
-	password: "senhadaora123",
+	port: 3000,
+	user: "root",
+	password: "password",
 	database: "db"
 });
 

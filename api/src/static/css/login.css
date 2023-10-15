@@ -15,6 +15,7 @@
     bottom: 10%;
     width: 33%;
     height: 80%; 
+    background-color: #292A2D;
     
 }
 
@@ -23,7 +24,13 @@
     margin: auto;
     position: relative;
     top: 14%;
+    background-color: #292A2D;
+    color: #292A2D;
 
+}
+
+.login-imagem img {
+    background-color: #292A2D;
 }
 
 .login-form {
@@ -32,6 +39,7 @@
     position: relative;
     top: 20%;
     width: 70%;
+    background-color: #292A2D;
 }
 
 .login-header-main {
@@ -41,7 +49,7 @@
     text-align: justify;
     color: #54C5CE;
     font-size: 28px;
-    
+    background-color: #292A2D;
 }
 
 .login-header-second {
@@ -52,6 +60,7 @@
     color: #58595B;
     font-size: 16px;
     margin-top: 3%;
+    background-color: #292A2D;
 }
 
 .login-form-container {
@@ -60,11 +69,13 @@
     position: relative;
     text-align: left;
     margin-top: 8%;
+    background-color: #292A2D;
 }
 
 .login-form-container p {
     color: #9AF0E8;
     font-size: 14px;
+    background-color: #292A2D;
 }
 
 .login-form-recuperar {
@@ -73,6 +84,7 @@
     margin-top: 1%;
     text-align: right;
     font-size: 11px;
+    background-color: #292A2D;
 }
 
 .login-form input {
@@ -80,13 +92,15 @@
     position: relative;
     height: 46px;
     border-radius: 9px;
-    color: #1D1E20;
+    color: white;
+    background-color: white;
 }
 
 .login-form input::placeholder {
     color: #1D1E20;
     padding-left: 10px;
     font-size: 15px;
+    
 }
 
 .login-form button {
@@ -97,6 +111,7 @@
     margin-top: 2%;
     background-color: #333333;
     border-radius: 90px;
+    
 }
 
 .login-criar-conta {
@@ -105,12 +120,14 @@
     margin-top: 14%;
     color: #58595B;
     font-size: 14px;
+    background-color: #292A2D;
     
 }
 
 .login-criar-conta a {
     color: #54C5CE;
     font-size: 14px;
+    
 }
 
 /* CSS tela Cadastro de usuário */
