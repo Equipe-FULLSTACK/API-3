@@ -12,6 +12,7 @@ export function Cadastro() {
             <div>Digite uma senha</div>
             <input type="text"/>          
             <button>Cadastrar</button>
+            
             </div>
     )
 }
