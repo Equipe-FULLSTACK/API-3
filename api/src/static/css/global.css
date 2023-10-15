@@ -408,12 +408,22 @@ box-shadow: var(--font-secondary-color)  0 0 0 1px;
 }
 
 /* Estilos para o botão de fechar o modal (se você quiser adicionar um botão de fechar) */
-.modal .close-button {
-  position: absolute;
+.modal .close-button {  
+  position: fixed;
   top: 10px;
   right: 10px;
   cursor: pointer;
   font-size: 20px;
+  color: white; /* Cor do ícone */
+  background-color: transparent; /* Fundo transparente */
+  border: none; /* Remova a borda */
+}
+
+
+
+/* Estilize o botão de fechar quando o mouse passar por cima dele */
+.modal .close-button:hover {
+  color: #13025e; /* Cor alterada quando o mouse passa por cima */
 }
 
 

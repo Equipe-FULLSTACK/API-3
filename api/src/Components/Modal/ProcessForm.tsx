@@ -59,7 +59,7 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
                     value={formData?.hourFinished}
                     onChange={handleInputChange} />
                 <button type="submit">Cadastrar</button>
-                <button type="button" onClick={()=> setShowModal(false)}>Close</button>
+                <button type="button" className="close-button" onClick={()=> setShowModal(false)}>X</button>
             </form>
         </div>
 
