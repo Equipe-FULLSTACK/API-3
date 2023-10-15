@@ -1,8 +1,81 @@
 // ModalComponent.tsx
 import React from 'react';
-import './style.css'
 
-const ModalProcess: React.FC = () => {
+import { selectProcessId } from '../../../store/index';
+import { useSelector } from 'react-redux';
+
+import './style.css'
+import addIcon from '../../../assets/icons/icon_add.png'
+import edit from '../../../assets/icons/icon_edit.png'
+import trash from '../../../assets/icons/icon_trash.png'
+import date from '../../../assets/icons/icon_calendar.png'
+import hour from '../../../assets/icons/icon_hour.png'
+
+import dataTask from '../../Data/DataTask/dataTask'
+import editTask from '../../Data/DataTask/editTask'
+
+import dataProcess from '../../Data/DataProcess/dataProcess'
+import editProcess from '../../Data/DataProcess/editProcess'
+
+
+
+interface dataProcessModal {
+
+    processId: number;
+    processName: string;
+    processStatus: string;
+    processDate: string;
+    processHour: string;
+    
+    processBarBackground: string;
+    processBarFill: string;
+  
+    taskId: number;
+    taskProcessId: number;
+    taskDescription: string;
+    taskDate: string;
+    taskStatus: string;
+    taskPercent: number;
+  }
+
+
+const ModalProcess: React.FC<dataProcessModal> = () => {
+
+    const processModalId = useSelector(selectProcessId);
+    console.log('Aberto modal o processo que vem via redux ' + processModalId)
+
+
+    const tasksFiltradas = dataTask.filter((task) => task.taskProcessId === processModalId);
+
+    const processName = dataProcess
+    .filter((f) => f.processId === processModalId)
+    .map((n) => n.processName);
+
+    const processHour = dataProcess
+    .filter((f) => f.processId === processModalId)
+    .map((n) => n.processHourFinshed);
+
+    const taskTotal = tasksFiltradas.length;
+
+
+    // VERIFICA SE EXISTE ALGUMA TAREFA ATRASADA
+    const taskAtrasada = tasksFiltradas.filter((f) => f.taskStatus === 'Atrasada');
+
+    // VERIFICA SE EXISTE ALGUMA TAREFA EM ANDAMENTO
+    const taskAndamento = tasksFiltradas.filter((f) => f.taskStatus === 'Andamento');
+
+    let statusProcess;
+
+    if (taskAtrasada.length > 0) {
+        statusProcess = 'Atrasada';
+    } else if (taskAndamento.length > 0) {
+        statusProcess = 'Em Andamento';
+    } else {
+        statusProcess = 'Concluida';
+    }
+
+    
+
   return (
     
     <>
@@ -10,13 +83,13 @@ const ModalProcess: React.FC = () => {
             <header>
                 <div className="ProcessModal">
                     <div className="subProcessModal">
-                        <h2>Processo 1</h2>
+                        <h2>Processo {processModalId} - {processName} ( {taskTotal} )</h2>
                         <div className="Datahora">
-                            <span>11/10/2023</span>
-                            <span>19:00</span>
+                            <span><img src={date} alt="dateProcess" />11/10/2023</span>
+                            <span><img src={hour} alt="dateHour" />{processHour}</span>
                         </div>
                     </div>
-                    <span className="status">Atrasada</span>
+                    <span className={statusProcess}>{statusProcess}</span>
                 </div>
             </header>
 
@@ -25,17 +98,17 @@ const ModalProcess: React.FC = () => {
                 <ul>
                     <li>
                     <button>
-                        <i className="material-icons">add_circle</i>
+                        <a className="material-icons"><img src={addIcon} alt="Add Task" /></a>
                     </button>
                     </li>
                     <li>
                     <button>
-                        <i className="material-icons">edit</i>
+                        <i className="material-icons"><img src={edit} alt="Edit Task" /></i>
                     </button>
                     </li>
                     <li>
                     <button>
-                        <i className="material-icons">delete</i>
+                        <i className="material-icons"><img src={trash} alt="Edit Task" /></i>
                     </button>
                     </li>
                 </ul>
@@ -54,42 +127,22 @@ const ModalProcess: React.FC = () => {
                         <th>Id</th>
                         <th>Data</th>
                         <th>Tarefa</th>
+                        <th>Percentual</th>
                         <th>Status</th> 
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
+                {tasksFiltradas.map((task) => (
+                    <tr key={task.taskId}>
                         <td><input type="checkbox" /></td>
-                        <td>01</td>
-                        <td>11/10/2023</td>
-                        <td>Criar código html</td>
-                        <td><span className="available"></span></td>
+                        <td>{task.taskId}</td>
+                        <td>{task.taskDate}</td>
+                        <td>{task.taskDescription}</td>
+                        <td>{task.taskPercent}%</td>
+                        <td><span className={task.taskStatus}></span></td>
                     </tr>
-
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>02</td>
-                        <td>15/12/2023</td>
-                        <td>Criar código CSS</td>
-                        <td><span className="away"></span></td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>03</td>
-                        <td>01/02/2024</td>
-                        <td>Criar modelamento da página</td>
-                        <td><span className="offline"></span></td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>04</td>
-                        <td>15/03/2024</td>
-                        <td>Sistematizar páginas no react</td>
-                        <td><span className="offline"></span></td>
-                    </tr>
+                ))}
 
                 </tbody>
             </table>

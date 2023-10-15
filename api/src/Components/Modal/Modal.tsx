@@ -5,12 +5,22 @@ import { FecharModalAction } from '../../store/index'; // Importe a ação FECHA
 import * as S from './styles';
 import ModalProcess from './ModalProcess/ModalProcess';
 
-  const ModalComponent: React.FC = () => {
-  const modalAberto = useSelector((state: AppState) => state.modalAberto);
-  const tamanhoModal = useSelector((state: AppState) => state.tamanhoModal);
-  const dispatch = useDispatch();
+//TODO TIPAR AS FUNÇÕES DE EVENTOS DOS BOTOES
+interface modalData {
+  name: string;
+}
 
-  const fecharModal = () => {
+
+  const ModalComponent: React.FC = ({name}) => {
+    
+    console.log('Aberto modal'+name)
+      
+
+    const modalAberto = useSelector((state: AppState) => state.modalAberto);
+    const tamanhoModal = useSelector((state: AppState) => state.tamanhoModal);
+    const dispatch = useDispatch();
+
+    const fecharModal = () => {
     const action: FecharModalAction = {
       type: 'FECHAR_MODAL',
     };
