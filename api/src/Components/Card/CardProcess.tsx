@@ -33,7 +33,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
 
   const tasksFiltradas = dataTask.filter((task) => task.taskProcessId === processId);
 
-  console.log(tasksFiltradas)
+  // console.log(tasksFiltradas)
 
   //TODO FAZER LOGICA SELEÇÃO COR DE ALERTA
   processBarFill = dark.colors.bgPrimarycolor;

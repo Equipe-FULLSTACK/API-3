@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import dataProcess from '../Data/DataProcess/dataProcess'
+import {default as InitDataProcess}  from '../Data/DataProcess/dataProcess'
 
 
 import {
@@ -13,9 +13,10 @@ import CardProcess from '../../Components/Card/CardProcess';
 import ButtonNewProcess from '../../Components/Button/ButtonNewProcess/ButtonNewProcess';
 import SearchComponent from '../../Components/Button/ButtonSearch/ButtonSearch';
 import dark from '../../styles/Theme/dark';
+import { ProcessForm } from '../Modal/ProcessForm';
 
 
-interface Process {
+export type DataProcess = {
   processId: number;
   processName: string;
   processStatus: string;
@@ -23,16 +24,23 @@ interface Process {
   processHourFinshed: string;
   processPercentExecuted?: number;
   processTasks?: number;
+}
+
+
+interface ProcessProps {
+  dataProcess: DataProcess[];
   pageName?: string; // Propriedade opcional
   bg: string;
 }
 
-const Process: React.FC<Process> = ({pageName, bg}) => {
+const Process: React.FC<ProcessProps> = ( {pageName,  bg}) => {
 
 bg = dark.colors.bgPrimarycolor;
 
 // ESTRUTURA EXIBIR E OCULTAR MENU LATERAL //
   const [display, setDisplay] = useState('none');
+  const [dataProcess, setDataProcess] = useState<DataProcess[]>(InitDataProcess);
+  const [showModal, setShowModal] = useState(false);
 
   const toggleDisplay = (e) => {
     e.preventDefault()
@@ -45,6 +53,7 @@ bg = dark.colors.bgPrimarycolor;
 
   return (
           <>
+            
             <Wrapper 
               flexDirection='column'
               justifyContent='center'
@@ -61,16 +70,17 @@ bg = dark.colors.bgPrimarycolor;
                 margin='0 0 0.5rem 0'
                 width='100%'
                 backgroundColor={bg}>
-                  <ProcessActive>Processos Ativos</ProcessActive>
-                  <a href="/cadastro"><ButtonNewProcess>Novo Processo</ButtonNewProcess></a>
-                  <SearchComponent/>
+                  {/* <ProcessActive>Processos Ativos</ProcessActive>
+                  <a href="/API-3/api/src/Components/Modal/ProcessForm.tsx"><ButtonNewProcess>Novo Processo</ButtonNewProcess></a>
+                  <SearchComponent/> */}
+                  <button className="btn-newProcess" onClick={() => setShowModal(true)}>Novo processo</button>
               </Wrapper>
               <Divider/>
               <Wrapper 
               flexDirection='row'
               backgroundColor={bg}
               >
-                {dataProcess.map((process: Process) => (
+                {dataProcess.map((process: DataProcess) => (
                   <li key={process.processId}>
                     <CardProcess processId={process.processId} 
                       processName={process.processName} 
@@ -84,6 +94,8 @@ bg = dark.colors.bgPrimarycolor;
 
               </Wrapper>
             </Wrapper>
+
+            {showModal && <ProcessForm setDataProcess={setDataProcess} setShowModal={setShowModal}/>}
           </>
   )
 }
