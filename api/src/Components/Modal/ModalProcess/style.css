@@ -141,26 +141,6 @@ td{
     margin-bottom:  px;
 }
 
-/* .Concluida{
-    padding: 1px;
-    background-color: #54c5cd;
-    border-radius: 5px;
-    color: black;
-}
-
-.Andamento{
-    padding: 1px;
-    background-color: #fbfb38;
-    border-radius: 5px;
-    color: black;
-}
-
-.Atrasada{
-    padding: 0px;
-    background-color: #ff6961;
-    border-radius: 5px;
-    color: black
-} */
 
 .Andamento, .Concluida, .Atrasada{
   padding: 10px;
