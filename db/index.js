@@ -20,7 +20,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "password",
+	password: "senhadaora123",
 	database: "db"
 });
 
@@ -53,7 +53,6 @@ app.get("/p", (req, res) => {
 		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks WHERE process = ?';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
-			console.log(result2);
 			res.json(result);
 		});
 	});
