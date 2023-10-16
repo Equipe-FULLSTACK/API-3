@@ -255,7 +255,8 @@ main>section>ol{
   height: 3rem;
   justify-content: center;
   line-height: 2;
-  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
   padding: 1rem 5rem;
   outline: none;
   overflow: hidden;
