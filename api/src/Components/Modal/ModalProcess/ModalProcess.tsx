@@ -42,7 +42,7 @@ interface dataProcessModal {
 const ModalProcess: React.FC<dataProcessModal> = () => {
 
     const processModalId = useSelector(selectProcessId);
-    console.log('Aberto modal o processo que vem via redux ' + processModalId)
+   /*  console.log('Aberto modal o processo que vem via redux ' + processModalId) */
 
 
     const tasksFiltradas = dataTask.filter((task) => task.taskProcessId === processModalId);
@@ -97,19 +97,9 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                 <div className="tools">
                 <ul>
                     <li>
-                    <button>
-                        <a className="material-icons"><img src={addIcon} alt="Add Task" /></a>
-                    </button>
-                    </li>
-                    <li>
-                    <button>
-                        <i className="material-icons"><img src={edit} alt="Edit Task" /></i>
-                    </button>
-                    </li>
-                    <li>
-                    <button>
-                        <i className="material-icons"><img src={trash} alt="Edit Task" /></i>
-                    </button>
+                        <button>
+                            <a className="material-icons"><img src={addIcon} alt="Add Task" />Adicionar nova tarefa</a>
+                        </button>
                     </li>
                 </ul>
                 </div>
@@ -123,24 +113,43 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
             <table className="datatable">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" /></th>
+                        {/* <th><input type="checkbox" /></th> */}
                         <th>Id</th>
                         <th>Data</th>
                         <th>Tarefa</th>
                         <th>Percentual</th>
                         <th>Status</th> 
+                        <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
                 {tasksFiltradas.map((task) => (
                     <tr key={task.taskId}>
-                        <td><input type="checkbox" /></td>
+                        {/* <td><input type="checkbox" /></td> */}
                         <td>{task.taskId}</td>
                         <td>{task.taskDate}</td>
                         <td>{task.taskDescription}</td>
                         <td>{task.taskPercent}%</td>
                         <td><span className={task.taskStatus}></span></td>
+                        <div className="task-tools">
+
+                            <div className="tools">
+                                <ul>
+                                    <li>
+                                        <button>
+                                            <i className="material-icons"><img src={edit} alt="Edit Task" /></i>
+                                        </button>
+                                    </li>
+                                    <li>
+                                    <button>
+                                        <i className="material-icons"><img src={trash} alt="Edit Task" /></i>
+                                    </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </tr>
                 ))}
 

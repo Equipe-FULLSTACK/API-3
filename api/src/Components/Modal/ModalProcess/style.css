@@ -164,11 +164,21 @@ td{
     font-size: 15px;
 }
   
-  .material-icons > img {
+
+  .datatable-container .header-tools .tools ul li button a img {
     background-size: cover;
-    width: 1rem;
+    width: 2rem;
+    margin-right: 1rem;
   }
   
+  .header-tools .tools ul li button a{
+    font-size: 1rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .datatable-container {
     font-family: sans-serif;
     background-color: var(--dt-background-color-container);
@@ -222,6 +232,66 @@ td{
     align-items: baseline;
   }
   
+
+
+/* ESTILIZAÇÃO DOS ICONES DAS TASKS */
+
+  .task-tools .tools ul li button i img {
+    background-size: cover;
+    width: 1rem;
+  }
+  
+
+  .datatable-container .task-tools {
+    border-bottom: solid 1px var(--dt-border-color);
+    padding: var(--dt-padding);
+    padding-left: 0;
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .datatable-container .task-tools .search {
+    width: 30%;
+  }
+  
+  .datatable-container .task-tools .search .search-input {
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    background-color: var(--dt-input-background-color);
+    display: block;
+    box-sizing: border-box;
+    border-radius: var(--dt-border-radius);
+    border: solid 1px var(--dt-border-color);
+    color: var(--dt-input-color);
+  }
+  
+  .datatable-container .task-tools .tools {
+    width: 70%;
+  }
+  
+  .datatable-container .task-tools .tools ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+  }
+  
+  .datatable-container .task-tools .tools ul li {
+    display: inline-block;
+    margin: 0 var(--dt-padding-xs);
+    align-items: baseline;
+  }
+
+
+
+
+
+
+
+  
+  
   .datatable-container .footer-tools {
     padding: var(--dt-padding);
     display: flex;
@@ -252,7 +322,8 @@ td{
   }
   
   .datatable-container .footer-tools .pages ul li button,
-  .datatable-container .header-tools .tools ul li button {
+  .datatable-container .header-tools .tools ul li button,
+  .datatable-container .task-tools .tools ul li button  {
     color: var(--dt-text-color-button);
     width: 100%;
     box-sizing: border-box;
@@ -263,7 +334,8 @@ td{
   }
   
   .datatable-container .footer-tools .pages ul li button:hover,
-  .datatable-container .header-tools .tools ul li button:hover {
+  .datatable-container .header-tools .tools ul li button:hover,
+  .datatable-container .task-tools .tools ul li button:hover {
     background: var(--dt-bg-active-button);
     color: var(--dt-text-color-active-button);
   }
@@ -275,7 +347,8 @@ td{
   
   .datatable-container .footer-tools .pages ul li button,
   .datatable-container .footer-tools .pages ul li span,
-  .datatable-container .header-tools .tools ul li button {
+  .datatable-container .header-tools .tools ul li button,
+  .datatable-container .task-tools .tools ul li button {
     padding: var(--dt-padding-s) var(--dt-padding);
   }
   

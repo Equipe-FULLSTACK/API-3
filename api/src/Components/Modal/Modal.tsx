@@ -13,7 +13,7 @@ interface modalData {
 
   const ModalComponent: React.FC = ({name}) => {
     
-    console.log('Aberto modal'+name)
+    /* console.log('Aberto modal'+name) */
       
 
     const modalAberto = useSelector((state: AppState) => state.modalAberto);
