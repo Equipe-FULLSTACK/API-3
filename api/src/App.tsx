@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom"
 import Login from './pages/Login'
 import { Cadastro } from './pages/Cadastro'
 
-import dark from './styles/Theme/dark.ts';
+import dark from '../src/styles/Theme/Dark.ts';
 import HomePage from './Components/Layout/HomePage.tsx';
 
 
@@ -16,8 +16,7 @@ import Lista from './pages/Lista.tsx';
 
 
 const App:React.FC = ()=> (
-
-  <>
+ <>
     <ThemeProvider theme={dark}>
       <GlobalStyle/>
       <Provider store={store}>

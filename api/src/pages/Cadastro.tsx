@@ -1,4 +1,20 @@
-export function Cadastro() {
+import { DataProcess } from "../Components/Process/Process"
+
+interface CadastroProps {
+    setDataProcess: React.Dispatch<React.SetStateAction<DataProcess[]>>
+}
+
+export function Cadastro({setDataProcess}: CadastroProps) {
+    
+    function handleClick(){
+        console.log('teste')
+        const newProcess: DataProcess = {
+            processId: 1000,
+            processName
+        }
+        setDataProcess(prev => [...prev])
+    }
+    
     return (
         <div className="login-containerC" id="fundo">
         <div className="login-imagemC">
