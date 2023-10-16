@@ -7,6 +7,7 @@ const dataUser = [
     userPassword: 123456789,
     userAccessLevel: "adm",
     userActive: true,
+    userPhoto: 'https://github.com/Equipe-FULLSTACK/API-3/blob/main/readme/thiago.png',
   },
   
   {
@@ -17,6 +18,7 @@ const dataUser = [
     userPassword: 123456789,
     userAccessLevel: "adm",
     userActive: true,
+    userPhoto: 'https://github.com/Equipe-FULLSTACK/API-3/blob/main/readme/juliano.png',
   },
     {
     userId: 3,
@@ -26,6 +28,7 @@ const dataUser = [
     userPassword: 123456789,
     userAccessLevel: "adm",
     userActive: true,
+    userPhoto: 'https://github.com/Equipe-FULLSTACK/API-3/blob/main/readme/leo.jpg',
   },
   
     {
@@ -36,16 +39,29 @@ const dataUser = [
     userPassword: 123456789,
     userAccessLevel: "adm",
     userActive: true,
+    userPhoto: 'https://github.com/Equipe-FULLSTACK/API-3/blob/main/readme/Ian.jpg',
   },
   
     {
     userId: 5,
+    userName: 'Pedro Henrique Siqueira Cardoso',
+    userEmail: 'pedrohenriquesiqueiracardoso@ionic.com',
+    userTag: 'phsc',
+    userPassword: 123456789,
+    userAccessLevel: "adm",
+    userActive: true,
+    userPhoto: 'https://github.com/Equipe-FULLSTACK/API-3/blob/main/readme/pedro.png',
+  },
+
+  {
+    userId: 6,
     userName: 'Jean Cezar de Oliveira Rodrigues',
     userEmail: 'jeancezaroliveirarodrigues@ionic.com',
     userTag: 'jcor',
     userPassword: 123456789,
     userAccessLevel: "adm",
     userActive: true,
+    userPhoto: 'https://github.com/Equipe-FULLSTACK/API-3/blob/main/readme/jean.png',
   },
  ]
  

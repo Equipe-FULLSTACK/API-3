@@ -2,31 +2,31 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { ToggleModalAction } from '../../store/index';
-import {
-  StyledButton,
-} from './styles'
+import { StyledButton } from './styles';
 
-//TODO TIPAR AS FUNÇÕES DE EVENTOS DOS BOTOES
 interface ButtonProps {
   label: string;
-  name: string;
+  name: number;
 }
 
-
-const BotaoModal: React.FC<ButtonProps> = ({label}, {name}) => {
+const BotaoModal: React.FC<ButtonProps> = ({ label, name }) => {
   const dispatch = useDispatch();
 
+  
+  
   const handleClick = () => {
-    console.log(name);
+    
+    console.log('Antes de dispashar segue o nome '+ name )
+    // Despache a ação TOGGLE_MODAL com o campo processId
     const action: ToggleModalAction = {
       type: 'TOGGLE_MODAL',
+      processId: name, // Passe o valor de name como processId   
     };
+    
     dispatch(action);
   };
 
-  return (
-    <StyledButton name={name} onClick={handleClick}>{label}</StyledButton>
-  );
+  return <StyledButton name={name} onClick={handleClick}>{label}</StyledButton>;
 };
 
 export default BotaoModal;

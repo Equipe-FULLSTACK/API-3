@@ -1,3 +1,33 @@
+:root {
+  --primary-color: white;
+  --secondary-color: rgb(61, 68, 73);
+  --highlight-color: #3282b8;
+
+  --dt-status-Concluida-color: #54c5cd;
+  --dt-status-Andamento-color: #fbfb38;
+  --dt-status-Atrasada-color: #ff6961;
+
+  --dt-padding: 12px;
+  --dt-padding-s: 6px;
+  --dt-padding-xs: 2px;
+
+  --dt-border-radius: 3px;
+
+  --dt-background-color-container: #2a3338;
+  --dt-border-color: var(--secondary-color);
+  --dt-bg-color: var(--highlight-color);
+  --dt-text-color: var(--primary-color);
+  --dt-bg-active-button: var(--highlight-color);
+  --dt-text-color-button: var(--primary-color);
+  --dt-text-color-active-button: var(--primary-color);
+  --dt-hover-cell-color: var(--highlight-color);
+  --dt-even-row-color: var(--secondary-color);
+  --dt-focus-color: var(--highlight-color);
+  --dt-input-background-color: var(--secondary-color);
+  --dt-input-color: var(--primary-color);
+}
+
+
 * {
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
@@ -29,20 +59,23 @@
 .subProcessModal h2{
   color:#54c5cd;
 }
-.status{
-    background-color: red;
-    padding: 10px;
-    border-radius: 5px;
-}
 
 .Datahora{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     font-size: .8rem;
-
 }
 
+.Datahora > span {
+  padding: 0.5rem 2rem 0 0;
+}
+
+.Datahora > span > img {
+  height: 0.8rem;
+  align-items: center;
+  margin-right: 0.5rem;
+}
 /* 
 header {
     background-color:#58595B;
@@ -108,26 +141,12 @@ td{
     margin-bottom:  px;
 }
 
-#status01{
-    padding: 1px;
-    background-color: #54c5cd;
-    border-radius: 5px;
-    color: black;
+
+.Andamento, .Concluida, .Atrasada{
+  padding: 10px;
+  border-radius: 5px;
 }
 
-#status02{
-    padding: 1px;
-    background-color: #fbfb38;
-    border-radius: 5px;
-    color: black;
-}
-
-#status03{
-    padding: 0px;
-    background-color: #ff6961;
-    border-radius: 5px;
-    color: black
-}
 
 .arquivo{
     display:flex;
@@ -144,39 +163,10 @@ td{
     border-radius: 10px;
     font-size: 15px;
 }
-
-
-:root {
-    --primary-color: white;
-    --secondary-color: rgb(61, 68, 73);
-    --highlight-color: #3282b8;
   
-    --dt-status-available-color: greenyellow;
-    --dt-status-away-color: lightsalmon;
-    --dt-status-offline-color: lightgray;
-  
-    --dt-padding: 12px;
-    --dt-padding-s: 6px;
-    --dt-padding-xs: 2px;
-  
-    --dt-border-radius: 3px;
-  
-    --dt-background-color-container: #2a3338;
-    --dt-border-color: var(--secondary-color);
-    --dt-bg-color: var(--highlight-color);
-    --dt-text-color: var(--primary-color);
-    --dt-bg-active-button: var(--highlight-color);
-    --dt-text-color-button: var(--primary-color);
-    --dt-text-color-active-button: var(--primary-color);
-    --dt-hover-cell-color: var(--highlight-color);
-    --dt-even-row-color: var(--secondary-color);
-    --dt-focus-color: var(--highlight-color);
-    --dt-input-background-color: var(--secondary-color);
-    --dt-input-color: var(--primary-color);
-  }
-  
-  .material-icons {
-    font-size: 16px;
+  .material-icons > img {
+    background-size: cover;
+    width: 1rem;
   }
   
   .datatable-container {
@@ -318,32 +308,53 @@ td{
     background-color: var(--dt-hover-cell-color);
   }
   
-  .datatable-container .datatable tbody tr .available::after,
-  .datatable-container .datatable tbody tr .away::after,
-  .datatable-container .datatable tbody tr .offline::after {
+  .datatable-container .datatable tbody tr .Concluida::after,
+  .datatable-container .datatable tbody tr .Andamento::after,
+  .datatable-container .datatable tbody tr .Atrasada::after {
     display: inline-block;
     vertical-align: middle;
   }
+
+
+  .ProcessModal .Concluida {
+    background-color: var(--dt-status-Concluida-color);
+    color: black;
+    padding: 0.5rem 2rem;
+  }
   
-  .datatable-container .datatable tbody tr .available::after {
+  .ProcessModal .Andamento{
+    background-color: var(--dt-status-Andamento-color);
+    color: black;
+    padding: 0.5rem 2rem;
+  }
+  
+  .ProcessModal .Atrasada{
+    background-color: var(--dt-status-Atrasada-color);
+    color: black;
+    padding: 0.5rem 2rem;
+  }
+
+
+
+  .datatable-container .datatable tbody tr .Concluida::after {
     content: "Completada";
-    color: var(--dt-status-available-color);
+    color: var(--dt-status-Concluida-color);
   }
   
-  .datatable-container .datatable tbody tr .away::after {
+  .datatable-container .datatable tbody tr .Andamento::after {
     content: "Andamento";
-    color: var(--dt-status-away-color);
+    color: var(--dt-status-Andamento-color);
   }
   
-  .datatable-container .datatable tbody tr .offline::after {
+  .datatable-container .datatable tbody tr .Atrasada::after {
     content: "Atrasada";
-    /* color: var(--dt-status-offline-color); */
+    /* color: var(--dt-status-Atrasada-color); */
     color: red;
   }
   
-  .datatable-container .datatable tbody tr .available::before,
-  .datatable-container .datatable tbody tr .away::before,
-  .datatable-container .datatable tbody tr .offline::before {
+  .datatable-container .datatable tbody tr .Concluida::before,
+  .datatable-container .datatable tbody tr .Andamento::before,
+  .datatable-container .datatable tbody tr .Atrasada::before {
     content: "";
     display: inline-block;
     width: 10px;
@@ -353,16 +364,19 @@ td{
     vertical-align: middle;
   }
   
-  .datatable-container .datatable tbody tr .available::before {
-    background-color: var(--dt-status-available-color);
+  .datatable-container .datatable tbody tr .Concluida::before {
+    background-color: var(--dt-status-Concluida-color);
   }
   
-  .datatable-container .datatable tbody tr .away::before {
-    background-color: var(--dt-status-away-color);
+  .datatable-container .datatable tbody tr .Andamento::before {
+    background-color: var(--dt-status-Andamento-color);
   }
   
-  .datatable-container .datatable tbody tr .offline::before {
-    background-color: var(--dt-status-offline-color);
+  .datatable-container .datatable tbody tr .Atrasada::before {
+    background-color: var(--dt-status-Atrasada-color);
     background-color: red;
   }
+
+
+  
   

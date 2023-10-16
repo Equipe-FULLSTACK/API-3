@@ -13,7 +13,7 @@ const dataTask = [
     "taskProcessId": 67,
     "taskDescription": "Testar material para Produção de Polímeros",
     "taskDate": "28/7/24",
-    "taskStatus": "Concluída",
+    "taskStatus": "Concluida",
     "taskPercent": 61
   },
   {
@@ -62,7 +62,7 @@ const dataTask = [
     "taskProcessId": 42,
     "taskDescription": "Calibrar motores para Montagem de Motores",
     "taskDate": "15/12/24",
-    "taskStatus": "Concluída",
+    "taskStatus": "Concluida",
     "taskPercent": 39
   },
   {
@@ -87,7 +87,7 @@ const dataTask = [
     "taskProcessId": 93,
     "taskDescription": "Fundir metal para Fundição de Metais",
     "taskDate": "5/8/24",
-    "taskStatus": "Concluída",
+    "taskStatus": "Concluida",
     "taskPercent": 88
   },
   // Tarefas para Fabricação de Componentes Eletrônicos (processId: 81)
@@ -96,7 +96,7 @@ const dataTask = [
     "taskProcessId": 81,
     "taskDescription": "Fabricar circuitos para Fabricação de Componentes Eletrônicos",
     "taskDate": "22/8/24",
-    "taskStatus": "Concluída",
+    "taskStatus": "Concluida",
     "taskPercent": 92
   },
   {
@@ -114,7 +114,7 @@ const dataTask = [
       "taskProcessId": 56,
       "taskDescription": "Preparar peças para Tratamento Térmico",
       "taskDate": "2/12/24",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
     {
@@ -122,7 +122,7 @@ const dataTask = [
       "taskProcessId": 56,
       "taskDescription": "Aquecer peças para Tratamento Térmico",
       "taskDate": "18/1/24",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
     {
@@ -130,7 +130,7 @@ const dataTask = [
       "taskProcessId": 56,
       "taskDescription": "Resfriar peças para Tratamento Térmico",
       "taskDate": "5/3/24",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
     {
@@ -138,7 +138,7 @@ const dataTask = [
       "taskProcessId": 56,
       "taskDescription": "Realizar inspeção pós-tratamento térmico",
       "taskDate": "20/4/24",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
   
@@ -176,7 +176,7 @@ const dataTask = [
       "taskProcessId": 29,
       "taskDescription": "Preparar peças para Soldagem de Estruturas Metálicas",
       "taskDate": "22/1/24",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
     {
@@ -184,7 +184,7 @@ const dataTask = [
       "taskProcessId": 29,
       "taskDescription": "Realizar soldagem para Estruturas Metálicas",
       "taskDate": "6/3/24",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
   
@@ -212,7 +212,7 @@ const dataTask = [
       "taskProcessId": 89,
       "taskDescription": "Instalar sensores para Linhas de Produção",
       "taskDate": "9/10/24",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
   
@@ -238,7 +238,7 @@ const dataTask = [
       "taskProcessId": 48,
       "taskDescription": "Afiação final para Ferramentas Industriais",
       "taskDate": "15/3/25",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
 
@@ -281,7 +281,7 @@ const dataTask = [
       "taskProcessId": 37,
       "taskDescription": "Aplicar primer para Pintura e Acabamento",
       "taskDate": "20/12/24",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
     {
@@ -299,7 +299,7 @@ const dataTask = [
       "taskProcessId": 22,
       "taskDescription": "Preparar reagentes para Produção de Produtos Químicos",
       "taskDate": "7/4/25",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
     {
@@ -345,7 +345,7 @@ const dataTask = [
       "taskProcessId": 59,
       "taskDescription": "Gerar energia a partir de fontes renováveis",
       "taskDate": "16/1/26",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
     {
@@ -388,7 +388,7 @@ const dataTask = [
       "taskProcessId": 14,
       "taskDescription": "Finalizar montagem e realizar inspeção para Montagem de Painéis Solares",
       "taskDate": "5/10/26",
-      "taskStatus": "Concluída",
+      "taskStatus": "Concluida",
       "taskPercent": 100
     },
     {
@@ -422,7 +422,7 @@ const dataTask = [
     "taskProcessId": 87,
     "taskDescription": "Armazenamento dos equipamentos finalizados para Produção de Equipamentos de Segurança",
     "taskDate": "25/9/26",
-    "taskStatus": "Concluída",
+    "taskStatus": "Concluida",
     "taskPercent": 100
   },
 
@@ -448,7 +448,7 @@ const dataTask = [
     "taskProcessId": 38,
     "taskDescription": "Realizar testes de segurança para Montagem de Veículos",
     "taskDate": "22/10/26",
-    "taskStatus": "Concluída",
+    "taskStatus": "Concluida",
     "taskPercent": 100
   },
   {
@@ -482,7 +482,7 @@ const dataTask = [
     "taskProcessId": 56,
     "taskDescription": "Inspeção de qualidade pós-tratamento térmico",
     "taskDate": "22/10/26",
-    "taskStatus": "Concluída",
+    "taskStatus": "Concluida",
     "taskPercent": 100
   }
 ];

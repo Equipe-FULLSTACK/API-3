@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var helmet = require('helmet');
 var rateLimit = require("express-rate-limit");
 
+var cors = require('cors');
 var app = express();
 var server = http.createServer(app);
 
@@ -18,8 +19,8 @@ const limiter = rateLimit({
 
 var con = mysql.createConnection({
 	host: "localhost",
-	user: "fullstack",
-	password: "senhadaora123",
+	user: "root",
+	password: "password",
 	database: "db"
 });
 
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname,'./')));
 app.use(helmet());
 app.use(limiter);
+app.use(cors());
 app.set('view engine', 'ejs');
 
 

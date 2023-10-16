@@ -33,7 +33,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
 
   const tasksFiltradas = dataTask.filter((task) => task.taskProcessId === processId);
 
-  // console.log(tasksFiltradas)
+  /* console.log(tasksFiltradas) */
 
   //TODO FAZER LOGICA SELEÇÃO COR DE ALERTA
   processBarFill = dark.colors.bgPrimarycolor;
@@ -70,7 +70,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
 
       <CardFooter>
         {/* TODO INSERIR FUNÇÕES DO BOTÃO */}
-        <BotaoModal label={'Detalhe'} tagButton={'Processo_'+processId}/>
+        <BotaoModal label={'Detalhe'} name={processId} tagButton={'Processo_'+processId}/>
       </CardFooter>
     </CardWrapper>
   );

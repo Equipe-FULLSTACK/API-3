@@ -12,6 +12,7 @@ import HomePage from './Components/Layout/HomePage.tsx';
 
 import { Provider } from 'react-redux';
 import store from './store/index.ts';
+import Lista from './pages/Lista.tsx';
 
 
 const App:React.FC = ()=> (
@@ -23,6 +24,7 @@ const App:React.FC = ()=> (
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/processos" element={<HomePage />} />
+          <Route path="/lista" element={<Lista />} />
         </Routes>
       </Provider>
     </ThemeProvider>
