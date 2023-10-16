@@ -47,7 +47,9 @@ Ao longo da Sprint, foi feito um levantamento de requisitos e implementadas nova
 ### <p align = "center">Gráfico de Burndown
 
 
-### <p align = "center">![image]()
+ <br>
+  <div align="center"> <img src="/readme/PrintBurndown.png "width="640" height="360"> </div>
+  <br>
   
   
   # <p align="center">SPRINTS
