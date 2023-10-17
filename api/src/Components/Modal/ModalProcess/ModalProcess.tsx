@@ -134,6 +134,30 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
         stopEditing();
     };
 
+
+    const addNewTask = () => {
+        // Crie uma nova tarefa com valores padrão ou vazios
+        
+        const newTask: Task = {
+            taskId: dataTask.length + 1,
+            taskProcessId: processModalId, //
+            taskDescription: '',
+            taskDate: '', 
+            taskStatus: 'Em Andamento', 
+            taskPercent: 0, //
+        };
+    
+        // Atualize tasksFiltradas adicionando a nova tarefa
+        const updatedTasks = [...tasksFiltradas, newTask];
+    
+        // Atualize o estado com as tarefas atualizadas
+        setTasksFiltradas(updatedTasks);
+    
+        // Chame a função updateTaskData para atualizar o array principal, se necessário
+        updateTaskData(updatedTasks);
+    };
+    
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -158,7 +182,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                     <div className="tools">
                         <ul>
                             <li>
-                                <button>
+                                <button onClick={addNewTask}>
                                     <a className="material-icons"><img src={addIcon} alt="Add Task" />Adicionar nova tarefa</a>
                                 </button>
                             </li>
@@ -174,7 +198,6 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                 <table className="datatable">
                     <thead>
                         <tr>
-                            {/* <th><input type="checkbox" /></th> */}
                             <th>Id</th>
                             <th>Data</th>
                             <th>Tarefa</th>
