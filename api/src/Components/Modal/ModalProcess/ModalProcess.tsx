@@ -1,8 +1,13 @@
 // ModalComponent.tsx
 import React, { useState, useEffect } from 'react';
 
-import { selectProcessId } from '../../../store/index';
 import { useSelector } from 'react-redux';
+import { AppState } from '../../../store/index'; //
+
+
+import { selectProcessId } from '../../../store/index';
+
+
 
 import './style.css'
 import addIcon from '../../../assets/icons/icon_add.png'
@@ -13,9 +18,12 @@ import hour from '../../../assets/icons/icon_hour.png'
 import save from '../../../assets/icons/icon_save.png'
 
 
+
 import { dataTask } from '../../Data/DataTask/dataTask'
-import { updateTaskData } from "../../Data/DataTask/dataTask"; /// atualiza as tasks
-import { deleteTask } from "../../Data/DataTask/dataTask"; /// deleta as tasks
+import { useDispatch } from 'react-redux';
+
+/* import { updateTaskData } from "../../Data/DataTask/dataTask"; /// atualiza as tasks
+import { deleteTask } from "../../Data/DataTask/dataTask"; /// deleta as tasks */
 
 
 import dataProcess from '../../Data/DataProcess/dataProcess'
@@ -45,15 +53,30 @@ interface dataProcessModal {
 
 
 const ModalProcess: React.FC<dataProcessModal> = () => {
+    
+    const dispatch = useDispatch();
+
+    // LOAD TASKS
+    const tasks = useSelector((state: AppState) => state.tasks);
+    useEffect(() => {
+        if (tasks) {
+            console.log('Modal Process UseEffect tasks')
+            console.log(tasks);
+        }
+    }, [tasks]);
+
+
+
+
     const processModalId = useSelector(selectProcessId); // VARIAVEL VEM REDUX MAINPULAÇÃO DOS DADOS A NIVEL GLOBAL.
     const [tasksFiltradas, setTasksFiltradas] = useState<Task[]>([]); /// DEFINE ESTADO DAS TASK PARA ALTERAÇÕES DINAMICAS.
 
 
     // PROCESSO DE ATUALIZAÇÃO DINAMICA DA PÁGINA QUANDO HÁ ALTERAÇÃO EM TEMPO REAL. 
     useEffect(() => {
-        const filteredTasks = dataTask.filter((task) => task.taskProcessId === processModalId);
+        const filteredTasks = tasks.filter((task) => task.taskProcessId === processModalId);
         setTasksFiltradas(filteredTasks);
-    }, [processModalId, dataTask]);
+    }, [processModalId, tasks]);
 
 
 
@@ -109,54 +132,68 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
         setEditTaskId(null);
     };
 
-    const editTask = (taskId, editedTaskFields) => {
-        const updatedTasks = tasksFiltradas.map((task) =>
-            task.taskId === taskId ? { ...task, ...editedTaskFields } : task
-        );
-
-        console.log('editTask');
-        console.log(updatedTasks);
-
-        setTasksFiltradas(updatedTasks);
-        updateTaskData(updatedTasks);
-
-        stopEditing(); // Sai do modo de edição
+/*     const editTask = (taskId: number, editedTaskFields: Partial<Task>) => {
+    const updatedTask = {
+      taskId,
+      ...editedTaskFields,
     };
 
-    const localDeleteTask = (taskId: number) => {
-        // Lógica para deletar a tarefa e atualizar tasksFiltradas
-        const updatedTasks = tasksFiltradas.filter((task) => task.taskId !== taskId);
-        setTasksFiltradas(updatedTasks);
+    // Despache a ação para atualizar a tarefa no estado global
+    
 
-        // Chame a função deleteTask para atualizar o array principal, se necessário
-        deleteTask(taskId);
-
-        stopEditing();
+    stopEditing(); // Sai do modo de edição
+  };
+ */
+  const editTask = (taskId: number, editedTaskFields: Partial<TaskToRedux>) => {
+    // Crie uma ação de atualização da tarefa
+    const updateTaskAction = {
+      type: 'UPDATE_TASK',
+      payload: {
+        taskId: taskId,
+        ...editedTaskFields,
+      },
     };
 
+    // Despache a ação para o Redux
+    dispatch(updateTaskAction);
+    stopEditing(); // Sai do modo de edição
 
-    const addNewTask = () => {
-        // Crie uma nova tarefa com valores padrão ou vazios
-        
-        const newTask: Task = {
-            taskId: dataTask.length + 1,
-            taskProcessId: processModalId, //
-            taskDescription: '',
-            taskDate: '', 
-            taskStatus: 'Em Andamento', 
-            taskPercent: 0, //
-        };
-    
-        // Atualize tasksFiltradas adicionando a nova tarefa
-        const updatedTasks = [...tasksFiltradas, newTask];
-    
-        // Atualize o estado com as tarefas atualizadas
-        setTasksFiltradas(updatedTasks);
-    
-        // Chame a função updateTaskData para atualizar o array principal, se necessário
-        updateTaskData(updatedTasks);
+  };
+
+
+  const localDeleteTask = (taskId: number) => {
+    // Disparar a ação DELETE_TASK usando dispatch
+    dispatch({ type: 'DELETE_TASK', payload: { taskId } });
+  
+    // Restante do seu código para atualizar localmente as tasksFiltradas, se necessário
+    const updatedTasks = tasksFiltradas.filter((task) => task.taskId !== taskId);
+    setTasksFiltradas(updatedTasks);
+  
+    stopEditing();
+  };
+
+
+  const addNewTask = () => {
+    // Crie uma nova tarefa com valores padrão ou vazios
+    const newTask: Task = {
+      taskId: tasks.length + 1,
+      taskProcessId: processModalId, //
+      taskDescription: '',
+      taskDate: '',
+      taskStatus: 'Em Andamento',
+      taskPercent: 0, //
     };
+  
+    // Disparar a ação ADD_TASK usando dispatch
+    dispatch({ type: 'ADD_TASK', payload: newTask });
+  
+    // Restante do seu código para atualizar localmente as tasksFiltradas, se necessário
+    const updatedTasks = [...tasksFiltradas, newTask];
+    setTasksFiltradas(updatedTasks);
+  
     
+  };
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 

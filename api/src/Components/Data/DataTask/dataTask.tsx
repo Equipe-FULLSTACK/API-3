@@ -525,5 +525,5 @@ export function deleteTask(taskId: number): void {
     dataTask.splice(taskIndex, 1);
   }
 
-  /* console.log(dataTask); */
+  console.log(dataTask);
 }
