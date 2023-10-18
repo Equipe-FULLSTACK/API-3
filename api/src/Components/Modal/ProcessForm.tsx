@@ -57,6 +57,7 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
     return (
         <div className="modal">
             <form onSubmit={(e) => handleSubmit(e)}>
+            <button type="button" className="close-button" onClick={()=> setShowModal(false)}>x</button>
                 <h1>Novo Processo</h1>
                 <div className="modaldiv">Nome</div>
                 <input type="text" name="name"
@@ -71,7 +72,6 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
                     value={formData?.hourFinished}
                     onChange={handleInputChange} />
                 <button type="submit">Cadastrar</button>
-                <button type="button" className="close-button" onClick={()=> setShowModal(false)}>X</button>
             </form>
         </div>
 

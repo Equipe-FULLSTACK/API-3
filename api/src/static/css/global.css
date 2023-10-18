@@ -157,14 +157,16 @@ box-shadow: var(--font-secondary-color)  0 0 0 1px;
 
 /* Estilos para o botão de fechar o modal (se você quiser adicionar um botão de fechar) */
 .modal .close-button {  
-  position: fixed;
-  top: 10px;
-  right: 10px;
+  display: flex;
   cursor: pointer;
-  font-size: 20px;
-  color: white; /* Cor do ícone */
-  background-color: transparent; /* Fundo transparente */
-  border: none; /* Remova a borda */
+  font-size: 30px;
+  color: black;
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  width: 30px;
+  margin-left: 200px;
+  margin-top: -10px;
 }
 
 
