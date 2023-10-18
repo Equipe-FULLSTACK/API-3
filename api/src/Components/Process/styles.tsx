@@ -15,6 +15,8 @@ export const Wrapper = styled(NavItemWrapper)`
     width: ${(props)=>props.width ? props.width  : "auto"};
     height: ${(props)=>props.height ? props.height  : "auto"};
     background-color: ${(props)=>props.backgroundColor ? props.backgroundColor  : ''}
+
+
 `
 
 export const Divider = styled.div`

@@ -66,22 +66,28 @@ bg = dark.colors.bgPrimarycolor;
                 flexDirection='row'
                 justifyContent='space-between'
                 alignItems='center'
-                padding=''
+                padding='0'
                 margin='0 0 0.5rem 0'
                 width='100%'
                 backgroundColor={bg}>
                   {/* <ProcessActive>Processos Ativos</ProcessActive>
                   <a href="/API-3/api/src/Components/Modal/ProcessForm.tsx"><ButtonNewProcess>Novo Processo</ButtonNewProcess></a>
                   <SearchComponent/> */}
+                  <ProcessActive>Processos Ativos</ProcessActive>
                   <button className="btn-newProcess" onClick={() => setShowModal(true)}>Novo processo</button>
+                  <SearchComponent/> 
+
               </Wrapper>
               <Divider/>
               <Wrapper 
-              flexDirection='row'
-              backgroundColor={bg}
+                flexDirection='row'
+                backgroundColor={bg}
+                margin='.5rem'
+                padding='0'
+
               >
                 {dataProcess.map((process: DataProcess) => (
-                  <li key={process.processId}>
+                  <li className='cardList' key={process.processId}>
                     <CardProcess processId={process.processId} 
                       processName={process.processName} 
                       processDate={process.processDateFinshed} 

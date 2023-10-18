@@ -19,9 +19,17 @@ const BargraphWrapper = styled.div<BargraphProps>`
 `;
 
 const BargraphFill = styled.div<BargraphProps>`
-  background-color: ${(props) => props.fillBackgroundColor};
+
+${props =>
+    props.fillBackgroundColor === 'Atrasada'
+    ? 'background-color: #ff6961;'
+    : props.fillBackgroundColor === 'Concluida'
+    ? 'background-color: #54c5cd;;'
+    : 'background-color: #fbfb38;'}
+
   border-radius: 5px;
   width: ${(props) => ((props.value - props.minValue) / (props.maxValue - props.minValue)) * 100}%;
+
 `;
 
 // DINAMIC INDICATOR PERCENT ABSOLUTE POSITION

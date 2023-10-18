@@ -132,20 +132,9 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
         setEditTaskId(null);
     };
 
-/*     const editTask = (taskId: number, editedTaskFields: Partial<Task>) => {
-    const updatedTask = {
-      taskId,
-      ...editedTaskFields,
-    };
 
-    // Despache a ação para atualizar a tarefa no estado global
-    
-
-    stopEditing(); // Sai do modo de edição
-  };
- */
   const editTask = (taskId: number, editedTaskFields: Partial<TaskToRedux>) => {
-    // Crie uma ação de atualização da tarefa
+    
     const updateTaskAction = {
       type: 'UPDATE_TASK',
       payload: {
@@ -165,7 +154,6 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     // Disparar a ação DELETE_TASK usando dispatch
     dispatch({ type: 'DELETE_TASK', payload: { taskId } });
   
-    // Restante do seu código para atualizar localmente as tasksFiltradas, se necessário
     const updatedTasks = tasksFiltradas.filter((task) => task.taskId !== taskId);
     setTasksFiltradas(updatedTasks);
   
@@ -174,7 +162,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
 
 
   const addNewTask = () => {
-    // Crie uma nova tarefa com valores padrão ou vazios
+
     const newTask: Task = {
       taskId: tasks.length + 1,
       taskProcessId: processModalId, //

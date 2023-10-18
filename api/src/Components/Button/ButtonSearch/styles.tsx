@@ -51,7 +51,7 @@ export const SearchButton = styled.button`
   position: absolute;
   right: 0px;
   color: ${props => props.theme.colors.fontPrimarycolor};
-  background-image: url(${iconSearch}});
+  background-image: url(${iconSearch});
   background-size: 1.5rem;
   background-repeat: no-repeat;
   background-color: ${props => props.theme.colors.bgTertiarycolor};

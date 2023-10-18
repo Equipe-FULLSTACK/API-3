@@ -3,33 +3,67 @@ import hour from '../../assets/icons/icon_hour.png'
 import date from '../../assets/icons/icon_calendar.png'
 
 export const CardWrapper = styled.li`
-  height: 210px;
+  display: flex;
+  flex-direction: column;
+  height: 240px;
   width: 360px;
   border: 1px solid ${props => props.theme.colors.bgTertiarycolor};
   background-color: ${props => props.theme.colors.bgSecondarycolor};
   opacity: 0.8;
   border-radius: 1rem;
-  margin: 0 1rem 1rem 1rem;
-  padding: 1rem;
+  margin: 0;
+  padding: 1rem 1rem 0 1rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, .1), 0 3px 6px rgba(0, 0, 0, .05);
+  box-sizing: border-box;
+  justify-content: space-between;
 `;
 
 export const CardHeader = styled.div`
   margin: 0 0 1rem 0;
+  height; 10rem;
   display: flex;
   align-content: center;
   justify-content: space-between;
 `;
 
 export const ProcessName = styled.span`
-  display: flex;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  /* display: flex; */
   align-items: center;
+  height: 100%
 `;
 
 export const ProcessStatus = styled.span`
+  display:flex;
   border-radius: 8px;
-  padding: 0.5rem 1rem;
-  background-color: ${props => props.theme.colors.alertRedColor};
+  padding: 6px 1rem;
+  height: 2rem;
+  text-align: center;
+  align-items: center;
+  
+  
+
+  &.Concluida {
+    background-color: #54c5cd;
+    color: black;
+
+  }
+  
+  &.Andamento{
+    background-color: #fbfb38;
+    color: black;
+
+  }
+  
+  &.Atrasada{
+    background-color: #ff6961;
+    color: black;
+
+  }
+
 `;
 
 export const CardSubtitle = styled.div`
@@ -79,8 +113,12 @@ export const CardBody = styled.div`
 export const CardBargraph = styled.ol`
   display: flex;
   flex-direction: row;
-  margin: 0.2rem 0rem 1rem 0;
-  height: 0.65rem;
+  margin: 0;
+  
+
+  &li{
+    margin: 0;
+  }
 `;
 
 export const CardPercent = styled.span`
@@ -92,10 +130,13 @@ export const CardPercent = styled.span`
 `;
 
 export const CardFooter = styled.div`
-  margin: 0 0 1rem 0;
+
+  margin: 1rem 0;
   display: flex;
   align-content: center;
   justify-content: center;
+  box-sizing: border-box;
+
 `;
 
 export const Button = styled.button`
@@ -125,6 +166,7 @@ export const Button = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  
 `;
 
 export const CardFooterButton = styled(Button)`

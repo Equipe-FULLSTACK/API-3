@@ -62,6 +62,7 @@ export const StyledButton = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  width: auto;
 
   &:hover {
     color: ${props => props.theme.colors.fontSecondarycolor};

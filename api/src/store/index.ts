@@ -2,7 +2,7 @@ import { Action} from 'redux';
 import { createStore } from 'redux';
 import taskReducer from '../Components/Data/DataTask/taskReducer';
 import { ADD_TASK, UPDATE_TASK, DELETE_TASK } from '../Components/Data/DataTask/taskTypes'; // Importe suas constantes de ação aqui
-import { Task } from '../Components/Data/DataTask/taskTypes';
+import { TaskToRedux } from '../Components/Data/DataTask/taskTypes';
 import { dataTask } from '../Components/Data/DataTask/dataTask';
 import { TaskActionTypes } from '../Components/Data/DataTask/taskTypes';
 
@@ -10,7 +10,7 @@ export interface AppState {
   modalAberto: boolean;
   tamanhoModal: string;
   processId?: number;
-  tasks: Task[];
+  tasks: TaskToRedux[];
 }
 
 export const selectProcessId = (state: AppState) => state.processId;
@@ -30,6 +30,10 @@ const initialState: AppState = {
   tamanhoModal: '1200px',
   tasks: dataTask, 
 };
+
+
+
+
 
 const reducer = (
   state: AppState = initialState,
