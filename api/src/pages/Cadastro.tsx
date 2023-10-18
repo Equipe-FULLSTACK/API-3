@@ -35,7 +35,7 @@ export function Cadastro({setDataProcess}: CadastroProps) {
                     <p>Nome de usuário</p>
                 </div>
 
-                <input className="cadastro-input" type="text" name="cadastro" id="cadastro" placeholder="Nome"/> 
+                <input className="cadastro-input" type="text" name="login" id="login" placeholder="Nome"/> 
 
 
             <div className="cadastro-form-containerC">
