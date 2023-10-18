@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../store/index'; //
-
+import { useDispatch } from 'react-redux';
 
 import { selectProcessId } from '../../../store/index';
 
@@ -20,7 +20,7 @@ import save from '../../../assets/icons/icon_save.png'
 
 
 import { dataTask } from '../../Data/DataTask/dataTask'
-import { useDispatch } from 'react-redux';
+
 
 /* import { updateTaskData } from "../../Data/DataTask/dataTask"; /// atualiza as tasks
 import { deleteTask } from "../../Data/DataTask/dataTask"; /// deleta as tasks */
@@ -60,10 +60,19 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     const tasks = useSelector((state: AppState) => state.tasks);
     useEffect(() => {
         if (tasks) {
-            console.log('Modal Process UseEffect tasks')
-            console.log(tasks);
+            /* console.log('Modal Process UseEffect tasks')
+            console.log(tasks); */
         }
     }, [tasks]);
+
+     // LOAD TASKS
+     const process = useSelector((state: AppState) => state.process);
+     useEffect(() => {
+         if (process) {
+            /*  console.log('Process Form UseEffect Process')
+             console.log(process); */
+         }
+     }, [process]);
 
 
 
@@ -80,11 +89,11 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
 
 
 
-    const processName = dataProcess
+    const processName = process
         .filter((f) => f.processId === processModalId)
         .map((n) => n.processName);
 
-    const processHour = dataProcess
+    const processHour = process
         .filter((f) => f.processId === processModalId)
         .map((n) => n.processHourFinshed);
 
@@ -98,7 +107,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     const taskAndamento = tasksFiltradas.filter((f) => f.taskStatus === 'Andamento');
 
     // ANIMAÇÃO DOS ESTILOS BASEADOS NOS STATUS.
-    let statusProcess;
+    let statusProcess;  
 
     if (taskAtrasada.length > 0) {
         statusProcess = 'Atrasada';
@@ -108,6 +117,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
         statusProcess = 'Concluida';
     }
 
+  /*   console.log(statusProcess) */
 
     ////////////////////////////////////// MANIPULAÇÃO DAS EDIÇÕES EM TEMPO REAL DAS TASKS //////////////////////////////////////////////////////////
 
@@ -240,7 +250,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                     {editTaskId === task.taskId ? (
                                         <>
                                             <input
-                                                type="text"
+                                                type="date"
                                                 value={editedDate[task.taskId] || ''}
                                                 onChange={(e) => {
                                                     const newEditedDate = { ...editedDate, [task.taskId]: e.target.value };

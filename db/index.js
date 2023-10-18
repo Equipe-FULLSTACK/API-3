@@ -20,7 +20,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "fatec",
+	password: "Fla*741137a",
 	database: "db"
 });
 
@@ -93,11 +93,25 @@ app.post('/register', function(req, res){
 app.post('/login', function(req, res){
 	const { login, senha } = req.body;
 	const { authorization } = req.headers;
-	if (login == "Pedro" && senha == "12345" ){
-		return res.redirect('http://localhost:5173/processos');
-	} else {
-		return res.redirect('http://localhost:5173/');
-	}
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log("Inserindo");
+		var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
+		con.query(sql, [login, senha], function (err, result) {
+			if (err) throw err;
+			if (result[0] != null){
+				var name = result[0].name;
+				var password = result[0].password;
+				if (login == name && senha == password ){
+					return res.redirect('http://localhost:5173/processos');
+				} else {
+					return res.redirect('http://localhost:5173/');
+				}
+			} else {
+				return res.redirect('http://localhost:5173/');	
+			}
+		});
+	});
 });
 
 app.post('/process', function(req, res){

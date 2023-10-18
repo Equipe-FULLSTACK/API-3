@@ -1,5 +1,9 @@
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { DataProcess } from "../Process/Process"
+
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store/index'; //
+import { useDispatch } from 'react-redux';
 
 
 
@@ -15,37 +19,55 @@ type FormData = {
 }
 
 export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
+    const dispatch = useDispatch();
+
+    // LOAD TASKS
+    const process = useSelector((state: AppState) => state.process);
+    useEffect(() => {
+        if (process) {
+           /*  console.log('Process Form UseEffect Process')
+            console.log(process); */
+        }
+    }, [process]);
+
+
     const [formData, setFormData] = useState<FormData>({
         name: '',
         dateFinished: '',
         hourFinished: '',
     });
 
-    const [lastProcessId, setLastProcessId] = useState(100); // Inicializado com 1000
+    const [lastProcessId, setLastProcessId] = useState(0); // Inicializado com 1000
+    const idLast = Math.max(...process.map(p => p.processId))+1;
+    /* console.log(idLast) */
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     };
 
-
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        console.log(formData)
+      /*   console.log(formData) */
 
 
         const newProcess: DataProcess = {
-            processId: lastProcessId + 1,
+            processId: idLast,
             processName: formData?.name,
             processDateFinshed: formData?.dateFinished,
             processHourFinshed: formData?.hourFinished,
             processPercentExecuted: 0,
-            processStatus: "Aberto"
+            processStatus: 'Andamento',
         }
+        // Disparar a ação ADD_TASK usando dispatch
+        dispatch({ type: 'ADD_PROCESS', payload: newProcess });
+
+
         setDataProcess(prev => [newProcess, ...prev])
         setLastProcessId(prev => prev + 1);
         setShowModal(false)
     }
+
 
 
     return (

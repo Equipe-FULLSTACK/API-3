@@ -39,7 +39,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
   const tasks = useSelector((state: AppState) => state.tasks);
     useEffect(() => {
         if (tasks) {
-            console.log('CardProcess UseEffect tasks')
+            /* console.log('CardProcess UseEffect tasks') */
            /*  console.log(tasks); */
         }
     }, [tasks]);
@@ -78,7 +78,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
  
 
   processBarFill = statusProcess;
-  console.log(processBarFill)
+  /* console.log(processBarFill) */
 
 
   return (
