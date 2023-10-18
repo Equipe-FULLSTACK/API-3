@@ -1,7 +1,4 @@
-import { useState } from "react";
-import { DataProcess } from "../Process/Process"
-
-
+import React, { useState } from 'react';
 
 interface CadastroProps {
     setDataProcess: React.Dispatch<React.SetStateAction<DataProcess[]>>,
@@ -13,6 +10,15 @@ type FormData = {
     dateFinished: string,
     hourFinished: string,
 }
+
+type DataProcess = {
+    processId: number,
+    processName: string,
+    processDateFinished: string,
+    processHourFinished: string,
+    processPercentExecuted: number,
+    processStatus: string,
+};
 
 export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
     const [formData, setFormData] = useState<FormData>({
@@ -26,21 +32,27 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
         setFormData({ ...formData, [name]: value });
     };
 
-
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        console.log(formData)
-        const newProcess: DataProcess = {
-            processId: 1000,
-            processName: formData?.name,
-            processDateFinshed: formData?.dateFinished,
-            processHourFinshed: formData?.hourFinished,
-            processPercentExecuted: 0,
-            processStatus: "Aberto"
-        }
-        setDataProcess(prev => [newProcess, ...prev])
-        setShowModal(false)
+        e.preventDefault();
+
+        setDataProcess((prevDataProcess: DataProcess[]) => {
+            const maxProcessId = Math.max(...prevDataProcess.map(process => process.processId), 0);
+
+            const newProcess: DataProcess = {
+                processId: maxProcessId + 1,
+                processName: formData.name,
+                processDateFinished: formData.dateFinished,
+                processHourFinished: formData.hourFinished,
+                processPercentExecuted: 0,
+                processStatus: "Aberto"
+            };
+
+            return [newProcess, ...prevDataProcess];
+        });
+
+        setShowModal(false);
     }
+
 
     return (
         <div className="modal">
