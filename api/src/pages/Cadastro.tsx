@@ -1,4 +1,5 @@
 import { DataProcess } from "../Components/Process/Process"
+import '../static/css/cadastro.css'
 
 interface CadastroProps {
     setDataProcess: React.Dispatch<React.SetStateAction<DataProcess[]>>
@@ -17,41 +18,41 @@ export function Cadastro({setDataProcess}: CadastroProps) {
     
     return (
     
-        <div className="login-containerC" id="fundo">
-        <div className="login-imagemC">
+        <div className="cadastro-containerC" id="fundo">
+        <div className="cadastro-imagemC">
             <img src="/./icons/logo_ionic_health.png" alt="" />
         </div>
-        <div className="login-formC">
-            <div className="login-header-mainC">
+        <div className="cadastro-formC">
+            <div className="cadastro-header-mainC">
                 Cadastro de usuário
             </div>
-            <div className="login-header-secondC">
+            <div className="cadastro-header-secondC">
                 Crie sua conta e aproveite nossos serviços
             </div>
-            <form className="login-form-containerC" action="http://127.0.0.1:3000/register" method="post">
+            <form className="cadastro-form-containerC" action="http://127.0.0.1:3000/register" method="post">
 
-            <div className="login-form-containerC">
+            <div className="cadastro-form-containerC">
                     <p>Nome de usuário</p>
                 </div>
 
-                <input className="login-input" type="text" name="login" id="login" placeholder="Nome"/> 
+                <input className="cadastro-input" type="text" name="cadastro" id="cadastro" placeholder="Nome"/> 
 
 
-            <div className="login-form-containerC">
+            <div className="cadastro-form-containerC">
                     <p>Digite um Apelido</p>
                 </div>
 
-                <input className="login-inputC" type="text" name="apelido" id="apelido" placeholder="Apelido"/>
+                <input className="cadastro-inputC" type="text" name="apelido" id="apelido" placeholder="Apelido"/>
 
 
-                <div className="login-form-containerC">
+                <div className="cadastro-form-containerC">
                     <p>Digite seu E-mail</p>
                 </div>
 
-                <input className="login-input" type="text" name="email" id="email" placeholder="E-mail"/>
+                <input className="cadastro-input" type="text" name="email" id="email" placeholder="E-mail"/>
 
 
-                <div className="login-form-containerC">
+                <div className="cadastro-form-containerC">
                     <p>Senha</p>
                 </div>
 
@@ -61,7 +62,7 @@ export function Cadastro({setDataProcess}: CadastroProps) {
                 <button type="submit">Cadastrar</button>
 
             </form>
-            <div className="login-criar-contaC">
+            <div className="cadastro-criar-contaC">
                 Já possui uma conta? <a href="http://localhost:5173/">Entrar</a>
             </div>
         </div>

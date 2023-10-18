@@ -1,0 +1,120 @@
+.cadastro-containerC{
+    
+    margin: auto;
+    position: relative;
+    text-align: center;
+    top: 10%;
+    bottom: 10%;
+    width: 33%;
+    height: 80%; 
+    background-color: #292A2D;
+    
+}
+
+.cadastro-imagemC {
+    
+    margin: auto;
+    position: relative;
+    top: 14%;
+    background-color: #292A2D;
+    color: #292A2D;
+
+}
+
+.cadastro-imagemC img {
+    background-color: #292A2D;
+}
+
+.cadastro-input, select, textarea{
+    color: black;
+}
+
+.cadastro-formC {
+    
+    margin: auto;
+    position: relative;
+    top: 20%;
+    width: 70%;
+    background-color: #292A2D;
+}
+
+.cadastro-header-mainC {
+    
+    margin: auto;
+    position: relative;
+    text-align: justify;
+    color: #54C5CE;
+    font-size: 28px;
+    background-color: #292A2D;
+}
+
+.cadastro-header-secondC {
+    
+    margin:auto;
+    position: relative;
+    text-align: left;
+    color: #58595B;
+    font-size: 16px;
+    margin-top: 3%;
+    background-color: #292A2D;
+}
+
+.cadastro-form-containerC {
+    
+    margin: auto;
+    position: relative;
+    text-align: left;
+    margin-top: 8%;
+    background-color: #292A2D;
+}
+
+.cadastro-form-containerC p {
+    color: #9AF0E8;
+    font-size: 14px;
+    background-color: #292A2D;
+}
+
+.cadastro-formC input {
+    width: 100%;
+    position: relative;
+    height: 46px;
+    border-radius: 9px;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    color: #1D1E20;
+    
+}
+
+.cadastro-formC input::placeholder {
+    color: #1D1E20;
+    padding-left: 10px;
+    font-size: 15px;
+    
+}
+
+.cadastro-formC button {
+    text-align: center;
+    color: #54C5CE;
+    width: 100%;
+    height: 50px;
+    margin-top: 2%;
+    background-color: #333333;
+    border-radius: 90px;
+    
+}
+
+.cadastro-criar-contaC {
+    text-align: center;
+    margin: auto;
+    margin-top: 14%;
+    color: #58595B;
+    font-size: 14px;
+    background-color: #292A2D;
+    
+}
+
+.cadastro-criar-contaC a {
+    color: #54C5CE;
+    font-size: 14px;
+    
+}
