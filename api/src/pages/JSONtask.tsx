@@ -13,12 +13,13 @@ const id = window.location.href.substring(posicaoID+3);
   }, []);
   
 var json = JSON.stringify(seuJSON, null, 2);
-json = json.replaceAll("\"id\":", "\"processId\":");
-json = json.replaceAll("\"name\":", "\"processName\":");
-json = json.replaceAll("\"status\":", "\"processStatus\":");
-json = json.replaceAll("\"created\":", "\"processDateCreated\":");
-json = json.replaceAll("\"deadline\":", "\"processDateFinished\":");
-json = json.replaceAll("\"description\":", "\"processDescription\":");
+json = json.replaceAll("\"id\":", "\"evidenceId\":");
+json = json.replaceAll("\"task\":", "\"evidenceTaskId\":");
+json = json.replaceAll("\"name\":", "\"evidenceName\":");
+json = json.replaceAll("\"status\":", "\"evidenceStatus\":");
+json = json.replaceAll("\"created\":", "\"evidenceDateCreated\":");
+json = json.replaceAll("\"deadline\":", "\"evidenceDateFinished\":");
+json = json.replaceAll("\"description\":", "\"evidenceDescription\":");
 
 
   return (
