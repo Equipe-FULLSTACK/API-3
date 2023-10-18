@@ -20,12 +20,13 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "senhadaora123",
+	password: "fatec",
 	database: "db"
 });
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname,'./')));
+app.use(express.json());
 app.use(helmet());
 app.use(limiter);
 app.use(cors());
@@ -71,6 +72,51 @@ app.get("/t", (req, res) => {
 	});
 });
 
+app.post('/register', function(req, res){
+	const { login, apelido, email, senha } = req.body;
+	const { authorization } = req.headers;
+	if (login != "" && apelido != "" && email != "" && senha != ""){
+		con.connect(function(err) {
+		if (err) throw err;
+		console.log("Inserindo");
+		var sql = 'INSERT INTO users (admin, name, password, email) VALUES (false, ?, ?, ?)';
+		con.query(sql, [login, senha, email], function (err, result) {
+			if (err) throw err;
+		});
+	});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/');
+});
+
+app.post('/login', function(req, res){
+	const { login, senha } = req.body;
+	const { authorization } = req.headers;
+	if (login == "Pedro" && senha == "12345" ){
+		return res.redirect('http://localhost:5173/processos');
+	} else {
+		return res.redirect('http://localhost:5173/');
+	}
+});
+
+app.post('/process', function(req, res){
+	const { name, deadline } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != ""){
+		con.connect(function(err) {
+		if (err) throw err;
+		console.log("Inserindo");
+		var sql = 'INSERT INTO processes (status, name, created, deadline) VALUES (0, ?, NOW(), ?)';
+		con.query(sql, [name, deadline], function (err, result) {
+			if (err) throw err;
+		});
+	});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/');
+});
 
 
 app.listen(PORT, () => {
