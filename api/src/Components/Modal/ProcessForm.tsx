@@ -21,6 +21,8 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
         hourFinished: '',
     });
 
+    const [lastProcessId, setLastProcessId] = useState(100); // Inicializado com 1000
+
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
@@ -30,8 +32,10 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         console.log(formData)
+
+
         const newProcess: DataProcess = {
-            processId: 1000,
+            processId: lastProcessId + 1,
             processName: formData?.name,
             processDateFinshed: formData?.dateFinished,
             processHourFinshed: formData?.hourFinished,
@@ -39,6 +43,7 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
             processStatus: "Aberto"
         }
         setDataProcess(prev => [newProcess, ...prev])
+        setLastProcessId(prev => prev + 1);
         setShowModal(false)
     }
 
