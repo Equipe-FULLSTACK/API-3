@@ -50,7 +50,7 @@ const Bargraph: React.FC<BargraphProps> = ({ value, minValue, maxValue, backgrou
   return (
     <BargraphWrapper backgroundColor={backgroundColor} className="bargraph">
       <BargraphFill value={value} minValue={minValue} maxValue={maxValue} fillBackgroundColor={fillBackgroundColor} />
-      {value !== 100 && <ValueIndicator fillPercentage={fillPercentage}>{value}%</ValueIndicator>}
+      {value !== 1000 && <ValueIndicator fillPercentage={fillPercentage}>{value}%</ValueIndicator>}
     </BargraphWrapper>
   );
 };

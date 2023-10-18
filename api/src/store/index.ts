@@ -1,16 +1,25 @@
 import { Action} from 'redux';
 import { createStore } from 'redux';
-import taskReducer from '../Components/Data/DataTask/taskReducer';
+/* import taskReducer from '../Components/Data/DataTask/taskReducer'; */
 import { ADD_TASK, UPDATE_TASK, DELETE_TASK } from '../Components/Data/DataTask/taskTypes'; // Importe suas constantes de ação aqui
+import { ADD_PROCESS, UPDATE_PROCESS, DELETE_PROCESS } from '../Components/Data/DataProcess/processTypes'; // Importe suas constantes de ação aqui
+
 import { TaskToRedux } from '../Components/Data/DataTask/taskTypes';
+import { ProcessToRedux } from '../Components/Data/DataProcess/processTypes'; //////
+
+
 import { dataTask } from '../Components/Data/DataTask/dataTask';
+import dataProcess  from '../Components/Data/DataProcess/dataProcess'; //////
+
 import { TaskActionTypes } from '../Components/Data/DataTask/taskTypes';
+import { ProcessActionTypes } from '../Components/Data/DataProcess/processTypes'; //////
 
 export interface AppState {
   modalAberto: boolean;
   tamanhoModal: string;
   processId?: number;
   tasks: TaskToRedux[];
+  process: ProcessToRedux[]; //////
 }
 
 export const selectProcessId = (state: AppState) => state.processId;
@@ -29,6 +38,7 @@ const initialState: AppState = {
   modalAberto: false,
   tamanhoModal: '1200px',
   tasks: dataTask, 
+  process: dataProcess,
 };
 
 
@@ -37,7 +47,7 @@ const initialState: AppState = {
 
 const reducer = (
   state: AppState = initialState,
-  action: ToggleModalAction | FecharModalAction | TaskActionTypes
+  action: ToggleModalAction | FecharModalAction | TaskActionTypes | ProcessActionTypes
 ): AppState => {
   switch (action.type) {
     case 'TOGGLE_MODAL':
@@ -69,6 +79,12 @@ const reducer = (
         ...state,
         tasks: state.tasks.filter((task) => task.taskId !== action.payload.taskId),
       };
+    case ADD_PROCESS:
+        return {
+        ...state,
+        process: [...state.process, action.payload],
+      };
+      
     default:
       return state;
   }
