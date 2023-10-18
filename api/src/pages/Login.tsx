@@ -13,7 +13,7 @@ export default function Login() {
                 <div className="login-header-second">
                     Acesso sistema de gerenciamento de processos e tarefas da empresa
                 </div>
-                <form className="login-form-container" action="post">
+                <form className="login-form-container" action="http://127.0.0.1:3000/login" method="post">
 
                     <div className="login-form-container">
                         <p>Login</p>
@@ -25,7 +25,7 @@ export default function Login() {
                         <p>Senha</p>
                     </div>
 
-                    <input type="text" name="senha" id="senha" placeholder="Senha"/>
+                    <input type="password" name="senha" id="senha" placeholder="Senha"/>
                     <div className="login-form-recuperar">
                         <a className="login-form-recuperar" href="/recuperar_senha">Esqueceu sua senha?</a>
                     </div>

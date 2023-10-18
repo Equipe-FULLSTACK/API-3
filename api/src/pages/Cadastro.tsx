@@ -27,7 +27,7 @@ export function Cadastro({setDataProcess}: CadastroProps) {
             <div className="login-header-secondC">
                 Crie sua conta e aproveite nossos serviços
             </div>
-            <form className="login-form-containerC" action="post">
+            <form className="login-form-containerC" action="http://127.0.0.1:3000/register" method="post">
 
             <div className="login-form-containerC">
                     <p>Nome de usuário</p>
@@ -54,7 +54,7 @@ export function Cadastro({setDataProcess}: CadastroProps) {
                     <p>Senha</p>
                 </div>
 
-                <input type="text" name="senha" id="senha" placeholder="Senha"/>
+                <input type="password" name="senha" id="senha" placeholder="Senha"/>
 
 
                 <button type="submit">Cadastrar</button>
