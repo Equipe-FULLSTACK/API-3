@@ -192,6 +192,39 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     
   };
 
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, taskId: number) => {
+    const fileInput = event.target; // O elemento <input type="file> que acionou o evento
+    const selectedFile = fileInput.files[0]; // O arquivo selecionado pelo usuário
+
+    if (selectedFile) {
+    // Agora você pode realizar ações com o arquivo, como fazer upload para um servidor, armazená-lo, etc.
+    // Por exemplo, você pode usar a API Fetch para enviar o arquivo para um servidor.
+    
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+    // Exemplo de envio para um servidor (substitua a URL pelo seu endpoint):
+        fetch('/seu-endpoint-de-upload', {
+            method: 'POST',
+            body: formData,
+    })
+        .then(response => response.json())
+        .then(data => {
+             console.log('Arquivo enviado com sucesso:', data);
+      // Aqui, você pode realizar ações adicionais, como atualizar o estado da tarefa com informações do arquivo.
+      // Por exemplo: updateTaskWithFile(taskId, data.url);
+    })
+        .catch(error => {
+            console.error('Erro ao enviar o arquivo:', error);
+    });
+
+    // Lembre-se de lidar com erros e feedback ao usuário, e de atualizar o estado da tarefa com informações sobre o arquivo, como uma URL de download, se aplicável.
+
+    // Limpar o valor do input para permitir novos uploads
+        fileInput.value = '';
+  }
+}
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -360,10 +393,28 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                             <li>
                                                 {editTaskId === task.taskId ? (
                                                     ('')
+                                                ) : (
+                                                    <div>
+                                                        <label htmlFor={`file-input-${task.taskId}`} className="file-label">
+                                                            <i className="material-icons"><img src={''} alt="Attach File"/>anexar</i>
+                                                        </label>
+                                                        <input
+                                                            type="file"
+                                                            id={`file-input-${task.taskId}`}
+                                                            style={{ display: 'none' }}
+                                                            onChange={(e) => handleFileUpload(e, task.taskId)} // Crie a função handleFileUpload para lidar com o arquivo selecionado
+                                                        />
+                                                    </div>
+                                                )}
+                                            </li>
+                                            <li>
+                                                {editTaskId === task.taskId ? (
+                                                    ('')
                                                 ) :
                                                     <button onClick={() => localDeleteTask(task.taskId)}>
                                                         <i className="material-icons"><img src={trash} alt="Delete Task" /></i>
-                                                    </button>}
+                                                    </button>
+                                                }
                                             </li>
                                         </ul>
                                     </div>
