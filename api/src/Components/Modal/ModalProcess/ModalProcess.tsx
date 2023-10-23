@@ -16,7 +16,7 @@ import trash from '../../../assets/icons/icon_trash.png'
 import date from '../../../assets/icons/icon_calendar.png'
 import hour from '../../../assets/icons/icon_hour.png'
 import save from '../../../assets/icons/icon_save.png'
-
+import attach from '../../../assets/icons/attach.png'
 
 
 import { dataTask } from '../../Data/DataTask/dataTask'
@@ -394,9 +394,9 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                                 {editTaskId === task.taskId ? (
                                                     ('')
                                                 ) : (
-                                                    <div>
+                                                    <div className='icon-file'>
                                                         <label htmlFor={`file-input-${task.taskId}`} className="file-label">
-                                                            <i className="material-icons"><img src={''} alt="Attach File"/>anexar</i>
+                                                            <i className="material-icons"><img src={attach} alt="Attach File"/></i>
                                                         </label>
                                                         <input
                                                             type="file"
