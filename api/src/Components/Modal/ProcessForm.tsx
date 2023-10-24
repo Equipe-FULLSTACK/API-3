@@ -4,6 +4,8 @@ import { DataProcess } from "../Process/Process"
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/index'; //
 import { useDispatch } from 'react-redux';
+import Notificacao from '../../pages/Notificacao';
+
 
 
 
@@ -66,6 +68,9 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
         setDataProcess(prev => [newProcess, ...prev])
         setLastProcessId(prev => prev + 1);
         setShowModal(false)
+
+        Notificacao({newProcess})
+
     }
 
 
