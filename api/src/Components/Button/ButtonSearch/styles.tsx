@@ -19,16 +19,16 @@ export const SearchBox = styled.div`
 `;
 
 export const InputSearch = styled.input`
-  height: 50px;
+  height: 51px;
   width: 50px;
   border-style: none;
   padding: 10px;
   font-size: 18px;
   letter-spacing: 2px;
   outline: none;
-  border-radius: 25px;
   transition: all 0.5s ease-in-out;
-  background-color: ${props => props.theme.colors.fontSecondarycolor};
+  border-radius: 50%;
+  background-color: ${props => props.theme.colors.fontTertiarycolor};
   padding-right: 40px;
   color: ${props => props.theme.colors.fontPrimarycolor};
 
@@ -36,6 +36,7 @@ export const InputSearch = styled.input`
     font-size: 18px;
     letter-spacing: 2px;
     font-weight: 100;
+
   }
 `;
 
@@ -50,6 +51,7 @@ export const SearchButton = styled.button`
   border-radius: 50%;
   position: absolute;
   right: 0px;
+  margin-top: 1px; 
   color: ${props => props.theme.colors.fontPrimarycolor};
   background-image: url(${iconSearch});
   background-size: 1.5rem;
