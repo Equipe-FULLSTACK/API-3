@@ -16,7 +16,7 @@ import Lista from './pages/Lista.tsx';
 import JSONall from './pages/JSONall.tsx';
 import JSONprocess from './pages/JSONprocess.tsx';
 import JSONtask from './pages/JSONtask.tsx';
-
+import Notificacao from './pages/Notificacao.tsx';
 
 
 const App:React.FC = ()=> (
@@ -32,6 +32,7 @@ const App:React.FC = ()=> (
           <Route path="/json" element={<JSONall />} />
           <Route path="/jsonprocess" element={<JSONprocess />} />
           <Route path="/jsontask" element={<JSONtask />} />
+          <Route path="/notificacao" element={<Notificacao />}/>
         </Routes>
       </Provider>
     </ThemeProvider>
