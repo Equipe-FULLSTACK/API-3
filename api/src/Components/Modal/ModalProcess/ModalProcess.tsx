@@ -390,21 +390,23 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                                     <button onClick={() => startEditing(task.taskId)}><i className="material-icons"><img src={edit} alt="Edit Task" /></i></button>
                                                 )}
                                             </li>
-                                            <li>
+                                            <li className="iconeanexo-li">
                                                 {editTaskId === task.taskId ? (
                                                     ('')
                                                 ) : (
-                                                    <div className='icon-file'>
+                                                    <button>
                                                         <label htmlFor={`file-input-${task.taskId}`} className="file-label">
                                                             <i className="material-icons"><img src={attach} alt="Attach File"/></i>
-                                                        </label>
+
                                                         <input
                                                             type="file"
                                                             id={`file-input-${task.taskId}`}
                                                             style={{ display: 'none' }}
                                                             onChange={(e) => handleFileUpload(e, task.taskId)} // Crie a função handleFileUpload para lidar com o arquivo selecionado
                                                         />
-                                                    </div>
+                                                        </label>
+                                                    </button>
+
                                                 )}
                                             </li>
                                             <li>

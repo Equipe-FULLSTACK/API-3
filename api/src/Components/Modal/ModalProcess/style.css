@@ -451,5 +451,8 @@ td{
     background-color: var(--dt-status-Atrasada-color);
     background-color: red;
   }
-
+ .iconeanexo-li{
+  width: 40px; 
+  height: 32.39px;
+ }
   
