@@ -58,6 +58,11 @@ export function Cadastro({setDataProcess}: CadastroProps) {
 
                 <input type="password" name="senha" id="senha" placeholder="Senha"/>
 
+                <div className="cadastro-form-containerC">
+                    <p>Digite seu Telefone</p>
+                </div>
+
+                <input type="telefone" name="telefone" id="telefone" placeholder="Telefone"/>
 
                 <button type="submit">Cadastrar</button>
 
