@@ -18,7 +18,7 @@ export function Cadastro({setDataProcess}: CadastroProps) {
     
     return (
     
-        <div className="cadastro-containerC" id="fundo">
+    <div className="cadastro-containerC" id="fundo">
         <div className="cadastro-imagemC">
             <img src="/./icons/logo_ionic_health.png" alt="" />
         </div>

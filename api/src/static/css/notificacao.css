@@ -1,0 +1,46 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.container-main{
+    max-width: 1200px;
+    display:inline-flex;
+
+}
+
+.side-notificacao{
+    display:flex;
+    margin-right: 170px;
+}
+
+.container-cards{
+    display:flex;
+    width: 700px;
+    height: 150px;
+    border: 2px solid white;
+    background: #292A2D;
+    border-radius: 8px;
+    margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.card-notificacao{
+    display:inline-block;
+    margin: 0 auto;
+    background: #292A2D;
+}
+
+
+.card-itens {
+    display:flex;
+    color: white;
+    background: #1d46c2;
+    width: 630px;
+    height: 29px;
+    
+
+
+}
