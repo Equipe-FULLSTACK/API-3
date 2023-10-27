@@ -20,7 +20,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "Fla*741137a",
+	password: "password",
 	database: "db"
 });
 
@@ -32,6 +32,8 @@ app.use(limiter);
 app.use(cors());
 app.set('view engine', 'ejs');
 
+
+// FUNÇÃO PARA RECEBER OS JSON DOS PROCESSOS GERAIS NA ROTA localhost:3000/
 
 app.get("/", (req, res) => {
 	con.connect(function(err) {
@@ -46,10 +48,12 @@ app.get("/", (req, res) => {
 	});
 });
 
+// FUNÇÃO PARA RECEBER OS JSON DOS PROCESSOS NA ROTA localhost:3000/p
+
 app.get("/p", (req, res) => {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Conectado");
+		console.log("Conectado Processos");
 		
 		var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks WHERE process = ?';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
@@ -59,10 +63,12 @@ app.get("/p", (req, res) => {
 	});
 });
 
+// FUNÇÃO PARA RECEBER OS JSON DAS TASKS NA ROTA localhost:3000/t
+
 app.get("/t", (req, res) => {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Conectado");
+		console.log("Conectado Tasks");
 		
 		var sql = 'SELECT id, task, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, description, type, url FROM evidences WHERE task = ?';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
@@ -72,6 +78,24 @@ app.get("/t", (req, res) => {
 	});
 });
 
+
+// FUNÇÃO PARA RECEBER OS JSON DOS USUARIOS NA ROTA localhost:3000/us
+
+app.get("/us", (req, res) => {
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log("Conectado Usuarios");
+		
+		var sql = 'SELECT id, admin, name, email FROM users';
+		con.query(sql, function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+
+// FUNÇÃO QUE FAZ O CADASTRO DE NOVOS USUÁRIOS NO BANCO DE DADOS
 app.post('/register', function(req, res){
 	const { login, apelido, email, senha } = req.body;
 	const { authorization } = req.headers;
@@ -90,6 +114,8 @@ app.post('/register', function(req, res){
 	return res.redirect('http://localhost:5173/');
 });
 
+
+// FUNÇÃO QUE CHECA SE O USUÁRIO E SUA SENHA CONSTAM NO BANCO DE DADOS PARA FAZER O LOGIN
 app.post('/login', function(req, res){
 	const { login, senha } = req.body;
 	const { authorization } = req.headers;
@@ -114,6 +140,7 @@ app.post('/login', function(req, res){
 	});
 });
 
+// FUNÇÃO PARA CRIAR NOVOS PROCESSOS NO BANCO DE DADOS
 app.post('/process', function(req, res){
 	const { name, deadline } = req.body;
 	const { authorization } = req.headers;

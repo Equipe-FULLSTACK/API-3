@@ -17,6 +17,7 @@ import JSONall from './pages/JSONall.tsx';
 import JSONprocess from './pages/JSONprocess.tsx';
 import JSONtask from './pages/JSONtask.tsx';
 import Notificacao from './pages/Notificacao.tsx';
+import Admin from './pages/Admin.tsx';
 
 
 const App:React.FC = ()=> (
@@ -33,6 +34,7 @@ const App:React.FC = ()=> (
           <Route path="/jsonprocess" element={<JSONprocess />} />
           <Route path="/jsontask" element={<JSONtask />} />
           <Route path="/notificacao" element={<Notificacao />}/>
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Provider>
     </ThemeProvider>
