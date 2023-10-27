@@ -192,17 +192,21 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     
   };
 
+  const [selectedFiles, setSelectedFiles] = useState<Record<number, File | null>>({});
+
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, taskId: number) => {
     const fileInput = event.target; // O elemento <input type="file> que acionou o evento
-    const selectedFile = fileInput.files[0]; // O arquivo selecionado pelo usuário
+    const selectedFile = fileInput.files ? fileInput.files[0] : null; // O arquivo selecionado pelo usuário
 
     if (selectedFile) {
+        setSelectedFiles((prev) => ({ ...prev, [taskId]: selectedFile }));
     // Agora você pode realizar ações com o arquivo, como fazer upload para um servidor, armazená-lo, etc.
     // Por exemplo, você pode usar a API Fetch para enviar o arquivo para um servidor.
     
         const formData = new FormData();
         formData.append('file', selectedFile);
-
+        fileInput.value = '';
     // Exemplo de envio para um servidor (substitua a URL pelo seu endpoint):
         fetch('/seu-endpoint-de-upload', {
             method: 'POST',
@@ -224,6 +228,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
         fileInput.value = '';
   }
 }
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -390,25 +395,31 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                                     <button onClick={() => startEditing(task.taskId)}><i className="material-icons"><img src={edit} alt="Edit Task" /></i></button>
                                                 )}
                                             </li>
-                                            <li className="iconeanexo-li">
+                                            <li>
                                                 {editTaskId === task.taskId ? (
                                                     ('')
                                                 ) : (
                                                     <button>
                                                         <label htmlFor={`file-input-${task.taskId}`} className="file-label">
-                                                            <i className="material-icons"><img src={attach} alt="Attach File"/></i>
-
-                                                        <input
-                                                            type="file"
-                                                            id={`file-input-${task.taskId}`}
-                                                            style={{ display: 'none' }}
-                                                            onChange={(e) => handleFileUpload(e, task.taskId)} // Crie a função handleFileUpload para lidar com o arquivo selecionado
-                                                        />
+                                                            <i className="material-icons"><img src={attach} alt="Attach File" /></i>
+                                                            <input
+                                                                type="file"
+                                                                id={`file-input-${task.taskId}`}
+                                                                style={{ display: 'none' }}
+                                                                onChange={(e) => handleFileUpload(e, task.taskId)}
+                                                            />
                                                         </label>
                                                     </button>
-
                                                 )}
+
+                                                {selectedFiles[task.taskId] ? (
+                                                    <a href={URL.createObjectURL(selectedFiles[task.taskId]!)} target="_blank">
+                                                        Visualizar Arquivo
+                                                    </a>
+                                                ) : null}
                                             </li>
+
+
                                             <li>
                                                 {editTaskId === task.taskId ? (
                                                     ('')
