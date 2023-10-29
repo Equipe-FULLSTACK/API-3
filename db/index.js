@@ -160,6 +160,25 @@ app.post('/process', function(req, res){
 });
 
 
+//FUNÇÃO PARA ATUALIZAR O CAMPO ADMIN DE UM USUÁRIO NA PAGINA ADMIN
+app.put('/atualizarAdmin/:userId', (req, res) => {
+	const { userId } = req.params;
+	const { admin } = req.body;
+  
+	// Execute a consulta SQL para atualizar o campo 'admin' para o usuário com o userId.
+	var sql = 'UPDATE users SET admin = ? WHERE id = ?';
+  
+	con.query(sql, [admin, userId], (err, result) => {
+	  if (err) {
+		console.error('Erro ao atualizar admin:', err);
+		res.status(500).json({ message: 'Erro ao atualizar admin' });
+	  } else {
+		res.json({ message: 'Admin atualizado com sucesso' });
+	  }
+	});
+  });
+
+
 app.listen(PORT, () => {
   console.log(`Servidor recebendo dados no port ${PORT}`);
 });
