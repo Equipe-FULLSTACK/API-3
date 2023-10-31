@@ -29,27 +29,30 @@ interface NotificacaoProps{
             <div className="container-cards">
             <div className="card-notificacao" id="fundoN">
 
-                <div className="card-itens">
-                    Nome do Processo: "{'process.responsavel'}"
+                <div className="card-itens1">
+                    <p className="pCard">Nome do Processo: "{'process.responsavel'}"</p>
+                    <p className="pCard2">Visto</p>
                 </div>
-                <div className="card-itens">
-                    Responsável: "{'process.responsavel'}"
+                <div className="card-itens2">
+                    
+                    <p className="pCardResp">Responsável: "{'process.responsavel'}"</p>
+                    <p className="pCardDest">Destinatário:</p>
                 </div>
-                <div className="card-itens">
-                    Data Final
+                <div className="card-itens3">
+                    Mensagem:
                 </div>
                 <div className="card-itens">
                     Status
                 </div>
                 <div className="card-itens">
-                    Destinatário
+                    Data Final
                 </div>
             </div>
             </div>
             <div className="container-cards">
             <div className="card-notificacao" id="fundoN">
 
-                <div className="card-itens">
+                <div className="card-itens" >
                     Nome do Processo: "{'process.responsavel'}"
                 </div>
                 <div className="card-itens">

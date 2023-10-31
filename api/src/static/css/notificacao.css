@@ -17,7 +17,7 @@
 .container-cards{
     display:flex;
     width: 700px;
-    height: 150px;
+    height: 200px;
     border: 2px solid white;
     background: #292A2D;
     border-radius: 8px;
@@ -34,13 +34,71 @@
 }
 
 
+.card-itens1 {
+    display:flex;
+    color: white;
+    background: #58595B;
+    width: 696px;
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.pCard{
+    background: #58595B;
+
+}
+
+.pCard2{
+    background-color: green;
+    padding-left: 10px;
+    padding-right: 10px; 
+    border-radius: 5px;
+}
+
 .card-itens {
     display:flex;
     color: white;
-    background: #1d46c2;
+    background:  #292A2D;
     width: 630px;
     height: 29px;
-    
+    padding-left: 18px;
+    padding-right: 18px;
+}
 
+.card-itens2 {
+    display:flex;
+    color: white;
+    width: 696px;
+    background:  #292A2D;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 18px;
+    padding-right: 18px;
+
+}
+
+.pCardResp{
+    background: #292A2D;
+}
+
+.pCardDest{
+    background: #292A2D;
+}
+
+
+.card-itens3 {
+    display:flex;
+    color: white;
+    width: 696px;
+    background:  #292A2D;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 25px;
 
 }
