@@ -97,14 +97,14 @@ app.get("/us", (req, res) => {
 
 // FUNÇÃO QUE FAZ O CADASTRO DE NOVOS USUÁRIOS NO BANCO DE DADOS
 app.post('/register', function(req, res){
-	const { login, apelido, email, senha } = req.body;
+	const { login, apelido, email, senha, tel } = req.body;
 	const { authorization } = req.headers;
-	if (login != "" && apelido != "" && email != "" && senha != ""){
+	if (login != "" && apelido != "" && email != "" && senha != "" && tel != ""){
 		con.connect(function(err) {
 		if (err) throw err;
 		console.log("Inserindo");
-		var sql = 'INSERT INTO users (admin, name, password, email) VALUES (false, ?, ?, ?)';
-		con.query(sql, [login, senha, email], function (err, result) {
+		var sql = 'INSERT INTO users (admin, name, password, email, tel) VALUES (false, ?, ?, ?, ?)';
+		con.query(sql, [login, senha, email, tel], function (err, result) {
 			if (err) throw err;
 		});
 	});

@@ -62,7 +62,7 @@ export function Cadastro({setDataProcess}: CadastroProps) {
                     <p>Digite seu Telefone</p>
                 </div>
 
-                <input type="telefone" name="telefone" id="telefone" placeholder="Telefone"/>
+                <input type="tel" name="tel" id="tel" placeholder="Telefone"/>
 
                 <button type="submit">Cadastrar</button>
 
