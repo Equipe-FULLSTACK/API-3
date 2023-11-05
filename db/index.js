@@ -20,7 +20,8 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "password",
+	/* password: "password", */
+	password: "Fla*741137a",
 	database: "db"
 });
 
@@ -103,7 +104,7 @@ app.post('/register', function(req, res){
 		con.connect(function(err) {
 		if (err) throw err;
 		console.log("Inserindo");
-		var sql = 'INSERT INTO users (admin, name, password, email, tel) VALUES (false, ?, ?, ?, ?)';
+		var sql = 'INSERT INTO users (admin, name, password, email, phone) VALUES (false, ?, ?, ?, ?)';
 		con.query(sql, [login, senha, email, tel], function (err, result) {
 			if (err) throw err;
 		});
