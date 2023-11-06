@@ -1,3 +1,8 @@
+
+
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+
 var mysql = require('mysql2');
 var express = require('express');
 var http = require('http');
@@ -21,7 +26,7 @@ var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
 	/* password: "password", */
-	password: "Fla*741137a",
+	password: "password",
 	database: "db"
 });
 
@@ -32,6 +37,16 @@ app.use(helmet());
 app.use(limiter);
 app.use(cors());
 app.set('view engine', 'ejs');
+app.use(cookieParser());
+app.use(session({
+	secret:'secret', //Chave gerada para o cookie de sessão
+	resave: false,
+	saveUninitialized: false,
+	cookie: {
+		secure: false,
+		maxAge: 1000 * 60 * 60 * 24 //Tempo em milisegundos que o cookie vai durar
+	}
+}))
 
 
 // FUNÇÃO PARA RECEBER OS JSON DOS PROCESSOS GERAIS NA ROTA localhost:3000/
@@ -117,28 +132,25 @@ app.post('/register', function(req, res){
 
 
 // FUNÇÃO QUE CHECA SE O USUÁRIO E SUA SENHA CONSTAM NO BANCO DE DADOS PARA FAZER O LOGIN
-app.post('/login', function(req, res){
-	const { login, senha } = req.body;
-	const { authorization } = req.headers;
-	con.connect(function(err) {
-		if (err) throw err;
-		console.log("Inserindo");
-		var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
-		con.query(sql, [login, senha], function (err, result) {
-			if (err) throw err;
-			if (result[0] != null){
-				var name = result[0].name;
-				var password = result[0].password;
-				if (login == name && senha == password ){
-					return res.redirect('http://localhost:5173/processos');
-				} else {
-					return res.redirect('http://localhost:5173/');
-				}
-			} else {
-				return res.redirect('http://localhost:5173/');	
-			}
-		});
-	});
+app.post('/login', function(req, res) {
+    const { username, senha } = req.body; // Use req.body para acessar os valores enviados no corpo da solicitação
+
+    con.connect(function(err) {
+        if (err) throw err;
+
+        console.log("Verificando Cadastro");
+        const sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
+        con.query(sql, [username, senha], (err, result) => {
+            if (err) return res.json({ Message: "Erro no servidor" });
+            if (result.length > 0) {
+                console.log(username);
+                return res.json({ Login: true, username: username });
+            } else {
+                console.log('Usuário não encontrado', username, senha);
+                return res.json({ Login: false });
+            }
+        });
+    });
 });
 
 // FUNÇÃO PARA CRIAR NOVOS PROCESSOS NO BANCO DE DADOS
