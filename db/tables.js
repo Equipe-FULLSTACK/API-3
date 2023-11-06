@@ -2,8 +2,8 @@ var mysql = require('mysql2');
 
 var con = mysql.createConnection({
 	host: "localhost",
-	user: "fullstack",
-	password: "senhadaora123",
+	user: "root",
+	password: "fatec",
 	database: "db"
 });
 
@@ -186,8 +186,9 @@ con.connect(function(err) {
 	
 	//LOG_ROLES
 	var sql = `CREATE TABLE log_roles (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		name VARCHAR(128),
 		description TEXT,
 		editroles BOOL DEFAULT 0,
@@ -208,8 +209,9 @@ con.connect(function(err) {
 	
 	//LOG_USERS
 	var sql = `CREATE TABLE log_users (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		admin BOOLEAN DEFAULT 0, 
 		name VARCHAR(128),
 		nickname VARCHAR(128),
@@ -229,8 +231,9 @@ con.connect(function(err) {
 	
 	//LOG_PROCESSES
 	var sql = `CREATE TABLE log_processes (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		active BOOL DEFAULT 1,
 		status VARCHAR(64),
 		name VARCHAR(128),
@@ -246,8 +249,9 @@ con.connect(function(err) {
 	
 	//LOG_TASKS
 	var sql = `CREATE TABLE log_tasks (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		process INT NOT NULL,
 		active BOOL DEFAULT 1,
 		status VARCHAR(64), 
@@ -264,8 +268,9 @@ con.connect(function(err) {
 	
 	//LOG_EVIDENCES
 	var sql = `CREATE TABLE log_evidences (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		task INT NOT NULL,
 		active BOOL DEFAULT 1,
 		status VARCHAR(64), 
@@ -285,8 +290,9 @@ con.connect(function(err) {
 	
 	//LOG_TEMPLATE_PROCESSES
 	var sql = `CREATE TABLE log_template_processes (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		name VARCHAR(128),
 		description TEXT,
 		PRIMARY KEY (id)
@@ -299,8 +305,9 @@ con.connect(function(err) {
 	
 	//LOG_TEMPLATE_TASKS
 	var sql = `CREATE TABLE log_template_tasks (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		process INT NOT NULL,
 		name VARCHAR(128),
 		description TEXT,
@@ -313,8 +320,9 @@ con.connect(function(err) {
 	
 	//LOG_TEMPLATE_EVIDENCES
 	var sql = `CREATE TABLE log_template_evidences (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		task INT NOT NULL,
 		name VARCHAR(128),
 		description TEXT,
@@ -330,8 +338,9 @@ con.connect(function(err) {
 	
 	//LOG_REQUIREMENTS
 	var sql = `CREATE TABLE log_requirements (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		task INT NOT NULL,
 		requires INT NOT NULL, 
 		PRIMARY KEY (id)
@@ -343,8 +352,9 @@ con.connect(function(err) {
 	
 	//LOG_RESPONSIBLES, PROCESS, TASK, EVIDENCE
 	var sql = `CREATE TABLE log_responsibles (
-		originalid INT,
 		id INT NOT NULL AUTO_INCREMENT,
+		originalid INT,
+		changetime DATETIME,
 		user INT NOT NULL,
 		type VARCHAR(64) NOT NULL, 
 		typeid INT NOT NULL,
