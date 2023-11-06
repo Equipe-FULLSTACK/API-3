@@ -1,0 +1,49 @@
+.admin-title {
+  margin-left: 2.5vw;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  font-size: 35px;
+  padding-top: 1vh;
+}
+
+.admin-user-list {
+}
+
+.admin-lista {
+  width: 90vw;
+  margin-left: 5vw;
+}
+
+.admin-table {
+  width: 90vw;
+  font-size: 16px;
+}
+
+.admin-mail {
+}
+
+.admin-m {
+  margin-left: 8px;
+}
+
+.admin-n {
+  margin-left: 8px;
+}
+
+.admin-text {
+  margin-left: 8PX;
+}
+
+.admin-check {
+  width: 50px;
+}
+
+.admin-td {
+  width: 25vh;
+  text-align: left;
+}
+
+.admin-tr {
+  background-color: #54c5ce;
+  color: black;
+}
