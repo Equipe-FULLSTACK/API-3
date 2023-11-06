@@ -186,9 +186,9 @@ con.connect(function(err) {
 	
 	//LOG_ROLES
 	var sql = `CREATE TABLE log_roles (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		name VARCHAR(128),
 		description TEXT,
 		editroles BOOL DEFAULT 0,
@@ -209,9 +209,9 @@ con.connect(function(err) {
 	
 	//LOG_USERS
 	var sql = `CREATE TABLE log_users (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		admin BOOLEAN DEFAULT 0, 
 		name VARCHAR(128),
 		nickname VARCHAR(128),
@@ -231,9 +231,9 @@ con.connect(function(err) {
 	
 	//LOG_PROCESSES
 	var sql = `CREATE TABLE log_processes (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		active BOOL DEFAULT 1,
 		status VARCHAR(64),
 		name VARCHAR(128),
@@ -249,9 +249,9 @@ con.connect(function(err) {
 	
 	//LOG_TASKS
 	var sql = `CREATE TABLE log_tasks (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		process INT NOT NULL,
 		active BOOL DEFAULT 1,
 		status VARCHAR(64), 
@@ -268,9 +268,9 @@ con.connect(function(err) {
 	
 	//LOG_EVIDENCES
 	var sql = `CREATE TABLE log_evidences (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		task INT NOT NULL,
 		active BOOL DEFAULT 1,
 		status VARCHAR(64), 
@@ -290,9 +290,9 @@ con.connect(function(err) {
 	
 	//LOG_TEMPLATE_PROCESSES
 	var sql = `CREATE TABLE log_template_processes (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		name VARCHAR(128),
 		description TEXT,
 		PRIMARY KEY (id)
@@ -305,9 +305,9 @@ con.connect(function(err) {
 	
 	//LOG_TEMPLATE_TASKS
 	var sql = `CREATE TABLE log_template_tasks (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		process INT NOT NULL,
 		name VARCHAR(128),
 		description TEXT,
@@ -320,9 +320,9 @@ con.connect(function(err) {
 	
 	//LOG_TEMPLATE_EVIDENCES
 	var sql = `CREATE TABLE log_template_evidences (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		task INT NOT NULL,
 		name VARCHAR(128),
 		description TEXT,
@@ -338,9 +338,9 @@ con.connect(function(err) {
 	
 	//LOG_REQUIREMENTS
 	var sql = `CREATE TABLE log_requirements (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		task INT NOT NULL,
 		requires INT NOT NULL, 
 		PRIMARY KEY (id)
@@ -352,9 +352,9 @@ con.connect(function(err) {
 	
 	//LOG_RESPONSIBLES, PROCESS, TASK, EVIDENCE
 	var sql = `CREATE TABLE log_responsibles (
+		id INT NOT NULL AUTO_INCREMENT,
 		originalid INT,
 		changetime DATETIME,
-		id INT NOT NULL AUTO_INCREMENT,
 		user INT NOT NULL,
 		type VARCHAR(64) NOT NULL, 
 		typeid INT NOT NULL,
