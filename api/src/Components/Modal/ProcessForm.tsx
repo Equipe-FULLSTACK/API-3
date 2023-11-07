@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DataProcess } from "../Process/Process"
 
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/index'; //
 import { useDispatch } from 'react-redux';
 import Notificacao from '../../pages/Notificacao';
+import emailjs from '@emailjs/browser';
 
 
 
@@ -22,6 +23,8 @@ type FormData = {
 
 export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
     const dispatch = useDispatch();
+    const form = useRef<HTMLFormElement | null>(null);
+
 
     // LOAD TASKS
     const process = useSelector((state: AppState) => state.process);
@@ -31,6 +34,8 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
             console.log(process); */
         }
     }, [process]);
+
+    
 
 
     const [formData, setFormData] = useState<FormData>({
@@ -48,9 +53,19 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
         setFormData({ ...formData, [name]: value });
     };
 
+
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
       /*   console.log(formData) */
+      if (form.current){
+        emailjs.sendForm('service_rm2otvc', 'template_vusbsfc', form.current, 'uTQ5qjDTE9qEl_Ekt')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+    }
+
 
 
         const newProcess: DataProcess = {
@@ -71,13 +86,13 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
 
         Notificacao({newProcess})
 
-    }
+}
 
 
 
     return (
         <div className="modal">
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form ref={form} onSubmit={(e) => handleSubmit(e)}>
             <button type="button" className="close-button" onClick={()=> setShowModal(false)}>x</button>
                 <h1>Novo Processo</h1>
                 <div className="modaldiv">Nome</div>
@@ -92,9 +107,9 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
                 <input type="time" name="hourFinished"
                     value={formData?.hourFinished}
                     onChange={handleInputChange} />
-                <button type="submit">Cadastrar</button>
+                <button  type="submit" onClick={() => { alert('Processo criado!');}}>Cadastrar</button>
             </form>
-        </div>
+        </div>        
 
-    )
+    )  
 }
