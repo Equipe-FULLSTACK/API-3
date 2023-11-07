@@ -35,7 +35,11 @@ app.use(express.static(path.join(__dirname,'./')));
 app.use(express.json());
 app.use(helmet());
 app.use(limiter);
-app.use(cors());
+app.use(cors({
+	origin: 'http://localhost:5173',
+	methods: ['POST','GET'],
+	credentials: true
+}));
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(session({
@@ -144,7 +148,9 @@ app.post('/login', function(req, res) {
             if (err) return res.json({ Message: "Erro no servidor" });
             if (result.length > 0) {
                 console.log(username);
-                return res.json({ Login: true, username: username });
+				req.session.username = result[0].name;
+				console.log(req.session.username,'username')
+                return res.json({ Login: true, username: req.session.username });
             } else {
                 console.log('Usuário não encontrado', username, senha);
                 return res.json({ Login: false });
@@ -152,6 +158,25 @@ app.post('/login', function(req, res) {
         });
     });
 });
+
+
+//FUNÇÃO PARA A CHECAGEM DE COOKIES DE USUARIO
+app.get("/ck", (req, res) => {
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log("Buscando Cookies");
+		
+		if(req.session.username) {
+			console.log('Achei')
+			return res.json({valid: true, username: req.session.username})
+	} else {
+			console.log('Não achei')
+			return res.json({valid: false})
+	}
+	});
+});
+
+
 
 // FUNÇÃO PARA CRIAR NOVOS PROCESSOS NO BANCO DE DADOS
 app.post('/process', function(req, res){
