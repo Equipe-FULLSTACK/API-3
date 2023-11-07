@@ -11,7 +11,7 @@ import HomePage from './Components/Layout/HomePage.tsx';
 
 
 import { Provider } from 'react-redux';
-import store from './store/index.ts';
+import store from './store/configureStore.ts';
 import Lista from './pages/Lista.tsx';
 import JSONall from './pages/JSONall.tsx';
 import JSONprocess from './pages/JSONprocess.tsx';

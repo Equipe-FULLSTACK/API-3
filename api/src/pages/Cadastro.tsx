@@ -1,20 +1,7 @@
-import { DataProcess } from "../Components/Process/Process"
 import '../static/css/cadastro.css'
 
-interface CadastroProps {
-    setDataProcess: React.Dispatch<React.SetStateAction<DataProcess[]>>
-}
 
-export function Cadastro({setDataProcess}: CadastroProps) {
-    
-    function handleClick(){
-        console.log('teste')
-        const newProcess: DataProcess = {
-            processId: 1000,
-            processName
-        }
-        setDataProcess(prev => [...prev])
-    }
+export function Cadastro() {
     
     return (
     
