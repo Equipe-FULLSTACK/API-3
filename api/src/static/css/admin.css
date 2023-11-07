@@ -4,6 +4,15 @@
   margin-top: 10px;
   font-size: 35px;
   padding-top: 1vh;
+  width: 50vw;
+}
+
+.admin-cadastro {
+  width: 20vw;
+  display: flex;
+  margin-left: 70vw;
+  margin-bottom: 1vh;
+  align-content: center;
 }
 
 .admin-user-list {

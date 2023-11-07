@@ -16,6 +16,8 @@ export default function Login() {
         setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
     }
 
+    axios.defaults.withCredentials = true;
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         axios.post('http://localhost:3000/login', values)
@@ -77,9 +79,7 @@ export default function Login() {
                     <button type="submit">Entrar</button>
 
                 </form>
-                <div className="login-criar-conta">
-                    Não possui acesso? <a href="/cadastro">Criar conta</a>
-                </div>
+            
             </div>
         </div>
     );

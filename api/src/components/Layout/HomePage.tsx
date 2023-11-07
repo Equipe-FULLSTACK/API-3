@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 /* Page Import */
 import Process from '../Process/Process';
@@ -14,17 +14,35 @@ import {
 
 import Modal from '../Modal/Modal';
 import { ProcessModal } from '../Modal/ModalProcess/styles';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 interface dataHomePage {
     name: string;
 }
 
-const HomePage: React.FC<dataHomePage> = ({ name }) => {
+const HomePage: React.FC<dataHomePage> = () => {
+    const [name, setName] = useState('')
+    const navigate = useNavigate()
+
+    axios.defaults.withCredentials = true;
+    useEffect(() =>{
+        axios.get('http://localhost:3000/ck')
+        .then( res => {
+            if(res.data.valid) {
+                setName(res.data.username);
+            } else {
+                navigate('/')
+            }
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+    },[])
 
     return (
         <>
-            <NavBar userName={"Juliano Prado"} pageName={'NavBar'} />
+            <NavBar userName={name} pageName={'NavBar'} />
             <Divider />
             <Modal>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus soluta velit, earum aperiam quas dolorum nesciunt inventore ullam tempore expedita neque beatae? Quidem ipsum enim porro, fugiat exercitationem asperiores omnis?</p>

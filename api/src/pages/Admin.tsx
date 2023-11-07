@@ -50,10 +50,14 @@ export default function Admin() {
   return (
     <>
       <NavBar userName={"Juliano Prado"} pageName={"NavBar"} />
+      
       <Divider />
       <div className="admin-lista">
         <div>
-          <h2 className="admin-title">Lista de Usuários</h2>
+          <div>
+            <h2 className="admin-title">Lista de Usuários</h2>
+            <a className="admin-cadastro" href="/cadastro">Criar novo usuario</a>
+          </div>
           <div className="admin-user-list">
             {seuJSON.map((user) => (
               <div key={user.id}>
