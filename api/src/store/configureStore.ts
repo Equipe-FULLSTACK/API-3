@@ -10,20 +10,13 @@ import { fetchProcesses } from '../Components/Data/process/actions/processAction
 export interface AppState {
   modalAberto: boolean;
   tamanhoModal: string;
-<<<<<<< Updated upstream
-  processId?: number;
-}
-
-=======
   processId: number;
-  loading?: boolean;
 }
 
 
 export const selectProcessId = (state: AppState) => state.processId;
-export const loading = (state: AppState) => state.loading;
 
->>>>>>> Stashed changes
+
 export type RootState = ReturnType<typeof rootReducer>;
 
 
@@ -32,11 +25,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 interface ToggleModalAction extends Action {
   type: 'TOGGLE_MODAL';
   tamanho?: string;
-<<<<<<< Updated upstream
-  processId?: number;
-=======
   processId: number;
->>>>>>> Stashed changes
 }
 
 interface FecharModalAction extends Action {
@@ -46,11 +35,7 @@ interface FecharModalAction extends Action {
 const initialState: AppState = {
   modalAberto: false,
   tamanhoModal: '1200px',
-<<<<<<< Updated upstream
-=======
-  loading: false,
   processId: 0,
->>>>>>> Stashed changes
 };
 
 const reducer = (
@@ -94,15 +79,12 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 (store.dispatch as ThunkDispatch<RootState, undefined, any>)(fetchTasks()).then(() => {
   (store.dispatch as ThunkDispatch<RootState, undefined, any>)(fetchProcesses()).then(() => {
     console.log('Dados da API foram carregados com sucesso.');
-<<<<<<< Updated upstream
-=======
 
     const tasks = store.getState().tasks.tasks; 
     const processes = store.getState().processes.processes; 
 
     console.log('Tarefas:', tasks);
     console.log('Processos:', processes);
->>>>>>> Stashed changes
   });
 });
 

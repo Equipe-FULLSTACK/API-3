@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DataProcess } from "../Process/Process"
 
 import { useSelector } from 'react-redux';
-import { AppState } from '../../store/index'; //
+import { AppState } from '../../store/configureStore'; //
 import { useDispatch } from 'react-redux';
 import Notificacao from '../../pages/Notificacao';
 import emailjs from '@emailjs/browser';

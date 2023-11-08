@@ -1,7 +1,7 @@
 // ModalComponent.tsx
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FecharModalAction } from '../../store/index'; // Importe a ação FECHAR_MODAL
+import { FecharModalAction } from '../../store/configureStore'; // Importe a ação FECHAR_MODAL
 import * as S from './styles';
 import ModalProcess from './ModalProcess/ModalProcess';
 

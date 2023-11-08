@@ -11,11 +11,7 @@ import HomePage from './Components/Layout/HomePage.tsx';
 
 
 import { Provider } from 'react-redux';
-<<<<<<< Updated upstream
 import store from './store/configureStore.ts';
-=======
-import store from './store/configureStore.ts'
->>>>>>> Stashed changes
 import Lista from './pages/Lista.tsx';
 import JSONall from './pages/JSONall.tsx';
 import JSONprocess from './pages/JSONprocess.tsx';
