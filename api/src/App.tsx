@@ -11,13 +11,18 @@ import HomePage from './Components/Layout/HomePage.tsx';
 
 
 import { Provider } from 'react-redux';
+<<<<<<< Updated upstream
 import store from './store/configureStore.ts';
+=======
+import store from './store/configureStore.ts'
+>>>>>>> Stashed changes
 import Lista from './pages/Lista.tsx';
 import JSONall from './pages/JSONall.tsx';
 import JSONprocess from './pages/JSONprocess.tsx';
 import JSONtask from './pages/JSONtask.tsx';
 import Notificacao from './pages/Notificacao.tsx';
 import Admin from './pages/Admin.tsx';
+import TestComponent from './Components/Testes/teste.tsx';
 
 
 const App:React.FC = ()=> (
@@ -25,6 +30,7 @@ const App:React.FC = ()=> (
     <ThemeProvider theme={dark}>
       <GlobalStyle/>
       <Provider store={store}>
+{/*         <TestComponent/> */}
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />

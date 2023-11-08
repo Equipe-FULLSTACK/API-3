@@ -73,9 +73,15 @@ app.get("/", (req, res) => {
 app.get("/p", (req, res) => {
 	con.connect(function (err) {
 		if (err) throw err;
+<<<<<<< Updated upstream
 		console.log("Dados solicitados para tabela de processos");
 
 		var sql = 'SELECT id, active, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM processes';
+=======
+		console.log("Conectado Processos");
+		var sql = 'SELECT id, active, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM processes';
+		/* var sql = 'SELECT id, process, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks WHERE process = ?'; */
+>>>>>>> Stashed changes
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
 			res.json(result);
@@ -88,10 +94,17 @@ app.get("/p", (req, res) => {
 app.get("/t", (req, res) => {
 	con.connect(function (err) {
 		if (err) throw err;
+<<<<<<< Updated upstream
 		console.log("Dados solicitados para tabela de tarefas");
 
 		var sql = 'SELECT id, process, active, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {	
+=======
+		console.log("Conectado Tasks");
+		var sql = 'SELECT id, process, active, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks';
+		/* var sql = 'SELECT id, task, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, description, type, url FROM evidences WHERE task = ?'; */
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+>>>>>>> Stashed changes
 			if (err) throw err;
 			res.json(result);
 		});
