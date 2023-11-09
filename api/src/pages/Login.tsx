@@ -5,7 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function Login() {
     const [values, setValues] = useState({
         username: '',
-        senha: ''
+        senha: '',
+        admin: '',
+        role: ''
     });
 
     const [authString, setAuthString] = useState('');

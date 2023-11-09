@@ -1,6 +1,7 @@
 
 import React from 'react';
 import PositionedMenu from './LogoutNavBar';
+import { useNavigate } from 'react-router-dom';
 
 
 import {
@@ -21,13 +22,17 @@ interface dataNavBar {
 
 const NavBar: React.FC<dataNavBar> = ({userName, pageName}) => {
   
-  
+  const navigate = useNavigate();
+
+  const returnHome = () => {
+    navigate('/processos')
+  }
 
 
   return (
     <Container>
       {/* {pageName} */}
-      <Logo src={logo} alt="iconIonicHealth"/>
+      <Logo src={logo} onClick={returnHome} alt="iconIonicHealth"/>
       
       
       <Wrapper>
