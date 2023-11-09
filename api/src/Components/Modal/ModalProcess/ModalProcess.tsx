@@ -1,11 +1,15 @@
 // ModalComponent.tsx
-import React, { useState, useEffect } from 'react';
-
+//PROCESSO DE UTILIZAÇÃO DO STORE THUNK
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../store/index'; //
-import { useDispatch } from 'react-redux';
+import thunk, { ThunkDispatch } from 'redux-thunk';
+import React, { useState, useEffect } from 'react';
+import { RootState, selectProcessId } from '../../../store/configureStore';
+import { ProcessToRedux } from '../../Data/process/types/processTypes';
+import { TaskToRedux } from '../../Data/tasks/types/taskTypes';
 
-import { selectProcessId } from '../../../store/index';
+import { fetchTasks, createTask, updateTask, deleteTask } from '../../Data/tasks/actions/taskActions';
+
+import { useDispatch } from 'react-redux';
 
 
 
@@ -17,18 +21,6 @@ import date from '../../../assets/icons/icon_calendar.png'
 import hour from '../../../assets/icons/icon_hour.png'
 import save from '../../../assets/icons/icon_save.png'
 import attach from '../../../assets/icons/attach.png'
-
-
-import { dataTask } from '../../Data/DataTask/dataTask'
-
-
-/* import { updateTaskData } from "../../Data/DataTask/dataTask"; /// atualiza as tasks
-import { deleteTask } from "../../Data/DataTask/dataTask"; /// deleta as tasks */
-
-
-import dataProcess from '../../Data/DataProcess/dataProcess'
-
-
 
 
 interface dataProcessModal {
@@ -44,70 +36,74 @@ interface dataProcessModal {
 
     taskId: number;
     taskProcessId: number;
+    taskName: string;
     taskDescription: string;
     taskDate: string;
     taskStatus: string;
     taskPercent: number;
-
+    taskActive: number;
 }
 
 
 const ModalProcess: React.FC<dataProcessModal> = () => {
+
+    //const dispatch = useDispatch();
+    const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
+
+    /// CARREGA DO STORE ESTADO ATUAL DOS DADOS
+    const tasks = useSelector((state: RootState) => state.tasks.tasks);
+    const process = useSelector((state: RootState) => state.processes.processes);
+    const processModalId = useSelector((state: RootState) => state.modal.processId);
     
-    const dispatch = useDispatch();
 
-    // LOAD TASKS
-    const tasks = useSelector((state: AppState) => state.tasks);
+    /// CARREGA VARIAVEL AUXILIAR MANIPULACAO NO COMPONENTE
+    const [dataProcess, setDataProcess] = useState<ProcessToRedux[]>(useSelector((state: RootState) => state.processes.processes));
+    const [dataTasks, setDataTasks] = useState<TaskToRedux[]>(useSelector((state: RootState) => state.tasks.tasks));
+
+    /// ALIMENTA VARIAVEL AUXILIAR
     useEffect(() => {
-        if (tasks) {
-            /* console.log('Modal Process UseEffect tasks')
-            console.log(tasks); */
-        }
-    }, [tasks]);
+        setDataProcess(process)
+        setDataTasks(tasks)
+    }, [process, tasks]);
 
-     // LOAD TASKS
-     const process = useSelector((state: AppState) => state.process);
-     useEffect(() => {
-         if (process) {
-            /*  console.log('Process Form UseEffect Process')
-             console.log(process); */
-         }
-     }, [process]);
+    /* console.log('Modal aberto com id ', processModalId )
+    console.log('dataProcess', dataProcess);
+    console.log('dataTasks', dataTasks); */
 
 
-
-
-    const processModalId = useSelector(selectProcessId); // VARIAVEL VEM REDUX MAINPULAÇÃO DOS DADOS A NIVEL GLOBAL.
-    const [tasksFiltradas, setTasksFiltradas] = useState<Task[]>([]); /// DEFINE ESTADO DAS TASK PARA ALTERAÇÕES DINAMICAS.
+    
+    const [tasksFiltradas, setTasksFiltradas] = useState<TaskToRedux[]>(useSelector((state: RootState) => state.tasks.tasks));
 
 
     // PROCESSO DE ATUALIZAÇÃO DINAMICA DA PÁGINA QUANDO HÁ ALTERAÇÃO EM TEMPO REAL. 
     useEffect(() => {
-        const filteredTasks = tasks.filter((task) => task.taskProcessId === processModalId);
+        const filteredTasks = dataTasks.filter((task) => task.process === processModalId);
         setTasksFiltradas(filteredTasks);
-    }, [processModalId, tasks]);
+    }, [processModalId, dataTasks]);
+
+    
 
 
 
     const processName = process
-        .filter((f) => f.processId === processModalId)
-        .map((n) => n.processName);
+        .filter((f) => f.id === processModalId)
+        .map((n) => n.name);
 
     const processHour = process
-        .filter((f) => f.processId === processModalId)
-        .map((n) => n.processHourFinshed);
+        .filter((f) => f.id === processModalId)
+        .map((n) => n.deadline);
 
     const taskTotal = tasksFiltradas.length;
 
 
     // VERIFICA SE EXISTE ALGUMA TAREFA ATRASADA
-    const taskAtrasada = tasksFiltradas.filter((f) => f.taskStatus === 'Atrasada');
+    const taskAtrasada = tasksFiltradas.filter((f) => f.status === 'Atrasada');
 
     // VERIFICA SE EXISTE ALGUMA TAREFA EM ANDAMENTO
-    const taskAndamento = tasksFiltradas.filter((f) => f.taskStatus === 'Andamento');
+    const taskAndamento = tasksFiltradas.filter((f) => f.status === 'Andamento');
 
     // ANIMAÇÃO DOS ESTILOS BASEADOS NOS STATUS.
-    let statusProcess;  
+    let statusProcess;
 
     if (taskAtrasada.length > 0) {
         statusProcess = 'Atrasada';
@@ -117,7 +113,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
         statusProcess = 'Concluida';
     }
 
-  /*   console.log(statusProcess) */
+    /*   console.log(statusProcess) */
 
     ////////////////////////////////////// MANIPULAÇÃO DAS EDIÇÕES EM TEMPO REAL DAS TASKS //////////////////////////////////////////////////////////
 
@@ -131,10 +127,10 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     const startEditing = (taskId: number) => {
         setEditTaskId(taskId);
         // Defina o valor do input para a descrição atual ao iniciar a edição
-        setEditedDescriptions((prev) => ({ ...prev, [taskId]: tasksFiltradas.find((task) => task.taskId === taskId)?.taskDescription || '' }));
-        setEditedDate((prev) => ({ ...prev, [taskId]: tasksFiltradas.find((task) => task.taskId === taskId)?.taskDate || '' }));
-        setEditedPercent((prev) => ({ ...prev, [taskId]: tasksFiltradas.find((task) => task.taskId === taskId)?.taskPercent || '' }));
-        setEditedStatus((prev) => ({ ...prev, [taskId]: tasksFiltradas.find((task) => task.taskId === taskId)?.taskStatus || '' }));
+        setEditedDescriptions((prev) => ({ ...prev, [taskId]: tasksFiltradas.find((task) => task.id === taskId)?.description || '' }));
+        setEditedDate((prev) => ({ ...prev, [taskId]: tasksFiltradas.find((task) => task.id === taskId)?.created || '' }));
+        setEditedPercent((prev) => ({ ...prev, [taskId]: tasksFiltradas.find((task) => task.id === taskId)?.active.toString() || '' }));
+        setEditedStatus((prev) => ({ ...prev, [taskId]: tasksFiltradas.find((task) => task.id === taskId)?.status || '' }));
 
     };
 
@@ -143,91 +139,92 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     };
 
 
-  const editTask = (taskId: number, editedTaskFields: Partial<TaskToRedux>) => {
-    
-    const updateTaskAction = {
-      type: 'UPDATE_TASK',
-      payload: {
-        taskId: taskId,
-        ...editedTaskFields,
-      },
+    const editTask = (taskId: number, editedTaskFields: TaskToRedux) => {
+
+        dispatch(updateTask(taskId, editedTaskFields));
+        /* console.log(taskId, editedTaskFields); */
+
+/* 
+        const updateTaskAction = {
+            type: 'UPDATE_TASK',
+            payload: {
+                taskId: taskId,
+                ...editedTaskFields,
+            },
+        };
+
+        // Despache a ação para o Redux
+        dispatch(updateTaskAction); */
+        stopEditing(); // Sai do modo de edição
+
     };
 
-    // Despache a ação para o Redux
-    dispatch(updateTaskAction);
-    stopEditing(); // Sai do modo de edição
 
-  };
+    const localDeleteTask = (taskId: number) => {
+        // Disparar a ação DELETE_TASK usando dispatch
+        dispatch({ type: 'DELETE_TASK', payload: { taskId } });
 
+        const updatedTasks = tasksFiltradas.filter((task) => task.id !== taskId);
+        setTasksFiltradas(updatedTasks);
 
-  const localDeleteTask = (taskId: number) => {
-    // Disparar a ação DELETE_TASK usando dispatch
-    dispatch({ type: 'DELETE_TASK', payload: { taskId } });
-  
-    const updatedTasks = tasksFiltradas.filter((task) => task.taskId !== taskId);
-    setTasksFiltradas(updatedTasks);
-  
-    stopEditing();
-  };
-
-
-  const addNewTask = () => {
-
-    const newTask: Task = {
-      taskId: tasks.length + 1,
-      taskProcessId: processModalId, //
-      taskDescription: '',
-      taskDate: '',
-      taskStatus: 'Em Andamento',
-      taskPercent: 0, //
+        stopEditing();
     };
-  
-    // Disparar a ação ADD_TASK usando dispatch
-    dispatch({ type: 'ADD_TASK', payload: newTask });
-  
-    // Restante do seu código para atualizar localmente as tasksFiltradas, se necessário
-    const updatedTasks = [...tasksFiltradas, newTask];
-    setTasksFiltradas(updatedTasks);
-  
-    
-  };
-
-  const [selectedFiles, setSelectedFiles] = useState<Record<number, File | null>>({});
 
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, taskId: number) => {
-    const fileInput = event.target; // O elemento <input type="file> que acionou o evento
-    const selectedFile = fileInput.files ? fileInput.files[0] : null; // O arquivo selecionado pelo usuário
+    const addNewTask = () => {
 
-    if (selectedFile) {
-        setSelectedFiles((prev) => ({ ...prev, [taskId]: selectedFile }));
-    // Agora você pode realizar ações com o arquivo, como fazer upload para um servidor, armazená-lo, etc.
-    // Por exemplo, você pode usar a API Fetch para enviar o arquivo para um servidor.
-    
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        fileInput.value = '';
-    // Exemplo de envio para um servidor (substitua a URL pelo seu endpoint):
-        fetch('/seu-endpoint-de-upload', {
-            method: 'POST',
-            body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-             console.log('Arquivo enviado com sucesso:', data);
-      // Aqui, você pode realizar ações adicionais, como atualizar o estado da tarefa com informações do arquivo.
-      // Por exemplo: updateTaskWithFile(taskId, data.url);
-    })
-        .catch(error => {
-            console.error('Erro ao enviar o arquivo:', error);
-    });
+        const newTask: TaskToRedux = {
+            id: tasks.length + 1,
+            process: processModalId, //
+            name: '',
+            description: '',
+            created: '',
+            status: 'Em Andamento',
+            deadline: '',
+            active: 1, 
+        };
 
-    // Lembre-se de lidar com erros e feedback ao usuário, e de atualizar o estado da tarefa com informações sobre o arquivo, como uma URL de download, se aplicável.
+        // Disparar a ação ADD_TASK usando dispatch
+        dispatch({ type: 'ADD_TASK', payload: newTask });
 
-    // Limpar o valor do input para permitir novos uploads
-        fileInput.value = '';
-  }
-}
+        // Restante do seu código para atualizar localmente as tasksFiltradas, se necessário
+        const updatedTasks = [...tasksFiltradas, newTask];
+        setTasksFiltradas(updatedTasks);
+
+
+    };
+
+    const [selectedFiles, setSelectedFiles] = useState<Record<number, File | null>>({});
+
+
+    const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, taskId: number) => {
+        const fileInput = event.target; // O elemento <input type="file> que acionou o evento
+        const selectedFile = fileInput.files ? fileInput.files[0] : null; // O arquivo selecionado pelo usuário
+
+        if (selectedFile) {
+            setSelectedFiles((prev) => ({ ...prev, [taskId]: selectedFile }));
+            
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            fileInput.value = '';
+            
+            fetch('/seu-endpoint-de-upload', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Arquivo enviado com sucesso:', data);
+
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar o arquivo:', error);
+                });
+
+            fileInput.value = '';
+        }
+    }
 
 
 
@@ -282,16 +279,16 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
 
                     <tbody>
                         {tasksFiltradas.map((task) => (
-                            <tr key={task.taskId}>
-                                <td>{task.taskId}</td>
+                            <tr key={task.id}>
+                                <td>{task.id}</td>
                                 <td>
-                                    {editTaskId === task.taskId ? (
+                                    {editTaskId === task.id ? (
                                         <>
                                             <input
                                                 type="date"
-                                                value={editedDate[task.taskId] || ''}
+                                                value={editedDate[task.id] || ''}
                                                 onChange={(e) => {
-                                                    const newEditedDate = { ...editedDate, [task.taskId]: e.target.value };
+                                                    const newEditedDate = { ...editedDate, [task.id]: e.target.value };
                                                     setEditedDate(newEditedDate);
                                                 }}
                                             />
@@ -299,20 +296,20 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                         </>
                                     ) : (
                                         <>
-                                            {task.taskDate}
+                                            {task.created}
 
                                         </>
                                     )}
 
                                 </td>
                                 <td>
-                                    {editTaskId === task.taskId ? (
+                                    {editTaskId === task.id ? (
                                         <>
                                             <input
                                                 type="text"
-                                                value={editedDescriptions[task.taskId] || ''}
+                                                value={editedDescriptions[task.id] || ''}
                                                 onChange={(e) => {
-                                                    const newEditedDescriptions = { ...editedDescriptions, [task.taskId]: e.target.value };
+                                                    const newEditedDescriptions = { ...editedDescriptions, [task.id]: e.target.value };
                                                     setEditedDescriptions(newEditedDescriptions);
                                                 }}
                                             />
@@ -320,7 +317,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                         </>
                                     ) : (
                                         <>
-                                            {task.taskDescription}
+                                            {task.description}
 
                                         </>
                                     )}
@@ -329,13 +326,13 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                 </td>
 
                                 <td>
-                                    {editTaskId === task.taskId ? (
+                                    {editTaskId === task.id ? (
                                         <>
                                             <input
                                                 type="text"
-                                                value={editedPercent[task.taskId] || ''}
+                                                value={editedPercent[task.id] || ''}
                                                 onChange={(e) => {
-                                                    const newEditedPercent = { ...editedPercent, [task.taskId]: e.target.value };
+                                                    const newEditedPercent = { ...editedPercent, [task.id]: e.target.value };
                                                     setEditedPercent(newEditedPercent);
                                                 }}
                                             />
@@ -343,7 +340,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                         </>
                                     ) : (
                                         <>
-                                            {task.taskPercent}
+                                            {task.active}
                                         </>
                                     )}
 
@@ -351,12 +348,12 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
 
                                 <td>
 
-                                    {editTaskId === task.taskId ? (
+                                    {editTaskId === task.id ? (
                                         <>
                                             <select
-                                                value={editedStatus[task.taskId] || ''}
+                                                value={editedStatus[task.id] || ''}
                                                 onChange={(e) => {
-                                                    const newEditedStatus = { ...editedStatus, [task.taskId]: e.target.value };
+                                                    const newEditedStatus = { ...editedStatus, [task.id]: e.target.value };
                                                     setEditedStatus(newEditedStatus);
                                                 }}
                                             >
@@ -368,7 +365,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                         </>
                                     ) : (
                                         <>
-                                            <span className={task.taskStatus}></span>
+                                            <span className={task.status}></span>
                                         </>
                                     )}
                                 </td>
@@ -378,42 +375,46 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                     <div className="tools">
                                         <ul>
                                             <li>
-                                                {editTaskId === task.taskId ? (
+                                                {editTaskId === task.id ? (
                                                     <button onClick={() => {
-                                                        const editedTaskFields = {
-                                                            taskDate: editedDate[task.taskId] || task.taskDate,
-                                                            taskDescription: editedDescriptions[task.taskId] || task.taskDescription,
-                                                            taskPercent: editedPercent[task.taskId] || task.taskPercent,
-                                                            taskStatus: editedStatus[task.taskId] || task.taskStatus,
+                                                        const editedTaskFields: TaskToRedux = {
+                                                            id: task.id,
+                                                            process: task.process,
+                                                            active: parseInt(editedPercent[task.id]) || task.active,
+                                                            status: editedStatus[task.id] || task.status,
+                                                            name: task.name,
+                                                            created: editedDate[task.id] || task.created,
+                                                            deadline: task.deadline,
+                                                            description: editedDescriptions[task.id] || task.description,
                                                         };
 
-                                                        editTask(task.taskId, editedTaskFields);
+                                                        editTask(task.id, editedTaskFields);
                                                     }}>
                                                         <i className="material-icons"><img src={save} alt="Save Task" /></i>
                                                     </button>
                                                 ) : (
-                                                    <button onClick={() => startEditing(task.taskId)}><i className="material-icons"><img src={edit} alt="Edit Task" /></i></button>
+                                                    <button onClick={() => startEditing(task.id)}><i className="material-icons"><img src={edit} alt="Edit Task" /></i></button>
                                                 )}
                                             </li>
                                             <li>
-                                                {editTaskId === task.taskId ? (
+                                                {editTaskId === task.id ? (
                                                     ('')
                                                 ) : (
                                                     <button>
-                                                        <label htmlFor={`file-input-${task.taskId}`} className="file-label">
+                                                        <label htmlFor={`file-input-${task.id}`} className="file-label">
                                                             <i className="material-icons"><img src={attach} alt="Attach File" /></i>
                                                             <input
                                                                 type="file"
-                                                                id={`file-input-${task.taskId}`}
+                                                                id={`file-input-${task.id}`}
                                                                 style={{ display: 'none' }}
-                                                                onChange={(e) => handleFileUpload(e, task.taskId)}
+                                                                onChange={(e) => handleFileUpload(e, task.id)}
                                                             />
                                                         </label>
                                                     </button>
                                                 )}
 
-                                                {selectedFiles[task.taskId] ? (
-                                                    <a href={URL.createObjectURL(selectedFiles[task.taskId]!)} target="_blank">
+                                                {selectedFiles[task.id] ? (
+                                                    <a href={URL.createObjectURL(selectedFiles[task.id]!)} target="_blank">
                                                         Visualizar Arquivo
                                                     </a>
                                                 ) : null}
@@ -421,10 +422,10 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
 
 
                                             <li>
-                                                {editTaskId === task.taskId ? (
+                                                {editTaskId === task.id ? (
                                                     ('')
                                                 ) :
-                                                    <button onClick={() => localDeleteTask(task.taskId)}>
+                                                    <button onClick={() => localDeleteTask(task.id)}>
                                                         <i className="material-icons"><img src={trash} alt="Delete Task" /></i>
                                                     </button>
                                                 }

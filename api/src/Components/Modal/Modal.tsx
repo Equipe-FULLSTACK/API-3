@@ -1,7 +1,8 @@
 // ModalComponent.tsx
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FecharModalAction } from '../../store/index'; // Importe a ação FECHAR_MODAL
+import { RootState } from '../../store/configureStore'; // Importe a ação FECHAR_MODAL
+
 import * as S from './styles';
 import ModalProcess from './ModalProcess/ModalProcess';
 
@@ -16,8 +17,13 @@ interface modalData {
     /* console.log('Aberto modal'+name) */
       
 
-    const modalAberto = useSelector((state: AppState) => state.modalAberto);
-    const tamanhoModal = useSelector((state: AppState) => state.tamanhoModal);
+    /* const modalAberto = useSelector((state: AppState) => state.modalAberto);
+    const tamanhoModal = useSelector((state: AppState) => state.tamanhoModal); */
+
+    const modalAberto = useSelector((state: RootState) => state.modal.modalAberto);
+    const tamanhoModal = useSelector((state: RootState) => state.modal.tamanhoModal);
+
+
     const dispatch = useDispatch();
 
     const fecharModal = () => {

@@ -1,32 +1,35 @@
 import { CardWrapper, CardHeader, ProcessName, ProcessStatus, CardSubtitle, ProcessDate, ProcessHour, CardBody, CardBargraph, CardPercent, BargraphItem, CardFooter, Button } from './styles'; // Importe os estilos do arquivo de estilos
 import Bargraph from '../BarGraph/BarGraph';
 import dark from '../../styles/Theme/dark';
-import ButtonDefault from '../Button/ButtonDefault/ButtonDefault';
-import {dataTask} from '../Data/DataTask/dataTask'
 
 import BotaoModal from '../Modal/BotãoModal'; // IMPORTAÇÃO BOTÃO REDUX PARA ALTERAÇÃO MODAL EM TODAS AS JANELAS
 
-import { AppState } from '../../store/index'; // MANIPULAÇÃO DADOS REDUX
 import React, { useState, useEffect } from 'react';
+
+//PROCESSO DE UTILIZAÇÃO DO STORE THUNK
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store/configureStore';
+import { ProcessToRedux } from '../Data/process/types/processTypes';
+import { TaskToRedux } from '../Data/tasks/types/taskTypes';
+
 
 
 interface dataCard {
-  processId: number;
-  processName: string;
-  processStatus: string;
-  processDate: string;
-  processHour: string;
+  processId?: number;
+  processName?: string;
+  processStatus?: string;
+  processDate?: string;
+  processHour?: string;
   
-  processBarBackground: string;
-  processBarFill: string;
+  processBarBackground?: string;
+  processBarFill?: string;
 
-  taskId: number;
-  taskProcessId: number;
-  taskDescription: string;
-  taskDate: string;
-  taskStatus: string;
-  taskPercent: number;
+  taskId?: number;
+  taskProcessId?: number;
+  taskDescription?: string;
+  taskDate?: string;
+  taskStatus?: string;
+  taskPercent?: number;
 }
 
 
@@ -35,23 +38,31 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
   //Template Colors Animation
   processBarBackground = dark.colors.bgPrimarycolor;
 
-  /// PROCESSO DE DEFINIÇÃO DOS DADOS VIA REDUX
-  const tasks = useSelector((state: AppState) => state.tasks);
-    useEffect(() => {
-        if (tasks) {
-            /* console.log('CardProcess UseEffect tasks') */
-           /*  console.log(tasks); */
-        }
-    }, [tasks]);
 
-  const tasksFiltradas = tasks.filter((task) => task.taskProcessId === processId);
+
+  /// CARREGA DO STORE ESTADO ATUAL DOS DADOS
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const process = useSelector((state: RootState) => state.processes.processes);
+
+  /// CARREGA VARIAVEL AUXILIAR MANIPULACAO NO COMPONENTE
+  const [dataProcess, setDataProcess] = useState<ProcessToRedux[]>(useSelector((state: RootState) => state.processes.processes));
+  const [dataTasks, setDataTasks] = useState<TaskToRedux[]>(useSelector((state: RootState) => state.tasks.tasks));
+
+  /// ALIMENTA VARIAVEL AUXILIAR
+  useEffect(() => {
+    setDataProcess(process)
+    setDataTasks(tasks)
+  }, [process, tasks]);
+
+  
+  const tasksFiltradas = dataTasks.filter((task) => task.id === processId);
 
 
   // VERIFICA SE EXISTE ALGUMA TAREFA ATRASADA
-  const taskAtrasada = tasksFiltradas.filter((f) => f.taskStatus === 'Atrasada');
+  const taskAtrasada = tasksFiltradas.filter((f) => f.status === 'Atrasada');
 
   // VERIFICA SE EXISTE ALGUMA TAREFA EM ANDAMENTO
-  const taskAndamento = tasksFiltradas.filter((f) => f.taskStatus === 'Andamento');
+  const taskAndamento = tasksFiltradas.filter((f) => f.status === 'Andamento');
 
   // ANIMAÇÃO DOS ESTILOS BASEADOS NOS STATUS.
   let statusProcess;
@@ -96,14 +107,14 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
       <CardBody>
         <CardBargraph>
           {/* TODO FAZER MAP ARRAY DOS DADOS DO BAR GRAPH BASEADO QUANTIDADE DE TASKS */}
-          {tasksFiltradas.map((task) => (
+          {tasksFiltradas.slice(0, 5).map((task) => (
             <Bargraph
-                key={task.taskId}  
-                value={task.taskPercent}
+                key={task.id}  
+                value={task.active} //TODO PRECISA DEFINIR SE IRA MANTER PERCENTUAL
                 minValue={0}
                 maxValue={100}
                 backgroundColor={processBarBackground}
-                fillBackgroundColor={task.taskStatus}
+                fillBackgroundColor={task.status}
             />
     )
 )}
