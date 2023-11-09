@@ -1,9 +1,12 @@
 
 import React from 'react';
+import PositionedMenu from './LogoutNavBar';
+
 
 import {
   Container,
   Logo,
+  Wrapper,
   UserName
 } from "./styles"
 //TODO CRIANDO STYLES NAVBAR
@@ -17,11 +20,22 @@ interface dataNavBar {
 }
 
 const NavBar: React.FC<dataNavBar> = ({userName, pageName}) => {
+  
+  
+
+
   return (
     <Container>
       {/* {pageName} */}
       <Logo src={logo} alt="iconIonicHealth"/>
-      <UserName>{userName}</UserName>
+      
+      
+      <Wrapper>
+        
+        <UserName>{userName.toUpperCase()} </UserName>
+       {/*  <PositionedMenu/> */}
+      </Wrapper>
+
     </Container>
   )
 };

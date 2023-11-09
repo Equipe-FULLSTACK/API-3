@@ -1,6 +1,8 @@
-import { CardWrapper, CardHeader, ProcessName, ProcessStatus, CardSubtitle, ProcessDate, processDeadLine, CardBody, CardBargraph, CardPercent, BargraphItem, CardFooter, Button } from './styles'; // Importe os estilos do arquivo de estilos
+import { CardWrapper, CardHeader, CardSubtitleColumn, ProcessName, ProcessStatus, CardSubtitle, ProcessDate, ProcessHour, CardBody, CardBargraph, CardPercent, BargraphItem, CardFooter, Button } from './styles'; // Importe os estilos do arquivo de estilos
 import Bargraph from '../BarGraph/BarGraph';
 import dark from '../../styles/Theme/dark';
+import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
+import Badge from '@mui/material/Badge';
 
 import BotaoModal from '../Modal/BotãoModal'; // IMPORTAÇÃO BOTÃO REDUX PARA ALTERAÇÃO MODAL EM TODAS AS JANELAS
 
@@ -20,7 +22,7 @@ interface dataCard {
   processStatus: string;
   processDate: string;
   processDeadLine: string;
-  
+
   processBarBackground?: string;
   processBarFill?: string;
 
@@ -34,7 +36,7 @@ interface dataCard {
 
 
 
-const Card: React.FC<dataCard> = ({processId,processName, processStatus, processDate, processDeadLine,processBarBackground,processBarFill}) => {
+const Card: React.FC<dataCard> = ({ processId, processName, processStatus, processDate, processDeadLine, processBarBackground, processBarFill }) => {
   //Template Colors Animation
   processBarBackground = dark.colors.bgPrimarycolor;
 
@@ -55,34 +57,28 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
   }, [process, tasks]);
 
   console.log('dataProcess', dataProcess);
-  console.log('dataTasks',dataTasks);
-  
+  console.log('dataTasks', dataTasks);
+
   const tasksFiltradas = dataTasks.filter((task) => task.process === processId);
 
   //console.log('CardProcess - tasksFiltradas', tasksFiltradas)
 
-
-  // VERIFICA SE EXISTE ALGUMA TAREFA ATRASADA
-  const taskAtrasada = tasksFiltradas.filter((f) => f.status === 'Atrasada');
-
-  // VERIFICA SE EXISTE ALGUMA TAREFA EM ANDAMENTO
-  const taskAndamento = tasksFiltradas.filter((f) => f.status === 'Andamento');
-
   // ANIMAÇÃO DOS ESTILOS BASEADOS NOS STATUS.
+  const dataProcessStatus = dataProcess
+    .filter((f) => f.id === processId)
+    .map((f) => f.status)[0]; // Acesso ao primeiro elemento do array
+
   let statusProcess;
 
-
-
-  if (taskAtrasada.length > 0) {
-      statusProcess = 'Atrasada';
-      processBarFill = "red";
-      
-  } else if (taskAndamento.length > 0) {
-      statusProcess = 'Andamento';
-      processBarFill = '#fbfb38';
+  if (dataProcessStatus === 'Atrasada') {
+    statusProcess = 'Atrasada';
+    processBarFill = "red";
+  } else if (dataProcessStatus === 'Em andamento') {
+    statusProcess = 'Andamento';
+    processBarFill = '#fbfb38';
   } else {
-      statusProcess = 'Concluida';
-      processBarFill = '#54c5cd;';
+    statusProcess = 'Concluida';
+    processBarFill = '#54c5cd';
   }
 
 
@@ -90,7 +86,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
 
   //TODO FAZER LOGICA SELEÇÃO COR DE ALERTA
   processBarFill = dark.colors.bgPrimarycolor;
- 
+
 
   processBarFill = statusProcess;
   /* console.log(processBarFill) */
@@ -99,13 +95,36 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
   return (
     <CardWrapper className="card">
       <CardHeader>
+
         <ProcessName>{processId} - {processName}</ProcessName>
-        <ProcessStatus className={statusProcess}>{statusProcess}</ProcessStatus>
+
+        <Badge 
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        badgeContent={tasksFiltradas.length} color="primary">
+          <ProcessStatus className={statusProcess}>{dataProcessStatus}</ProcessStatus>
+        </Badge>
+
       </CardHeader>
 
       <CardSubtitle>
-        <ProcessDate>{processDate}</ProcessDate>
-        <processDeadLine>{processDeadLine}</processDeadLine>
+        
+
+        <CardSubtitleColumn>
+          <span>Criado</span>
+          <ProcessDate>{processDate}</ProcessDate>
+        </CardSubtitleColumn>
+
+        <CardSubtitleColumn>
+          <span>Data Limite</span>
+          <ProcessDate>{processDeadLine}</ProcessDate>
+        </CardSubtitleColumn>
+
+
+
+
       </CardSubtitle>
 
       <CardBody>
@@ -113,22 +132,22 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
           {/* TODO FAZER MAP ARRAY DOS DADOS DO BAR GRAPH BASEADO QUANTIDADE DE TASKS */}
           {tasksFiltradas.slice(0, 5).map((task) => (
             <Bargraph
-                key={task.id}  
-                value={task.active} //TODO PRECISA DEFINIR SE IRA MANTER PERCENTUAL
-                minValue={0}
-                maxValue={100}
-                backgroundColor={processBarBackground}
-                fillBackgroundColor={task.status}
+              key={task.id}
+              value={task.active} //TODO PRECISA DEFINIR SE IRA MANTER PERCENTUAL
+              minValue={0}
+              maxValue={1}
+              backgroundColor={processBarBackground}
+              fillBackgroundColor={task.status}
             />
-    )
-)}
+          )
+          )}
         </CardBargraph>
       </CardBody>
 
       <CardFooter>
-        {/* TODO INSERIR FUNÇÕES DO BOTÃO */}
-        <BotaoModal label={'Detalhe'} name={processId} tagButton={'Processo_'+processId}/>
+        <BotaoModal label={'Detalhe'} name={processId} tagButton={'Processo_' + processId} />
       </CardFooter>
+
     </CardWrapper>
   );
 };
