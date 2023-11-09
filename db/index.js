@@ -28,8 +28,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	/* password: "fatec", */
-	password: "fatec",
+	password: "senhadaora123",
 	database: "db"
 });
 
@@ -236,28 +235,6 @@ app.get("/ck", (req, res) => {
 	});
 });
 
-
-
-// FUNÇÃO PARA CRIAR NOVOS PROCESSOS NO BANCO DE DADOS
-app.post('/process', function (req, res) {
-	const { name, deadline } = req.body;
-	const { authorization } = req.headers;
-	if (name != "" && deadline != "") {
-		con.connect(function (err) {
-			if (err) throw err;
-			console.log("Inserindo");
-			var sql = 'INSERT INTO processes (status, name, created, deadline) VALUES (0, ?, NOW(), ?)';
-			con.query(sql, [name, deadline], function (err, result) {
-				if (err) throw err;
-			});
-		});
-	} else {
-		console.log("Erro");
-	}
-	return res.redirect('http://localhost:5173/');
-});
-
-
 //FUNÇÃO PARA ATUALIZAR O CAMPO ADMIN DE UM USUÁRIO NA PAGINA ADMIN
 app.put('/atualizarAdmin/:userId', (req, res) => {
 	const { userId } = req.params;
@@ -274,6 +251,176 @@ app.put('/atualizarAdmin/:userId', (req, res) => {
 			res.json({ message: 'Admin atualizado com sucesso' });
 		}
 	});
+});
+
+
+////// FUNÇÕES ORIGINAIS
+//FUNÇÕES DE INSERT
+// FUNÇÃO PARA CRIAR NOVOS PROCESSOS NO BANCO DE DADOS
+app.post('/process', function (req, res) {
+	const { name, deadline } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Inserindo");
+			var sql = 'INSERT INTO processes (status, name, created, deadline) VALUES (0, ?, NOW(), ?)';
+			con.query(sql, [name, deadline], function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
+});
+// FUNÇÃO PARA CRIAR NOVAS TASKS NO BANCO DE DADOS
+app.post('/task', function (req, res) {
+	const { process, name, deadline } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Inserindo");
+			var sql = 'INSERT INTO tasks (process, status, name, created, deadline) VALUES (?, 0, ?, NOW(), ?)';
+			con.query(sql, [process, name, deadline], function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
+});
+// FUNÇÃO PARA CRIAR NOVAS EVIDENCIAS NO BANCO DE DADOS
+app.post('/evidence', function (req, res) {
+	const { task, name, deadline, url } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Inserindo");
+			var sql = 'INSERT INTO evidences (task, status, name, created, deadline, type, url) VALUES (?, 0, ?, NOW(), ?, "TEXT", ?)';
+			con.query(sql, [task, name, deadline, url], function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
+});
+
+// FUNÇÕES DE UPDATE
+// FUNÇÃO PARA ATUALIZAR PROCESSOS NO BANCO DE DADOS
+app.post('/updateprocess', function (req, res) {
+	const { status, name, deadline, id } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Atualizando");
+			var sql = 'UPDATE processes SET status = ?, name = ?, deadline = ? WHERE id = ?';
+			con.query(sql, [status, name, deadline, id], function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
+});
+// FUNÇÃO PARA ATUALIZAR TASKS NO BANCO DE DADOS
+app.post('/updatetask', function (req, res) {
+	const { status, name, deadline, id } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Atualizando");
+			var sql = 'UPDATE tasks SET status = ?, name = ?, deadline = ? WHERE id = ?';
+			con.query(sql, [status, name, deadline, id], function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
+});
+// FUNÇÃO PARA ATUALIZAR EVIDENCIAS NO BANCO DE DADOS
+app.post('/evidence', function (req, res) {
+	const { status, name, url, id } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Atualizando");
+			var sql = 'UPDATE evidences SET status = ?, name = ?, url = ? WHERE id = ?)';
+			con.query(sql, [status, name, url, id], function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
+});
+
+// FUNÇÕES DE DELETE
+// FUNÇÃO PARA DELETAR PROCESSOS NO BANCO DE DADOS
+app.post('/deleteprocess', function (req, res) {
+	const { id } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Deletando");
+			var sql = 'DELERE FROM processes WHERE id = ?';
+			con.query(sql, id, function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
+});
+// FUNÇÃO PARA DELETAR TASKS NO BANCO DE DADOS
+app.post('/deletetask', function (req, res) {
+	const { id } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Deletando");
+			var sql = 'DELERE FROM tasks WHERE id = ?';
+			con.query(sql, id, function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
+});
+// FUNÇÃO PARA DELETAR EVIDENCIAS NO BANCO DE DADOS
+app.post('/deleteevidence', function (req, res) {
+	const { id } = req.body;
+	const { authorization } = req.headers;
+	if (name != "" && deadline != "") {
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Deletando");
+			var sql = 'DELERE FROM evidences WHERE id = ?';
+			con.query(sql, id, function (err, result) {
+				if (err) throw err;
+			});
+		});
+	} else {
+		console.log("Erro");
+	}
+	return res.redirect('http://localhost:5173/processos');
 });
 
 
