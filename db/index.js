@@ -79,7 +79,7 @@ app.get("/p", (req, res) => {
 		if (err) throw err;
 		console.log("Dados solicitados para tabela de processos");
 
-		var sql = 'SELECT id, active, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM processes';
+		var sql = 'SELECT id, active, status, name, DATE_FORMAT(CONVERT(created, date), "%d/%m/%Y") AS created, DATE_FORMAT(CONVERT(deadline, date), "%d/%m/%Y") AS deadline, description FROM processes';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
 			res.json(result);
@@ -94,7 +94,7 @@ app.get("/t", (req, res) => {
 		if (err) throw err;
 		console.log("Dados solicitados para tabela de tarefas");
 
-		var sql = 'SELECT id, process, active, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM tasks';
+		var sql = 'SELECT id, process, active, status, name, DATE_FORMAT(CONVERT(created, date), "%d/%m/%Y") AS created, DATE_FORMAT(CONVERT(deadline, date), "%d/%m/%Y") AS deadline, description FROM tasks';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {	
 			if (err) throw err;
 			res.json(result);

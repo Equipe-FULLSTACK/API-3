@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware, Dispatch, Action } from 'redux';
+import { createStore, combineReducers, applyMiddleware, Action } from 'redux';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import taskReducer from '../Components/Data/tasks/reducers/taskReducer';
 import processReducer from '../Components/Data/process/reducers/processReducer';

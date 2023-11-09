@@ -1,4 +1,4 @@
-import { CardWrapper, CardHeader, ProcessName, ProcessStatus, CardSubtitle, ProcessDate, ProcessHour, CardBody, CardBargraph, CardPercent, BargraphItem, CardFooter, Button } from './styles'; // Importe os estilos do arquivo de estilos
+import { CardWrapper, CardHeader, ProcessName, ProcessStatus, CardSubtitle, ProcessDate, processDeadLine, CardBody, CardBargraph, CardPercent, BargraphItem, CardFooter, Button } from './styles'; // Importe os estilos do arquivo de estilos
 import Bargraph from '../BarGraph/BarGraph';
 import dark from '../../styles/Theme/dark';
 
@@ -15,11 +15,11 @@ import { TaskToRedux } from '../Data/tasks/types/taskTypes';
 
 
 interface dataCard {
-  processId?: number;
-  processName?: string;
-  processStatus?: string;
-  processDate?: string;
-  processHour?: string;
+  processId: number;
+  processName: string;
+  processStatus: string;
+  processDate: string;
+  processDeadLine: string;
   
   processBarBackground?: string;
   processBarFill?: string;
@@ -34,7 +34,7 @@ interface dataCard {
 
 
 
-const Card: React.FC<dataCard> = ({processId,processName, processStatus, processDate, processHour,processBarBackground,processBarFill}) => {
+const Card: React.FC<dataCard> = ({processId,processName, processStatus, processDate, processDeadLine,processBarBackground,processBarFill}) => {
   //Template Colors Animation
   processBarBackground = dark.colors.bgPrimarycolor;
 
@@ -54,8 +54,12 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
     setDataTasks(tasks)
   }, [process, tasks]);
 
+  console.log('dataProcess', dataProcess);
+  console.log('dataTasks',dataTasks);
   
-  const tasksFiltradas = dataTasks.filter((task) => task.id === processId);
+  const tasksFiltradas = dataTasks.filter((task) => task.process === processId);
+
+  //console.log('CardProcess - tasksFiltradas', tasksFiltradas)
 
 
   // VERIFICA SE EXISTE ALGUMA TAREFA ATRASADA
@@ -101,7 +105,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
 
       <CardSubtitle>
         <ProcessDate>{processDate}</ProcessDate>
-        <ProcessHour>{processHour}</ProcessHour>
+        <processDeadLine>{processDeadLine}</processDeadLine>
       </CardSubtitle>
 
       <CardBody>

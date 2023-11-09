@@ -90,9 +90,7 @@ const Process: React.FC<ProcessProps> = ({ pageName, bg }) => {
           margin='0 0 0.5rem 0'
           width='100%'
           backgroundColor={bg}>
-          {/* <ProcessActive>Processos Ativos</ProcessActive>
-                  <a href="/API-3/api/src/Components/Modal/ProcessForm.tsx"><ButtonNewProcess>Novo Processo</ButtonNewProcess></a>
-                  <SearchComponent/> */}
+
           <ProcessActive>Processos Ativos</ProcessActive>
           <button className="btn-newProcess" onClick={() => setShowModal(true)}>Novo processo</button>
           <SearchComponent />
@@ -108,11 +106,12 @@ const Process: React.FC<ProcessProps> = ({ pageName, bg }) => {
         >
           {dataProcess.map((process: ProcessToRedux) => (
             <li className='cardList' key={process.id}>
-              <CardProcess processId={process.id}
+              <CardProcess 
+                processId={process.id}
                 processName={process.name}
                 processDate={process.created}
                 processStatus={process.status}
-                processHour={process.deadline}
+                processDeadLine={process.deadline}
               />
             </li>
           ))}
