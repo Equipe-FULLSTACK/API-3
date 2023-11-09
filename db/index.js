@@ -349,7 +349,7 @@ app.post('/updatetask', function (req, res) {
 	return res.redirect('http://localhost:5173/processos');
 });
 // FUNÇÃO PARA ATUALIZAR EVIDENCIAS NO BANCO DE DADOS
-app.post('/evidence', function (req, res) {
+app.post('/updateevidence', function (req, res) {
 	const { status, name, url, id } = req.body;
 	const { authorization } = req.headers;
 	if (name != "" && deadline != "") {
