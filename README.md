@@ -21,8 +21,11 @@ Equipe FULLSTACK - API 3º Semestre
 
   <br>
   <div align="center">
-  <img src="/readme/index_sprint_1.png" width="640" height="360"><br>
-  <img src="/readme/dados_db.png" width="640" height="360"><br>
+  <img src="/readme/home.png" width="640" height="360"><br>
+  <img src="/readme/autentic.png" width="640" height="360"><br>
+  <img src="/readme/processos.png" width="640" height="360"><br>
+  <img src="/readme/task.png" width="640" height="360"><br>
+  <img src="/readme/admin.png" width="640" height="360"><br>
   </div>
  
  
@@ -235,6 +238,15 @@ Para facilitar a comunicação e colaboração, notificações externas via e-ma
             <a href="https://linkedin.com/in/">Linkedin</a>
           </td>
          </tr>
+         <tr>
+          <td>Willians Motta</td>
+          <td><img src="/readme/will.png" width="75px" height="75px"></td>
+          <td>Desenvolvedor</td>
+          <td>
+            <a href="https://github.com/williansmott4">Github</a><br>
+            <a href="https://linkedin.com/in/">Linkedin</a>
+          </td>
+         </tr>
     </tbody>
   </table>
   <br>
@@ -252,9 +264,9 @@ Para facilitar a comunicação e colaboração, notificações externas via e-ma
 
   ## <a href="https://github.com/Equipe-FULLSTACK/API-3/tree/Sprint1">Primeira Sprint</a>
   ## <br>
-  ## <a href="">Segunda Sprint</a>
+  ## <a href="https://github.com/Equipe-FULLSTACK/API-3/tree/Sprint2">Segunda Sprint</a>
   ## <br>
-  ## <a href="">Terceira Sprint</a>
+  ## <a href="https://github.com/Equipe-FULLSTACK/API-3/tree/Sprint3">Terceira Sprint</a>
   ## <br>
   ## <a href="">Quarta Sprint</a>
   
