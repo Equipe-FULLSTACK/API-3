@@ -78,7 +78,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 /// DESPACHO INICIAL PARA CARREGAR DADOS DA API
 (store.dispatch as ThunkDispatch<RootState, undefined, any>)(fetchTasks()).then(() => {
   (store.dispatch as ThunkDispatch<RootState, undefined, any>)(fetchProcesses()).then(() => {
-    console.log('Dados da API foram carregados com sucesso.');
+    /* console.log('Dados da API foram carregados com sucesso.'); */
 
  /*    const tasks = store.getState().tasks.tasks; 
     const processes = store.getState().processes.processes; 

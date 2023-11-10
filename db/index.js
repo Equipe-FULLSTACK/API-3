@@ -103,6 +103,24 @@ app.get("/t", (req, res) => {
 
 
 
+///// ROTA PARA COLETA DAS LOGS
+
+app.get("/logProcess", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados para tabela de processos");
+
+		var sql = 'SELECT * FROM log_processes';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+
+
+
 // FUNÇÃO PARA CRIAR NOVAS TAREFAS NO BANCO DE DADOS
 app.post('/t', function (req, res) {
 	const process = req.body.process;

@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:3000';
 
 export const fetchTasks = async () => {
   try {
-    console.log('API fetchTasks enviado a rota ', API_URL,'/t - GET')
+    /* console.log('API fetchTasks enviado a rota ', API_URL,'/t - GET') */
     const response = await axios.get(`${API_URL}/t`);
     return response.data;
   } catch (error) {
@@ -25,7 +25,7 @@ export const createTask = async (newTaskData: TaskToRedux) => {
       description: newTaskData.description,
     };
 
-    console.log('API createTask enviada a rota ', `${API_URL}/createtask`, '- POST', taskDataToSend);
+    /* console.log('API createTask enviada a rota ', `${API_URL}/createtask`, '- POST', taskDataToSend); */
     
     const response = await axios.post(`${API_URL}/createtask`, taskDataToSend);
     
@@ -50,7 +50,7 @@ export const updateTask = async (taskId: number, taskData: TaskToRedux) => {
 
     };
 
-    console.log('API updateTask enviado a rota ', `${API_URL}/updatetask/${taskId}`, '- POST', updatedTaskData);
+    /* console.log('API updateTask enviado a rota ', `${API_URL}/updatetask/${taskId}`, '- POST', updatedTaskData); */
     
     const response = await axios.post(`${API_URL}/updatetask/${taskId}`, updatedTaskData);
     

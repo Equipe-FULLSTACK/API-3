@@ -46,10 +46,11 @@ const SideBar: React.FC<dataSideBar> = ({pageName}) => {
                 <Link href='#'><img src={detail} alt="lock"/>Editar Ordem</Link>
                 <Link href='#'><img src={notification} alt="lock"/>Notificações</Link>
                 <Link href='#'><img src={graph} alt="lock"/>Gráficos</Link>
-            </Wrapper>
+                <Link href='/logs'><img src={graph} alt="lock"/>Logs</Link>      
+            </Wrapper>  
 
           </Wrapper>
-        </Wrapper>
+        </Wrapper>  
       </Container>
 
   )
