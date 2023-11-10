@@ -12,15 +12,15 @@ Equipe FULLSTACK - API 3º Semestre
 
   #### <div align="center"> Estado do Projeto ao final da Terceira Sprint: </div>
   
-  <div align="center"> <img src="/readme/login.png "width="640" height="360"> </div>
+  <div align="center"> <img src="/readme/home.png "width="640" height="360"> </div>
   <br>
-  <div align="center"> <img src="/readme/cadastro.png "width="640" height="360"> </div>
+  <div align="center"> <img src="/readme/autentic.png "width="640" height="360"> </div>
   <br>
   <div align="center"> <img src="/readme/processos.png "width="640" height="360"> </div>
   <br>
-  <div align="center"> <img src="/readme/processos_abas.png "width="640" height="360"> </div>
+  <div align="center"> <img src="/readme/task.png "width="640" height="360"> </div>
   <br>
-  <div align="center"> <img src="/readme/processos_modais.png "width="640" height="360"> </div>
+  <div align="center"> <img src="/readme/admin.png "width="640" height="360"> </div>
   <br>
   
   
@@ -41,13 +41,14 @@ Ao longo da Sprint, foi feito um levantamento de requisitos e implementadas nova
 - Ajustes na tela de Processos
 - Sistema de autenticação de usuários por meio de cookies
 - Desenvolvimento de sistema de logs de uso do app
+- Notificação de usuários por email na criação de novas atividades
   
 
 ### <p align = "center">Gráfico de Burndown
 
 
  <br>
-  <div align="center"> <img src="/readme/PrintBurndown.png "width="640" height="360"> </div>
+  <div align="center"> <img src="/readme/burndown3.png "width="640" height="360"> </div>
   <br>
   
   
