@@ -79,12 +79,19 @@
 }
 
 
-button, input {
+button, input, td>select {
   overflow: visible;
   width: 100%;
   height: 100%;
   border-color: #54c5cd;
+  color: aliceblue;
 }
+
+.n-entries{
+  color: aliceblue;
+}
+
+
 
 .datatable-container header {
     font-size: 1rem;

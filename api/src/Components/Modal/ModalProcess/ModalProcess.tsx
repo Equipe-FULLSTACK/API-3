@@ -376,10 +376,10 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                                     setEditedStatus(newEditedStatus);
                                                 }}
                                             >
-                                                <option value="Pendente">Pendente</option>
-                                                <option value="Atrasada">Atrasada</option>
-                                                <option value="Concluida">Completada</option>
-                                                <option value="Andamento">Andamento</option>
+                                                <option className={'Pendente'} value="Pendente">Pendente</option>
+                                                <option className={'Atrasada'} value="Atrasada">Atrasada</option>
+                                                <option className={'Concluida'}value="Concluida">Completada</option>
+                                                <option className={'Andamento'}value="Andamento">Andamento</option>
                                             </select>
 
                                         </>
