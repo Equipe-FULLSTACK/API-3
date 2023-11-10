@@ -8,6 +8,7 @@ import { ProcessToRedux } from '../../Data/process/types/processTypes';
 import { TaskToRedux } from '../../Data/tasks/types/taskTypes';
 
 import { fetchTasks, createTask, updateTask, deleteTask } from '../../Data/tasks/actions/taskActions';
+import { fetchProcesses, createProcess, updateProcess, deleteProcess } from '../../Data/process/actions/processActions';
 
 import { useDispatch } from 'react-redux';
 

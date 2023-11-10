@@ -29,7 +29,7 @@ export const createTask = (taskData: TaskToRedux): ThunkAction<void, RootState, 
     try {
       const newTask = await createTaskApi(taskData);
       console.log('taskAction createTask', newTask); /// CONTROLE ERRO
-      dispatch(fetchProcesses());
+      dispatch(fetchTasks());
     } catch (error) {
       console.error(error);
     }
