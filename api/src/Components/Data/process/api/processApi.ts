@@ -19,7 +19,7 @@ export const createProcess = async (newProcessData: ProcessToRedux) => {
       active: newProcessData.active,
       status: newProcessData.status,
       name: newProcessData.name,
-      created: newProcessData.created, // Adicione a propriedade 'created' conforme necessário
+      created: newProcessData.created, 
       deadline: newProcessData.deadline,
       description: newProcessData.description,
     };
