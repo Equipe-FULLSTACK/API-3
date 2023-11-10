@@ -3,6 +3,7 @@ import { RootState } from '../../../../store/configureStore';
 import { TaskActionTypes } from '../types/taskActionTypes';
 import { TaskToRedux } from '../types/taskTypes'; 
 import { fetchTasks as fetchTasksApi, createTask as createTaskApi, updateTask as updateTaskApi, deleteTask as deleteTaskApi } from '../api/taskApi';
+import { fetchProcesses } from '../../process/actions/processActions';
 
 // Ação para buscar tarefas
 export const fetchTasks = (): ThunkAction<void, RootState, null, TaskActionTypes> => {
@@ -10,10 +11,12 @@ export const fetchTasks = (): ThunkAction<void, RootState, null, TaskActionTypes
     try {
       const tasks = await fetchTasksApi();
       console.log('taskAction fetchTasks', tasks); /// CONTROLE ERRO
+
       dispatch({
         type: 'SET_TASKS',
         payload: tasks,
       });
+      
     } catch (error) {
       console.error(error);
     }
@@ -26,10 +29,7 @@ export const createTask = (taskData: TaskToRedux): ThunkAction<void, RootState, 
     try {
       const newTask = await createTaskApi(taskData);
       console.log('taskAction createTask', newTask); /// CONTROLE ERRO
-      dispatch({
-        type: 'ADD_TASK',
-        payload: newTask,
-      });
+      dispatch(fetchProcesses());
     } catch (error) {
       console.error(error);
     }
@@ -41,10 +41,11 @@ export const updateTask = (taskId: number, updatedData: TaskToRedux): ThunkActio
   return async (dispatch) => {
     console.log('taskAction updateTask', updatedData); /// CONTROLE ERRO
     try {
-      const updatedTask = await updateTaskApi(taskId, updatedData);
+      const updateTaskToBackend = await updateTaskApi(taskId, updatedData);
+      console.log('taskAction updatedTask',updateTaskToBackend)
       dispatch({
         type: 'UPDATE_TASK', 
-        payload: updatedTask,
+        payload: updatedData,
       });
     } catch (error) {
       console.error(error);
@@ -56,8 +57,9 @@ export const updateTask = (taskId: number, updatedData: TaskToRedux): ThunkActio
 export const deleteTask = (taskId: number): ThunkAction<void, RootState, null, TaskActionTypes> => {
   return async (dispatch) => {
     try {
-      await deleteTaskApi(taskId);
       console.log('taskAction deleteTaskApi', taskId); /// CONTROLE ERRO
+      await deleteTaskApi(taskId);
+      
       dispatch({
         type: 'DELETE_TASK',
         payload: { taskId },

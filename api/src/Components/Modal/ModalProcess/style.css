@@ -3,6 +3,7 @@
   --secondary-color: rgb(61, 68, 73);
   --highlight-color: #3282b8;
 
+  --dt-status-Pendente-color: #bac8c9;
   --dt-status-Concluida-color: #54c5cd;
   --dt-status-Andamento-color: #fbfb38;
   --dt-status-Atrasada-color: #ff6961;
@@ -118,7 +119,7 @@ main{
 
 table {
     width: 95%;
-    font-size: 16px;
+    font-size: 12px;
     margin: 0;
 }
 
@@ -130,6 +131,7 @@ th{
 td{
     padding: 5px;
     text-align: left;
+    align-self: start;
 }
 
 .listHead{
@@ -145,7 +147,6 @@ td{
 
 
 .Andamento, .Concluida, .Atrasada{
-  padding: 10px;
   border-radius: 5px;
 }
 
@@ -189,7 +190,7 @@ td{
     max-width: 1140px;
     min-width: 950px;
     margin: 0 auto;
-    font-size: 12px;
+    font-size: 15px;
   }
   
   .datatable-container .header-tools {
@@ -245,6 +246,7 @@ td{
   
 
   .datatable-container .task-tools {
+    height: auto;
     border-bottom: solid 1px var(--dt-border-color);
     padding: var(--dt-padding);
     padding-left: 0;
@@ -383,6 +385,7 @@ td{
     background-color: var(--dt-hover-cell-color);
   }
   
+  .datatable-container .datatable tbody tr .Pendente::after,
   .datatable-container .datatable tbody tr .Concluida::after,
   .datatable-container .datatable tbody tr .Andamento::after,
   .datatable-container .datatable tbody tr .Atrasada::after {
@@ -390,6 +393,11 @@ td{
     vertical-align: middle;
   }
 
+  .ProcessModal .Pendente {
+    background-color: var(--dt-status-Pendente-color);
+    color: black;
+    padding: 0.5rem 2rem;
+  }
 
   .ProcessModal .Concluida {
     background-color: var(--dt-status-Concluida-color);
@@ -410,7 +418,11 @@ td{
   }
 
 
-
+  .datatable-container .datatable tbody tr .Pendente::after {
+    content: "Pendente";
+    color: var(--dt-status-Pendente-color);
+  }
+  
   .datatable-container .datatable tbody tr .Concluida::after {
     content: "Completada";
     color: var(--dt-status-Concluida-color);
@@ -426,7 +438,8 @@ td{
     /* color: var(--dt-status-Atrasada-color); */
     color: red;
   }
-  
+
+  .datatable-container .datatable tbody tr .Pendente::before,
   .datatable-container .datatable tbody tr .Concluida::before,
   .datatable-container .datatable tbody tr .Andamento::before,
   .datatable-container .datatable tbody tr .Atrasada::before {
@@ -438,7 +451,10 @@ td{
     border-radius: 50%;
     vertical-align: middle;
   }
-  
+
+  .datatable-container .datatable tbody tr .Pendente::before {
+    background-color: var(--dt-status-Pendente-color);
+  }
   .datatable-container .datatable tbody tr .Concluida::before {
     background-color: var(--dt-status-Concluida-color);
   }

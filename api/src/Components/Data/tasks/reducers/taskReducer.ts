@@ -21,6 +21,7 @@ const taskReducer = (state: AppState = initialState, action: TaskActionTypes): A
       };
         
     case UPDATE_TASK:
+      console.log('taskReducer - UPDATE_TASK');
       return {
         ...state,
         tasks: state.tasks.map((task) =>

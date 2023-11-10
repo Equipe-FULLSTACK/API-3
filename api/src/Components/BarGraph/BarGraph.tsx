@@ -26,7 +26,9 @@ ${props =>
     props.fillBackgroundColor === 'Atrasada'
     ? 'background-color: #ff6961;'
     : props.fillBackgroundColor === 'Concluída'
-    ? 'background-color: #54c5cd;;'
+    ? 'background-color: #54c5cd;'
+    : props.fillBackgroundColor === 'Pendente'
+    ? 'background-color: #bac8c9;'
     : 'background-color: #fbfb38;'}
 
   border-radius: 5px;

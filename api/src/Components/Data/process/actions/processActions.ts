@@ -23,18 +23,16 @@ export const fetchProcesses = (): ThunkAction<void, RootState, null, ProcessActi
   };
 };
 
-
-// Ação para criar um processo
+/// CRIANDO UM PROCESSO
 export const createProcess = (processData: ProcessToRedux): ThunkAction<void, RootState, null, ProcessActionTypes> => {
   return async (dispatch) => {
     try {
       const newProcess = await createProcessApi(processData);
-      dispatch({
-        type: 'ADD_PROCESS',
-        payload: newProcess,
-      });
+      console.log('processAction createProcess', newProcess); 
+      dispatch(fetchProcesses());
     } catch (error) {
-      console.error(error);
+      console.error('Erro ao criar processo:', error);
+      
     }
   };
 };
