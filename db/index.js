@@ -28,7 +28,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "Fla*741137a",
+	password: "senhadaora123",
 	database: "db"
 });
 
@@ -39,7 +39,7 @@ app.use(helmet());
 app.use(limiter);
 app.use(cors({
 	origin: 'http://localhost:5173',
-	methods: ['POST', 'GET', 'PUT', 'DELETE'],
+	methods: ['POST', 'GET','PUT', 'DELETE'],
 	credentials: true
 }));
 
@@ -210,8 +210,10 @@ app.post('/login', function (req, res) {
 			if (result.length > 0) {
 				console.log(username);
 				req.session.username = result[0].name;
-				console.log(req.session.username, 'username')
-				return res.json({ Login: true, username: req.session.username });
+				req.session.admin = result[0].admin;
+				req.session.role = result[0].role;
+				console.log(req.session.username, 'username', 'Admin: ', req.session.admin,' Role: ', req.session.role)
+				return res.json({ Login: true, username: req.session.username, admin: req.session.admin, role:req.session.role });
 			} else {
 				console.log('Usuário não encontrado', username, senha);
 				return res.json({ Login: false });
@@ -229,7 +231,7 @@ app.get("/ck", (req, res) => {
 
 		if (req.session.username) {
 			console.log('Achei')
-			return res.json({ valid: true, username: req.session.username })
+			return res.json({ valid: true, username: req.session.username, admin:req.session.admin, role: req.session.role })
 		} else {
 			console.log('Não achei')
 			return res.json({ valid: false })
