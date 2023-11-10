@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 
 import NavBar from "../Components/Navbar/Navbar";
 import { Divider } from "../Components/Layout/styles";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Admin() {
   const posicaoID = window.location.href.indexOf("id=");
   const id = window.location.href.substring(posicaoID + 3);
   const [seuJSON, setSeuJSON] = useState([]);
+  const [name, setName] = useState('')
+  const [admin, setAdmin] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`http://localhost:3000/us?us${id}`)
@@ -14,6 +20,30 @@ export default function Admin() {
       .then((data) => setSeuJSON(data))
       .catch((error) => console.error("Erro ao buscar o JSON", error));
   }, []);
+
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios.get('http://localhost:3000/ck')
+        .then( res => {
+            if(res.data.valid) {
+                setName(res.data.username);
+                setAdmin(res.data.admin);
+                if(res.data.admin == 1){
+                  console.log('Usuario admin confirmado')
+                } else{
+                  alert('Acesso Negado')
+                  console.log(res)
+                  navigate('/')
+                  
+                }
+            } else {
+                alert('Acesso Negado')
+                navigate('/')
+            }
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+    },[])
 
   const handleAdminToggle = (userId) => {
     const userToUpdate = seuJSON.find((user) => user.id === userId);
@@ -49,7 +79,7 @@ export default function Admin() {
 
   return (
     <>
-      <NavBar userName={"Juliano Prado"} pageName={"NavBar"} />
+      <NavBar userName={name} pageName={"NavBar"} />
       
       <Divider />
       <div className="admin-lista">
@@ -67,8 +97,8 @@ export default function Admin() {
                       <tr >
                         <th className="admin-tr">Nome</th>
                         <th  className="admin-tr">E-mail</th>
-                        <th  className="admin-tr">Cargo</th>
-                        <th  className="admin-tr">Status</th>
+                        <th  className="admin-tr">Admin</th>
+                        <th  className="admin-tr">Role</th>
                       </tr>
                       <tr className="admin-tr">
                         <td className="admin-td">

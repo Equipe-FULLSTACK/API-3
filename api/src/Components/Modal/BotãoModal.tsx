@@ -1,7 +1,7 @@
 // Botao.tsx
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ToggleModalAction } from '../../store/index';
+import { ToggleModalAction } from '../../store/configureStore';
 import { StyledButton } from './styles';
 
 interface ButtonProps {
@@ -12,8 +12,7 @@ interface ButtonProps {
 const BotaoModal: React.FC<ButtonProps> = ({ label, name }) => {
   const dispatch = useDispatch();
 
-  
-  
+
   const handleClick = () => {
     
     console.log('Antes de dispashar segue o nome '+ name )

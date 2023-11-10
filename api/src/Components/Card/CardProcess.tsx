@@ -1,14 +1,19 @@
-import { CardWrapper, CardHeader, ProcessName, ProcessStatus, CardSubtitle, ProcessDate, ProcessHour, CardBody, CardBargraph, CardPercent, BargraphItem, CardFooter, Button } from './styles'; // Importe os estilos do arquivo de estilos
+import { CardWrapper, CardHeader, CardSubtitleColumn, ProcessName, ProcessStatus, CardSubtitle, ProcessDate, ProcessHour, CardBody, CardBargraph, CardPercent, BargraphItem, CardFooter, Button } from './styles'; // Importe os estilos do arquivo de estilos
 import Bargraph from '../BarGraph/BarGraph';
 import dark from '../../styles/Theme/dark';
-import ButtonDefault from '../Button/ButtonDefault/ButtonDefault';
-import {dataTask} from '../Data/DataTask/dataTask'
+import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
+import Badge from '@mui/material/Badge';
 
 import BotaoModal from '../Modal/BotãoModal'; // IMPORTAÇÃO BOTÃO REDUX PARA ALTERAÇÃO MODAL EM TODAS AS JANELAS
 
-import { AppState } from '../../store/index'; // MANIPULAÇÃO DADOS REDUX
 import React, { useState, useEffect } from 'react';
+
+//PROCESSO DE UTILIZAÇÃO DO STORE THUNK
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store/configureStore';
+import { ProcessToRedux } from '../Data/process/types/processTypes';
+import { TaskToRedux } from '../Data/tasks/types/taskTypes';
+
 
 
 interface dataCard {
@@ -16,58 +21,67 @@ interface dataCard {
   processName: string;
   processStatus: string;
   processDate: string;
-  processHour: string;
-  
-  processBarBackground: string;
-  processBarFill: string;
+  processDeadLine: string;
 
-  taskId: number;
-  taskProcessId: number;
-  taskDescription: string;
-  taskDate: string;
-  taskStatus: string;
-  taskPercent: number;
+  processBarBackground?: string;
+  processBarFill?: string;
+
+  taskId?: number;
+  taskProcessId?: number;
+  taskDescription?: string;
+  taskDate?: string;
+  taskStatus?: string;
+  taskPercent?: number;
 }
 
 
 
-const Card: React.FC<dataCard> = ({processId,processName, processStatus, processDate, processHour,processBarBackground,processBarFill}) => {
+const Card: React.FC<dataCard> = ({ processId, processName, processStatus, processDate, processDeadLine, processBarBackground, processBarFill }) => {
   //Template Colors Animation
   processBarBackground = dark.colors.bgPrimarycolor;
 
-  /// PROCESSO DE DEFINIÇÃO DOS DADOS VIA REDUX
-  const tasks = useSelector((state: AppState) => state.tasks);
-    useEffect(() => {
-        if (tasks) {
-            /* console.log('CardProcess UseEffect tasks') */
-           /*  console.log(tasks); */
-        }
-    }, [tasks]);
-
-  const tasksFiltradas = tasks.filter((task) => task.taskProcessId === processId);
 
 
-  // VERIFICA SE EXISTE ALGUMA TAREFA ATRASADA
-  const taskAtrasada = tasksFiltradas.filter((f) => f.taskStatus === 'Atrasada');
+  /// CARREGA DO STORE ESTADO ATUAL DOS DADOS
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const process = useSelector((state: RootState) => state.processes.processes);
 
-  // VERIFICA SE EXISTE ALGUMA TAREFA EM ANDAMENTO
-  const taskAndamento = tasksFiltradas.filter((f) => f.taskStatus === 'Andamento');
+  /// CARREGA VARIAVEL AUXILIAR MANIPULACAO NO COMPONENTE
+  const [dataProcess, setDataProcess] = useState<ProcessToRedux[]>(useSelector((state: RootState) => state.processes.processes));
+  const [dataTasks, setDataTasks] = useState<TaskToRedux[]>(useSelector((state: RootState) => state.tasks.tasks));
+
+  /// ALIMENTA VARIAVEL AUXILIAR
+  useEffect(() => {
+    setDataProcess(process)
+    setDataTasks(tasks)
+  }, [process, tasks]);
+
+ /*  console.log('dataProcess', dataProcess);
+  console.log('dataTasks', dataTasks); */
+
+  const tasksFiltradas = dataTasks.filter((task) => task.process === processId);
+
+  //console.log('CardProcess - tasksFiltradas', tasksFiltradas)
 
   // ANIMAÇÃO DOS ESTILOS BASEADOS NOS STATUS.
+  const dataProcessStatus = dataProcess
+    .filter((f) => f.id === processId)
+    .map((f) => f.status)[0]; // Acesso ao primeiro elemento do array
+
   let statusProcess;
 
-
-
-  if (taskAtrasada.length > 0) {
-      statusProcess = 'Atrasada';
-      processBarFill = "red";
-      
-  } else if (taskAndamento.length > 0) {
-      statusProcess = 'Andamento';
-      processBarFill = '#fbfb38';
+  if (dataProcessStatus === 'Atrasada') {
+    statusProcess = 'Atrasada';
+    processBarFill = "red";
+  } else if (dataProcessStatus === 'Andamento') {
+    statusProcess = 'Andamento';
+    processBarFill = '#fbfb38';
+  } else if (dataProcessStatus === 'Pendente') {
+    statusProcess = 'Pendente';
+    processBarFill = '#bac8c9';
   } else {
-      statusProcess = 'Concluida';
-      processBarFill = '#54c5cd;';
+    statusProcess = 'Concluida';
+    processBarFill = '#54c5cd';
   }
 
 
@@ -75,7 +89,7 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
 
   //TODO FAZER LOGICA SELEÇÃO COR DE ALERTA
   processBarFill = dark.colors.bgPrimarycolor;
- 
+
 
   processBarFill = statusProcess;
   /* console.log(processBarFill) */
@@ -84,36 +98,59 @@ const Card: React.FC<dataCard> = ({processId,processName, processStatus, process
   return (
     <CardWrapper className="card">
       <CardHeader>
+
         <ProcessName>{processId} - {processName}</ProcessName>
-        <ProcessStatus className={statusProcess}>{statusProcess}</ProcessStatus>
+
+        <Badge 
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        badgeContent={tasksFiltradas.length} color="primary">
+          <ProcessStatus className={statusProcess}>{dataProcessStatus}</ProcessStatus>
+        </Badge>
+
       </CardHeader>
 
       <CardSubtitle>
-        <ProcessDate>{processDate}</ProcessDate>
-        <ProcessHour>{processHour}</ProcessHour>
+        
+
+        <CardSubtitleColumn>
+          <span>Criado</span>
+          <ProcessDate>{processDate}</ProcessDate>
+        </CardSubtitleColumn>
+
+        <CardSubtitleColumn>
+          <span>Data Limite</span>
+          <ProcessDate>{processDeadLine}</ProcessDate>
+        </CardSubtitleColumn>
+
+
+
+
       </CardSubtitle>
 
       <CardBody>
         <CardBargraph>
           {/* TODO FAZER MAP ARRAY DOS DADOS DO BAR GRAPH BASEADO QUANTIDADE DE TASKS */}
-          {tasksFiltradas.map((task) => (
+          {tasksFiltradas.slice(0, 5).map((task) => (
             <Bargraph
-                key={task.taskId}  
-                value={task.taskPercent}
-                minValue={0}
-                maxValue={100}
-                backgroundColor={processBarBackground}
-                fillBackgroundColor={task.taskStatus}
+              key={task.id}
+              value={task.active} //TODO PRECISA DEFINIR SE IRA MANTER PERCENTUAL
+              minValue={0}
+              maxValue={1}
+              backgroundColor={processBarBackground}
+              fillBackgroundColor={task.status}
             />
-    )
-)}
+          )
+          )}
         </CardBargraph>
       </CardBody>
 
       <CardFooter>
-        {/* TODO INSERIR FUNÇÕES DO BOTÃO */}
-        <BotaoModal label={'Detalhe'} name={processId} tagButton={'Processo_'+processId}/>
+        <BotaoModal label={'Detalhe'} name={processId} tagButton={'Processo_' + processId} />
       </CardFooter>
+
     </CardWrapper>
   );
 };

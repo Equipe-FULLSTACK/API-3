@@ -11,13 +11,14 @@ import HomePage from './Components/Layout/HomePage.tsx';
 
 
 import { Provider } from 'react-redux';
-import store from './store/index.ts';
+import store from './store/configureStore.ts';
 import Lista from './pages/Lista.tsx';
 import JSONall from './pages/JSONall.tsx';
 import JSONprocess from './pages/JSONprocess.tsx';
 import JSONtask from './pages/JSONtask.tsx';
 import Notificacao from './pages/Notificacao.tsx';
 import Admin from './pages/Admin.tsx';
+import TestComponent from './Components/Testes/teste.tsx';
 
 
 const App:React.FC = ()=> (
@@ -25,15 +26,16 @@ const App:React.FC = ()=> (
     <ThemeProvider theme={dark}>
       <GlobalStyle/>
       <Provider store={store}>
+{/*         <TestComponent/> */}
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/processos" element={<HomePage />} />
+          <Route path="/processos" element={<HomePage name='homePage'/>} />
           <Route path="/lista" element={<Lista />} />
           <Route path="/json" element={<JSONall />} />
           <Route path="/jsonprocess" element={<JSONprocess />} />
           <Route path="/jsontask" element={<JSONtask />} />
-          <Route path="/notificacao" element={<Notificacao />}/>
+          <Route path="/notificacao" element={<Notificacao/>}/>
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </Provider>

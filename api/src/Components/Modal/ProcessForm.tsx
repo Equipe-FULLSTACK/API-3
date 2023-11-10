@@ -2,16 +2,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DataProcess } from "../Process/Process"
 
 import { useSelector } from 'react-redux';
-import { AppState } from '../../store/index'; //
+import { RootState } from '../../store/configureStore';
+import { ProcessToRedux } from '../Data/process/types/processTypes';
+import { TaskToRedux } from '../Data/tasks/types/taskTypes';
+
 import { useDispatch } from 'react-redux';
 import Notificacao from '../../pages/Notificacao';
 import emailjs from '@emailjs/browser';
 
 
 
+import { fetchTasks, createTask, updateTask, deleteTask } from '../../Data/tasks/actions/taskActions';
+import { fetchProcesses, createProcess, updateProcess, deleteProcess } from '../Data/process/actions/processActions';
+
+
+
 
 interface CadastroProps {
-    setDataProcess: React.Dispatch<React.SetStateAction<DataProcess[]>>,
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
@@ -21,22 +28,26 @@ type FormData = {
     hourFinished: string,
 }
 
-export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
-    const dispatch = useDispatch();
-    const form = useRef<HTMLFormElement | null>(null);
+export function ProcessForm({ setShowModal }: CadastroProps) {
+
+    /// CARREGA DO STORE ESTADO ATUAL DOS DADOS
+    const tasks = useSelector((state: RootState) => state.tasks.tasks);
+    const process = useSelector((state: RootState) => state.processes.processes);
+
+    /// CARREGA VARIAVEL AUXILIAR MANIPULACAO NO COMPONENTE
+    const [dataProcess, setDataProcess] = useState<ProcessToRedux[]>(useSelector((state: RootState) => state.processes.processes));
+    const [dataTasks, setDataTasks] = useState<TaskToRedux[]>(useSelector((state: RootState) => state.tasks.tasks));
 
 
-    // LOAD TASKS
-    const process = useSelector((state: AppState) => state.process);
+    /// ALIMENTA VARIAVEL AUXILIAR
     useEffect(() => {
-        if (process) {
-           /*  console.log('Process Form UseEffect Process')
-            console.log(process); */
-        }
-    }, [process]);
+        setDataProcess(process)
+        setDataTasks(tasks)
+    }, [process, tasks]);
 
-    
+    const dispatch = useDispatch();
 
+    const form = useRef<HTMLFormElement | null>(null);
 
     const [formData, setFormData] = useState<FormData>({
         name: '',
@@ -44,9 +55,21 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
         hourFinished: '',
     });
 
-    const [lastProcessId, setLastProcessId] = useState(0); // Inicializado com 1000
-    const idLast = Math.max(...process.map(p => p.processId))+1;
-    /* console.log(idLast) */
+
+    const addNewProcess = (newProcessData: ProcessToRedux) => {
+
+        newProcessData.active = 1;
+        newProcessData.status = 'Pendente';
+        newProcessData.name = formData?.name;
+        newProcessData.deadline = formData?.dateFinished,
+        newProcessData.description = '';
+
+        console.log('ModalProcess - addNewProcess ', newProcessData);
+      
+        dispatch(createProcess(newProcessData));
+        setShowModal(false)
+
+      };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -56,44 +79,38 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-      /*   console.log(formData) */
-      if (form.current){
-        emailjs.sendForm('service_rm2otvc', 'template_vusbsfc', form.current, 'uTQ5qjDTE9qEl_Ekt')
-      .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
-    }
-
-
-
-        const newProcess: DataProcess = {
-            processId: idLast,
-            processName: formData?.name,
-            processDateFinshed: formData?.dateFinished,
-            processHourFinshed: formData?.hourFinished,
-            processPercentExecuted: 0,
-            processStatus: 'Andamento',
+        /*   console.log(formData) */
+        if (form.current) {
+            emailjs.sendForm('service_rm2otvc', 'template_vusbsfc', form.current, 'uTQ5qjDTE9qEl_Ekt')
+                .then((result) => {
+                    console.log(result.text);
+                }, (error) => {
+                    console.log(error.text);
+                });
         }
-        // Disparar a ação ADD_TASK usando dispatch
-        dispatch({ type: 'ADD_PROCESS', payload: newProcess });
+        
+        const newProcess: ProcessToRedux = {
+            id: dataProcess.length + 1,
+            name: formData?.name,
+            deadline: formData?.dateFinished,
+            active: 1,
+            status: 'Pendente',
+            description: '',
+            created:'',
 
+        }
+        addNewProcess(newProcess)
 
-        setDataProcess(prev => [newProcess, ...prev])
-        setLastProcessId(prev => prev + 1);
-        setShowModal(false)
+        /* Notificacao( newProcess ) */
 
-        Notificacao({newProcess})
-
-}
+    }
 
 
 
     return (
         <div className="modal">
             <form ref={form} onSubmit={(e) => handleSubmit(e)}>
-            <button type="button" className="close-button" onClick={()=> setShowModal(false)}>x</button>
+                <button type="button" className="close-button" onClick={() => setShowModal(false)}>x</button>
                 <h1>Novo Processo</h1>
                 <div className="modaldiv">Nome</div>
                 <input type="text" name="name"
@@ -107,9 +124,9 @@ export function ProcessForm({ setDataProcess, setShowModal }: CadastroProps) {
                 <input type="time" name="hourFinished"
                     value={formData?.hourFinished}
                     onChange={handleInputChange} />
-                <button  type="submit" onClick={() => { alert('Processo criado!');}}>Cadastrar</button>
+                <button type="submit" onClick={() => { alert('Processo criado!'); }}>Cadastrar</button>
             </form>
-        </div>        
+        </div>
 
-    )  
+    )
 }

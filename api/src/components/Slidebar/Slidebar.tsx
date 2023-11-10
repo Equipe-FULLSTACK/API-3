@@ -42,7 +42,7 @@ const SideBar: React.FC<dataSideBar> = ({pageName}) => {
             <Menu href="" onClick={toggleDisplay}><img src={menu} alt="lock"/></Menu>
 
             <Wrapper display={display} flexDirection='column' flexWrap='wrap' alignItems='flex-start' justifyContent='center' padding='1rem'>
-                <Link href='#'><img src={lock} alt="lock"/>Permissões</Link>
+                <Link href='/admin'><img src={lock} alt="lock"/>Permissões</Link>
                 <Link href='#'><img src={detail} alt="lock"/>Editar Ordem</Link>
                 <Link href='#'><img src={notification} alt="lock"/>Notificações</Link>
                 <Link href='#'><img src={graph} alt="lock"/>Gráficos</Link>

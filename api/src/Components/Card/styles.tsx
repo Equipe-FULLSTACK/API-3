@@ -22,8 +22,16 @@ export const CardHeader = styled.div`
   margin: 0 0 1rem 0;
   height; 10rem;
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: space-between;
+`;
+
+export const CardSubtitleColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: left;
+  justify-content: space-between;
+  
 `;
 
 export const ProcessName = styled.span`
@@ -33,7 +41,6 @@ export const ProcessName = styled.span`
   -webkit-line-clamp: 2;
   /* display: flex; */
   align-items: center;
-  height: 100%
 `;
 
 export const ProcessStatus = styled.span`
@@ -70,7 +77,7 @@ export const CardSubtitle = styled.div`
   margin: 0 0 3rem 0;
   display: flex;
   align-content: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   font-size: 0.7rem;
   padding: 0;
   font-weight: lighter;
@@ -78,11 +85,14 @@ export const CardSubtitle = styled.div`
 `;
 
 export const ProcessDate = styled.span`
+  margin-top: 0.2rem;
+  margin-right: 0.5rem;
   &::before {
     width: auto;
     height: auto;
     content: '';
     padding: 0 0 0 1rem;
+    margin-top: 0.5rem;
     margin-right: 0.5rem;
     align-content: center;
     background-repeat: no-repeat;
@@ -102,7 +112,7 @@ export const ProcessHour = styled.span`
     align-content: center;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url(${hour});
+    background-image: url(${date});
   }
 `;
 
@@ -115,7 +125,6 @@ export const CardBargraph = styled.ol`
   flex-direction: row;
   margin: 0;
   
-
   &li{
     margin: 0;
   }

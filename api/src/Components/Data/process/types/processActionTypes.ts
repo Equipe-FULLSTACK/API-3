@@ -1,19 +1,15 @@
+import { ProcessToRedux } from '../types/processTypes';
 
-export interface ProcessToRedux {
-  processId: number,
-  processName: string,
-  processStatus: string,
-  processDateFinshed: string,
-  processHourFinshed: string,
-}
 
-export interface ProcessState {
-  process: ProcessToRedux[];
-}
-
+export const SET_PROCESSES = 'SET_PROCESSES';
 export const ADD_PROCESS = 'ADD_PROCESS';
 export const UPDATE_PROCESS = 'UPDATE_PROCESS';
 export const DELETE_PROCESS = 'DELETE_PROCESS';
+
+interface SetProcessesAction {
+  type: typeof SET_PROCESSES;
+  payload: ProcessToRedux[];
+}
 
 interface AddProcessAction {
   type: typeof ADD_PROCESS;
@@ -30,4 +26,8 @@ interface DeleteProcessAction {
   payload: { processId: number };
 }
 
-export type ProcessActionTypes = AddProcessAction | UpdateProcessAction | DeleteProcessAction;
+export type ProcessActionTypes =
+  | SetProcessesAction
+  | AddProcessAction
+  | UpdateProcessAction
+  | DeleteProcessAction;

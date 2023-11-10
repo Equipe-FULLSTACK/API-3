@@ -1,9 +1,13 @@
 
 import React from 'react';
+import PositionedMenu from './LogoutNavBar';
+import { useNavigate } from 'react-router-dom';
+
 
 import {
   Container,
   Logo,
+  Wrapper,
   UserName
 } from "./styles"
 //TODO CRIANDO STYLES NAVBAR
@@ -17,11 +21,26 @@ interface dataNavBar {
 }
 
 const NavBar: React.FC<dataNavBar> = ({userName, pageName}) => {
+  
+  const navigate = useNavigate();
+
+  const returnHome = () => {
+    navigate('/processos')
+  }
+
+
   return (
     <Container>
       {/* {pageName} */}
-      <Logo src={logo} alt="iconIonicHealth"/>
-      <UserName>{userName}</UserName>
+      <Logo src={logo} onClick={returnHome} alt="iconIonicHealth"/>
+      
+      
+      <Wrapper>
+        
+        <UserName>{userName.toUpperCase()} </UserName>
+       {/*  <PositionedMenu/> */}
+      </Wrapper>
+
     </Container>
   )
 };
