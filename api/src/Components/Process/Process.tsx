@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { RootState } from '../../store/configureStore';
 import { ProcessToRedux } from '../Data/process/types/processTypes';
 import { TaskToRedux } from '../Data/tasks/types/taskTypes';
-
+import Badge from '@mui/material/Badge';
+import { ProcessForm } from '../Modal/ProcessForm';
 
 import {
   Wrapper,
@@ -16,6 +17,7 @@ import CardProcess from '../../Components/Card/CardProcess';
 import ButtonNewProcess from '../../Components/Button/ButtonNewProcess/ButtonNewProcess';
 import SearchComponent from '../../Components/Button/ButtonSearch/ButtonSearch';
 import dark from '../../styles/Theme/dark';
+
 
 
 export type DataProcess = {
@@ -81,7 +83,7 @@ const Process: React.FC<ProcessProps> = ({ pageName, bg }) => {
         padding='2rem' margin='0 auto'
         width='100%'
         backgroundColor={bg}
-      >
+      > 
         <Wrapper
           flexDirection='row'
           justifyContent='space-between'
@@ -91,7 +93,41 @@ const Process: React.FC<ProcessProps> = ({ pageName, bg }) => {
           width='100%'
           backgroundColor={bg}>
 
-          <ProcessActive>Processos Ativos</ProcessActive>
+          <ProcessActive>Processos</ProcessActive>
+
+          
+          {/* <Wrapper> //TODO IMPLEMENTAR VISUALIZAÇÃO PROCESSOS CONTAGE,
+          <Badge
+            
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            badgeContent={dataProcess.filter(item => item.status === 'Atrasada').length} color="error" style={{ borderRadius: '1rem' }}>
+            <ProcessActive>Processos Atrasados</ProcessActive>
+          </Badge>
+          
+          <Badge
+            
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            badgeContent={dataProcess.filter(item => item.status === 'Andamento').length} color="info" style={{ borderRadius: '1rem' }}>
+            <ProcessActive>Processos Andamento</ProcessActive>
+          </Badge>
+
+          <Badge
+            
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            badgeContent={dataProcess.filter(item => item.status === 'Concluida').length} color="success" style={{ borderRadius: '1rem' }}>
+            <ProcessActive>Processos Concluidos</ProcessActive>
+          </Badge>
+          </Wrapper> */}
+          
           <button className="btn-newProcess" onClick={() => setShowModal(true)}>Novo processo</button>
           <SearchComponent />
 
@@ -106,7 +142,7 @@ const Process: React.FC<ProcessProps> = ({ pageName, bg }) => {
         >
           {dataProcess.map((process: ProcessToRedux) => (
             <li className='cardList' key={process.id}>
-              <CardProcess 
+              <CardProcess
                 processId={process.id}
                 processName={process.name}
                 processDate={process.created}

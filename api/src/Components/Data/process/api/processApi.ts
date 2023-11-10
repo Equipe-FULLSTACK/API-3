@@ -13,15 +13,28 @@ export const fetchProcesses = async () => {
   }
 };
 
-export const createProcess = async (processData: ProcessToRedux) => {
+export const createProcess = async (newProcessData: ProcessToRedux) => {
   try {
-    const response = await axios.post(`${API_URL}/processes`, processData);
+    const processDataToSend = {
+      active: newProcessData.active,
+      status: newProcessData.status,
+      name: newProcessData.name,
+      created: newProcessData.created, 
+      deadline: newProcessData.deadline,
+      description: newProcessData.description,
+    };
+
+    console.log('API createProcess enviada a rota ', `${API_URL}/createprocess`, '- POST', processDataToSend);
+    
+    const response = await axios.post(`${API_URL}/createprocess`, processDataToSend);
+    
     return response.data;
   } catch (error) {
     console.error('Erro ao criar processo:', error);
     throw error;
   }
 };
+
 
 export const updateProcess = async (processId: number, processData: ProcessToRedux) => {
   try {

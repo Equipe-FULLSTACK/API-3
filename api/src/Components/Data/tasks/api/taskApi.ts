@@ -14,10 +14,21 @@ export const fetchTasks = async () => {
   }
 };
 
-export const createTask = async (taskData: TaskToRedux) => {
+export const createTask = async (newTaskData: TaskToRedux) => {
   try {
-    console.log('API createTask enviado a rota ', API_URL,'/t - POST')
-    const response = await axios.post(`${API_URL}/t`, taskData);
+    const taskDataToSend = {
+      process: newTaskData.process,
+      active: newTaskData.active,
+      status: newTaskData.status,
+      name: newTaskData.name,
+      deadline: newTaskData.deadline,
+      description: newTaskData.description,
+    };
+
+    console.log('API createTask enviada a rota ', `${API_URL}/createtask`, '- POST', taskDataToSend);
+    
+    const response = await axios.post(`${API_URL}/createtask`, taskDataToSend);
+    
     return response.data;
   } catch (error) {
     console.error('Erro ao criar tarefa:', error);
@@ -25,9 +36,10 @@ export const createTask = async (taskData: TaskToRedux) => {
   }
 };
 
+
+
 export const updateTask = async (taskId: number, taskData: TaskToRedux) => {
   try {
-    
     const updatedTaskData = {
       process: taskData.process,
       active: taskData.active,
@@ -35,10 +47,13 @@ export const updateTask = async (taskId: number, taskData: TaskToRedux) => {
       name: taskData.name,
       deadline: taskData.deadline,
       description: taskData.description,
+
     };
 
-    console.log('API updateTask enviado a rota ', API_URL,'/t - PUT',updatedTaskData);
-    const response = await axios.put(`${API_URL}/t/${taskId}`, updatedTaskData);
+    console.log('API updateTask enviado a rota ', `${API_URL}/updatetask/${taskId}`, '- POST', updatedTaskData);
+    
+    const response = await axios.post(`${API_URL}/updatetask/${taskId}`, updatedTaskData);
+    
     return response.data;
   } catch (error) {
     console.error('Erro ao atualizar tarefa:', error);
@@ -48,8 +63,8 @@ export const updateTask = async (taskId: number, taskData: TaskToRedux) => {
 
 export const deleteTask = async (taskId: number) => {
   try {
-    console.log('API deleteTask enviado a rota ', API_URL,'/t - DELETE')
-    await axios.delete(`${API_URL}/tasks/${taskId}`);
+    console.log('API deleteTask enviado a rota ', API_URL,'/deletetask - DELETE')
+    await axios.post(`${API_URL}/deletetask/${taskId}`);
   } catch (error) {
     console.error('Erro ao excluir tarefa:', error);
     throw error;

@@ -28,7 +28,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "password",
+	password: "senhadaora123",
 	database: "db"
 });
 
@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(limiter);
 app.use(cors({
-	origin: ['http://localhost:5173','http://localhost:5173/processos','http://localhost:5173/admin'],
+	origin: 'http://localhost:5173',
 	methods: ['POST', 'GET','PUT', 'DELETE'],
 	credentials: true
 }));
@@ -94,7 +94,7 @@ app.get("/t", (req, res) => {
 		console.log("Dados solicitados para tabela de tarefas");
 
 		var sql = 'SELECT id, process, active, status, name, DATE_FORMAT(CONVERT(created, date), "%d/%m/%Y") AS created, DATE_FORMAT(CONVERT(deadline, date), "%d/%m/%Y") AS deadline, description FROM tasks';
-		con.query(sql, req.url.substring(4), function (err, result, fields) {	
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
 			res.json(result);
 		});
@@ -113,48 +113,50 @@ app.post('/t', function (req, res) {
 	const description = req.body.description;
 
 	const { authorization } = true;
-  
+
 	if (authorization) {
-	  con.connect(function (err) {
-		if (err) throw err;
-		console.log("Inserindo tarefas no banco de dados");
-  
-		var sql = `INSERT INTO tasks (process, active, status, name, created, deadline, description) VALUES (${process}, ${active}, ${status}, ${name}, NOW(), ${deadline}, ${description})`
-		con.query(sql, [task.name, task.deadline, task.description], function (err, result) {
-		  if (err) throw err;
-		  res.status(200).send({ message: "Tarefa criada com sucesso!" });
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Inserindo tarefas no banco de dados");
+
+			var sql = `INSERT INTO tasks (process, active, status, name, created, deadline, description) VALUES (${process}, ${active}, ${status}, ${name}, NOW(), ${deadline}, ${description})`
+			con.query(sql, [task.name, task.deadline, task.description], function (err, result) {
+				if (err) throw err;
+				res.status(200).send({ message: "Tarefa criada com sucesso!" });
+			});
 		});
-	  });
 	} else {
-	  res.status(400).send({ message: "Falha de autenticação verificar credenciais" });
+		res.status(400).send({ message: "Falha de autenticação verificar credenciais" });
 	}
-  });
+});
 
 
-  app.put('/t/:id', function (req, res) {
+
+
+app.put('/t/:id', function (req, res) {
 	const taskId = req.params.id;
 	const updatedTaskData = req.body;
 	const { process, active, status, name, deadline, description } = updatedTaskData;
 	const { authorization } = req.headers;
 
 
-  
+
 	if (authorization) {
-	  con.connect(function (err) {
-		if (err) throw err;
-		console.log("Atualizando tarefa no banco de dados");
-  
-		var sql = `UPDATE tasks SET process = ?, active = ?, status = ?, name = ?, deadline = ?, description = ? WHERE id = ?`;
-		con.query(sql, [process, active, status, name, deadline, description, taskId], function (err, result) {
-		  if (err) throw err;
-  
-		  res.status(200).send({ message: "Tarefa atualizada com sucesso!" });
+		con.connect(function (err) {
+			if (err) throw err;
+			console.log("Atualizando tarefa no banco de dados");
+
+			var sql = `UPDATE tasks SET process = ?, active = ?, status = ?, name = ?, deadline = ?, description = ? WHERE id = ?`;
+			con.query(sql, [process, active, status, name, deadline, description, taskId], function (err, result) {
+				if (err) throw err;
+
+				res.status(200).send({ message: "Tarefa atualizada com sucesso!" });
+			});
 		});
-	  });
 	} else {
-	  res.status(400).send({ message: "O nome e o prazo são obrigatórios!" });
+		res.status(400).send({ message: "O nome e o prazo são obrigatórios!" });
 	}
-  });
+});
 
 
 
@@ -259,41 +261,42 @@ app.put('/atualizarAdmin/:userId', (req, res) => {
 ////// FUNÇÕES ORIGINAIS
 //FUNÇÕES DE INSERT
 // FUNÇÃO PARA CRIAR NOVOS PROCESSOS NO BANCO DE DADOS
-app.post('/process', function (req, res) {
-	const { name, deadline } = req.body;
-	const { authorization } = req.headers;
-	if (name != "" && deadline != "") {
-		con.connect(function (err) {
-			if (err) throw err;
-			console.log("Inserindo");
-			var sql = 'INSERT INTO processes (status, name, created, deadline) VALUES (0, ?, NOW(), ?)';
-			con.query(sql, [name, deadline], function (err, result) {
-				if (err) throw err;
-			});
-		});
-	} else {
-		console.log("Erro");
-	}
-	return res.redirect('http://localhost:5173/processos');
+
+app.post('/createprocess', function (req, res) {
+    console.log(req.body);
+    const { active, status, name, description } = req.body;
+
+    // Executa a consulta SQL para criar um novo processo incluindo active
+    const sql = 'INSERT INTO processes (active, status, name, created, deadline, description) VALUES (?, ?, ?, NOW(), NOW(), ?)';
+    con.query(sql, [active, status, name, description], function (err, result) {
+        if (err) {
+            console.error('Erro ao criar processo:', err);
+            return res.status(500).json({ error: 'Erro interno do servidor' });
+        }
+
+        console.log('Processo criado com sucesso');
+        return res.status(201).json({ message: 'Processo criado com sucesso', processId: result.insertId });
+    });
 });
+
 // FUNÇÃO PARA CRIAR NOVAS TASKS NO BANCO DE DADOS
-app.post('/task', function (req, res) {
-	const { process, name, deadline } = req.body;
-	const { authorization } = req.headers;
-	if (name != "" && deadline != "") {
-		con.connect(function (err) {
-			if (err) throw err;
-			console.log("Inserindo");
-			var sql = 'INSERT INTO tasks (process, status, name, created, deadline) VALUES (?, 0, ?, NOW(), ?)';
-			con.query(sql, [process, name, deadline], function (err, result) {
-				if (err) throw err;
-			});
-		});
-	} else {
-		console.log("Erro");
-	}
-	return res.redirect('http://localhost:5173/processos');
-});
+app.post('/createtask', function (req, res) {
+	console.log(req.body);
+	const { process, active, status, name, description } = req.body;
+
+	// Executa a consulta SQL para criar uma nova tarefa incluindo process e active
+	const sql = 'INSERT INTO tasks (process, active, status, name, deadline, description) VALUES (?, ?, ?, ?, NOW(), ?)';
+	con.query(sql, [process, active, status, name, description], function (err, result) {
+	  if (err) {
+		console.error('Erro ao criar tarefa:', err);
+		return res.status(500).json({ error: 'Erro interno do servidor' });
+	  }
+  
+	  console.log('Tarefa criada com sucesso');
+	  return res.status(201).json({ message: 'Tarefa criada com sucesso', taskId: result.insertId });
+	});
+  });
+
 // FUNÇÃO PARA CRIAR NOVAS EVIDENCIAS NO BANCO DE DADOS
 app.post('/evidence', function (req, res) {
 	const { task, name, deadline, url } = req.body;
@@ -332,24 +335,29 @@ app.post('/updateprocess', function (req, res) {
 	}
 	return res.redirect('http://localhost:5173/processos');
 });
+
 // FUNÇÃO PARA ATUALIZAR TASKS NO BANCO DE DADOS
-app.post('/updatetask', function (req, res) {
-	const { status, name, deadline, id } = req.body;
-	const { authorization } = req.headers;
-	if (name != "" && deadline != "") {
-		con.connect(function (err) {
-			if (err) throw err;
-			console.log("Atualizando");
-			var sql = 'UPDATE tasks SET status = ?, name = ?, deadline = ? WHERE id = ?';
-			con.query(sql, [status, name, deadline, id], function (err, result) {
-				if (err) throw err;
-			});
+app.post('/updatetask/:id', function (req, res) {
+	const taskId = req.params.id;
+	const { status, name, deadline, description } = req.body;
+
+	if (name && deadline) {
+		const sql = 'UPDATE tasks SET status = ?, name = ?, deadline = STR_TO_DATE(?, "%d/%m/%Y"), description = ? WHERE id = ?';
+		con.query(sql, [status, name, deadline, description, taskId], function (err, result) {
+			if (err) {
+				console.error('Erro ao atualizar tarefa:', err);
+				return res.status(500).json({ error: 'Erro interno do servidor' });
+			}
+
+			console.log('Tarefa atualizada com sucesso');
+			return res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
 		});
 	} else {
-		console.log("Erro");
+		console.log("Erro: Campos inválidos");
+		return res.status(400).json({ error: 'Campos inválidos' });
 	}
-	return res.redirect('http://localhost:5173/processos');
 });
+
 // FUNÇÃO PARA ATUALIZAR EVIDENCIAS NO BANCO DE DADOS
 app.post('/updateevidence', function (req, res) {
 	const { status, name, url, id } = req.body;
@@ -388,24 +396,23 @@ app.post('/deleteprocess', function (req, res) {
 	}
 	return res.redirect('http://localhost:5173/processos');
 });
-// FUNÇÃO PARA DELETAR TASKS NO BANCO DE DADOS
-app.post('/deletetask', function (req, res) {
-	const { id } = req.body;
-	const { authorization } = req.headers;
-	if (name != "" && deadline != "") {
-		con.connect(function (err) {
-			if (err) throw err;
-			console.log("Deletando");
-			var sql = 'DELERE FROM tasks WHERE id = ?';
-			con.query(sql, id, function (err, result) {
-				if (err) throw err;
-			});
-		});
-	} else {
-		console.log("Erro");
-	}
-	return res.redirect('http://localhost:5173/processos');
-});
+
+app.post('/deletetask/:id', function (req, res) {
+	const taskId = req.params.id;
+  
+	const sql = 'DELETE FROM tasks WHERE id = ?';
+	con.query(sql, taskId, function (err, result) {
+	  if (err) {
+		console.error('Erro ao excluir tarefa:', err);
+		return res.status(500).json({ error: 'Erro interno do servidor' });
+	  }
+  
+	  console.log('Tarefa excluída com sucesso');
+	  return res.status(200).json({ message: 'Tarefa excluída com sucesso' });
+	});
+  });
+
+
 // FUNÇÃO PARA DELETAR EVIDENCIAS NO BANCO DE DADOS
 app.post('/deleteevidence', function (req, res) {
 	const { id } = req.body;

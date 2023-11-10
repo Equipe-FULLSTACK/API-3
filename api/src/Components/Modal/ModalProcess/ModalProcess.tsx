@@ -3,11 +3,12 @@
 import { useSelector } from 'react-redux';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import React, { useState, useEffect } from 'react';
-import { RootState, selectProcessId } from '../../../store/configureStore';
+import { RootState } from '../../../store/configureStore';
 import { ProcessToRedux } from '../../Data/process/types/processTypes';
 import { TaskToRedux } from '../../Data/tasks/types/taskTypes';
 
 import { fetchTasks, createTask, updateTask, deleteTask } from '../../Data/tasks/actions/taskActions';
+import { fetchProcesses, createProcess, updateProcess, deleteProcess } from '../../Data/process/actions/processActions';
 
 import { useDispatch } from 'react-redux';
 
@@ -100,15 +101,22 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     const taskAtrasada = tasksFiltradas.filter((f) => f.status === 'Atrasada');
 
     // VERIFICA SE EXISTE ALGUMA TAREFA EM ANDAMENTO
-    const taskAndamento = tasksFiltradas.filter((f) => f.status === 'Andamento');
+    const taskAndamento = tasksFiltradas.filter((f) => f.status === 'Em andamento');
 
     // ANIMAÇÃO DOS ESTILOS BASEADOS NOS STATUS.
-    let statusProcess;
+    const dataProcessStatus = dataProcess
+        .filter((f) => f.id === processModalId)
+        .map((f) => f.status)[0]; // Acesso ao primeiro elemento do array
 
-    if (taskAtrasada.length > 0) {
+    let statusProcess;
+    
+
+    if (dataProcessStatus === 'Atrasada') {
         statusProcess = 'Atrasada';
-    } else if (taskAndamento.length > 0) {
-        statusProcess = 'Em Andamento';
+    } else if (dataProcessStatus === 'Andamento') {
+        statusProcess = 'Andamento';
+    } else if (dataProcessStatus === 'Pendente') {
+        statusProcess = 'Pendente';
     } else {
         statusProcess = 'Concluida';
     }
@@ -139,39 +147,50 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     };
 
 
+    // ESTRUTURAÇÃO PARA DESPACHO DA EDIÇÃO DAS TASKS PARA O BACKEND
     const editTask = (taskId: number, editedTaskFields: TaskToRedux) => {
 
         dispatch(updateTask(taskId, editedTaskFields));
         /* console.log(taskId, editedTaskFields); */
-
-/* 
-        const updateTaskAction = {
-            type: 'UPDATE_TASK',
-            payload: {
-                taskId: taskId,
-                ...editedTaskFields,
-            },
-        };
-
-        // Despache a ação para o Redux
-        dispatch(updateTaskAction); */
         stopEditing(); // Sai do modo de edição
-
     };
 
 
+    // ESTRUTURAÇÃO PARA DESPACHO DA EDIÇÃO DAS TASKS PARA O BACKEND
     const localDeleteTask = (taskId: number) => {
-        // Disparar a ação DELETE_TASK usando dispatch
-        dispatch({ type: 'DELETE_TASK', payload: { taskId } });
 
-        const updatedTasks = tasksFiltradas.filter((task) => task.id !== taskId);
-        setTasksFiltradas(updatedTasks);
+        dispatch(deleteTask(taskId));
 
         stopEditing();
     };
 
 
+
+
+    const addNewTask = (newTaskData: TaskToRedux) => {
+        
+        newTaskData.process = processModalId;
+        newTaskData.active = 1;
+        newTaskData.name = '';
+        newTaskData.description = '';
+        newTaskData.deadline = '';
+        newTaskData.status = 'Pendente';
+        
+        console.log('ModalProcess - addNewTask ',newTaskData);
+
+        dispatch(createTask(newTaskData));
+      
+        stopEditing(); 
+      };
+
+
+/* 
     const addNewTask = () => {
+
+        const createdTaskLocal(task: TaskToRedux)
+
+
+        dispatch(createTask(editedTaskFields: TaskToRedux)
 
         const newTask: TaskToRedux = {
             id: tasks.length + 1,
@@ -182,7 +201,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
             status: 'Em Andamento',
             deadline: '',
             active: 1, 
-        };
+        }; 
 
         // Disparar a ação ADD_TASK usando dispatch
         dispatch({ type: 'ADD_TASK', payload: newTask });
@@ -193,7 +212,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
 
 
     };
-
+*/
     const [selectedFiles, setSelectedFiles] = useState<Record<number, File | null>>({});
 
 
@@ -271,7 +290,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                             <th>Id</th>
                             <th>Data</th>
                             <th>Tarefa</th>
-                            <th>Percentual</th>
+                            <th>Ativa</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -357,6 +376,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                                     setEditedStatus(newEditedStatus);
                                                 }}
                                             >
+                                                <option value="Pendente">Pendente</option>
                                                 <option value="Atrasada">Atrasada</option>
                                                 <option value="Concluida">Completada</option>
                                                 <option value="Andamento">Andamento</option>

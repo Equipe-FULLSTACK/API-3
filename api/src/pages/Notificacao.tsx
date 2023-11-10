@@ -4,9 +4,10 @@ import NavBar from '../Components/Navbar/Navbar';
 
 import '../static/css/notificacao.css'
 import SideBar from '../Components/Slidebar/Slidebar';
+import { ProcessToRedux } from '../Components/Data/process/types/processTypes';
 
 interface NotificacaoProps{
-    newProcess: DataProcess
+    newProcess: ProcessToRedux
 }
  const Notificacao: React.FC<NotificacaoProps> = ({newProcess}) =>{
     console.log('novo processo: ', newProcess);

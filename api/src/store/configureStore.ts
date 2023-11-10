@@ -80,11 +80,11 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
   (store.dispatch as ThunkDispatch<RootState, undefined, any>)(fetchProcesses()).then(() => {
     console.log('Dados da API foram carregados com sucesso.');
 
-    const tasks = store.getState().tasks.tasks; 
+ /*    const tasks = store.getState().tasks.tasks; 
     const processes = store.getState().processes.processes; 
 
     console.log('Tarefas:', tasks);
-    console.log('Processos:', processes);
+    console.log('Processos:', processes); */
   });
 });
 

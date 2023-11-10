@@ -56,8 +56,8 @@ const Card: React.FC<dataCard> = ({ processId, processName, processStatus, proce
     setDataTasks(tasks)
   }, [process, tasks]);
 
-  console.log('dataProcess', dataProcess);
-  console.log('dataTasks', dataTasks);
+ /*  console.log('dataProcess', dataProcess);
+  console.log('dataTasks', dataTasks); */
 
   const tasksFiltradas = dataTasks.filter((task) => task.process === processId);
 
@@ -73,9 +73,12 @@ const Card: React.FC<dataCard> = ({ processId, processName, processStatus, proce
   if (dataProcessStatus === 'Atrasada') {
     statusProcess = 'Atrasada';
     processBarFill = "red";
-  } else if (dataProcessStatus === 'Em andamento') {
+  } else if (dataProcessStatus === 'Andamento') {
     statusProcess = 'Andamento';
     processBarFill = '#fbfb38';
+  } else if (dataProcessStatus === 'Pendente') {
+    statusProcess = 'Pendente';
+    processBarFill = '#bac8c9';
   } else {
     statusProcess = 'Concluida';
     processBarFill = '#54c5cd';
