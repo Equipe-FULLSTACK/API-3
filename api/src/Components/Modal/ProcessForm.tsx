@@ -80,14 +80,7 @@ export function ProcessForm({ setShowModal }: CadastroProps) {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         /*   console.log(formData) */
-        if (form.current) {
-            emailjs.sendForm('service_rm2otvc', 'template_vusbsfc', form.current, 'uTQ5qjDTE9qEl_Ekt')
-                .then((result) => {
-                    console.log(result.text);
-                }, (error) => {
-                    console.log(error.text);
-                });
-        }
+        
         
         const newProcess: ProcessToRedux = {
             id: dataProcess.length + 1,

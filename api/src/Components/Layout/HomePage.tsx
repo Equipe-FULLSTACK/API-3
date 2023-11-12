@@ -16,15 +16,13 @@ import Modal from '../Modal/Modal';
 import { ProcessModal } from '../Modal/ModalProcess/styles';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import LogProcess from '../Testes/teste copy';
-import LogTask from '../Testes/logtask';
 
 
 interface dataHomePage {
     name: string;
 }
 
-const LogPage: React.FC<dataHomePage> = () => {
+const HomePage: React.FC<dataHomePage> = () => {
     const [name, setName] = useState('')
     const navigate = useNavigate()
 
@@ -57,8 +55,7 @@ const LogPage: React.FC<dataHomePage> = () => {
             >
 
                 <SideBar pageName={'SideBar'} />
-                {/* <LogProcess pageName={'LogProcess'}/> */}
-                <LogProcess pageName={'LogTask'}/>
+                <Process pageName={'Process'} dataProcess={[]} bg={''} />
 
 
             </Wrapper>
@@ -68,4 +65,4 @@ const LogPage: React.FC<dataHomePage> = () => {
     );
 };
 
-export default LogPage;
+export default HomePage;

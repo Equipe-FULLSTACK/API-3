@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.13",
     "@mui/styled-engine-sc": "^6.0.0-alpha.1",
+    "@mui/x-data-grid": "^6.18.1",
     "axios": "^1.6.0",
     "fetch": "^1.1.0",
     "react": "^18.2.0",

@@ -28,7 +28,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "Fla*741137a",
+	password: "iannatacao",
 	database: "db"
 });
 
@@ -111,6 +111,32 @@ app.get("/logProcess", (req, res) => {
 		console.log("Dados solicitados para tabela de processos");
 
 		var sql = 'SELECT * FROM log_processes';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+app.get("/logTask", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados para tabela de processos");
+
+		var sql = 'SELECT * FROM log_tasks';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+app.get("/log_users", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados para tabela de processos");
+
+		var sql = 'SELECT * FROM log_users';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
 			res.json(result);
