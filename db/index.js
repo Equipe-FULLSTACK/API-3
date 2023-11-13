@@ -1,3 +1,4 @@
+var multer = require('multer');
 
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -28,7 +29,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "iannatacao",
+	password: "fatec",
 	database: "db"
 });
 
@@ -476,6 +477,26 @@ app.post('/deleteevidence', function (req, res) {
 	return res.redirect('http://localhost:5173/processos');
 });
 
+//UPLOAD DE ARQUIVOS
+var location = "";
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		location = "";
+		cb(null, 'uploads/');
+	},
+	filename: (req, file, cb) => {
+		cb(null, Date.now() + '-' + file.originalname);
+		location = Date.now() + '-' + file.originalname;
+	}
+});
+const upload = multer({ storage: storage });
+
+module.exports = upload;
+
+//UPLOAD DE ARQUIVOS
+app.post('/upload', upload.single('file'), (req, res) => {
+  res.json({ message: location });
+});
 
 app.listen(PORT, () => {
 	console.log(`Servidor recebendo dados no port ${PORT}`);
