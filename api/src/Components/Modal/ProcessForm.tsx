@@ -113,10 +113,10 @@ export function ProcessForm({ setShowModal }: CadastroProps) {
                 <input type="date" name="dateFinished"
                     value={formData?.dateFinished}
                     onChange={handleInputChange} />
-                <div className="modaldiv">Hora Final</div>
+                {/* <div className="modaldiv">Hora Final</div>
                 <input type="time" name="hourFinished"
                     value={formData?.hourFinished}
-                    onChange={handleInputChange} />
+                    onChange={handleInputChange} /> */}
                 <button type="submit" onClick={() => { alert('Processo criado!'); }}>Cadastrar</button>
             </form>
         </div>

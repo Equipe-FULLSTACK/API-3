@@ -29,6 +29,7 @@ export const createTask = (taskData: TaskToRedux): ThunkAction<void, RootState, 
     try {
       const newTask = await createTaskApi(taskData);
       console.log('taskAction createTask', newTask); /// CONTROLE ERRO
+      { alert('Tarefa CRIADA com Sucesso!'); }
       dispatch(fetchTasks());
     } catch (error) {
       console.error(error);
@@ -43,6 +44,7 @@ export const updateTask = (taskId: number, updatedData: TaskToRedux): ThunkActio
     try {
       const updateTaskToBackend = await updateTaskApi(taskId, updatedData);
       console.log('taskAction updatedTask',updateTaskToBackend)
+      { alert('Tarefa Atualizada com Sucesso!'); }
       dispatch({
         type: 'UPDATE_TASK', 
         payload: updatedData,
@@ -59,7 +61,7 @@ export const deleteTask = (taskId: number): ThunkAction<void, RootState, null, T
     try {
       console.log('taskAction deleteTaskApi', taskId); /// CONTROLE ERRO
       await deleteTaskApi(taskId);
-      
+      { alert('Tarefa DELETADA com Sucesso!'); }
       dispatch({
         type: 'DELETE_TASK',
         payload: { taskId },

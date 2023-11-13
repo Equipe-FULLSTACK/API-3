@@ -29,7 +29,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "fatec",
+	password: "Fla*741137a",
 	database: "db"
 });
 
@@ -383,25 +383,29 @@ app.post('/updateprocess', function (req, res) {
 
 // FUNÇÃO PARA ATUALIZAR TASKS NO BANCO DE DADOS
 app.post('/updatetask/:id', function (req, res) {
-	const taskId = req.params.id;
-	const { status, name, deadline, description } = req.body;
+    const taskId = req.params.id;
+    const { status, name, deadline, description } = req.body;
 
-	if (name && deadline) {
-		const sql = 'UPDATE tasks SET status = ?, name = ?, deadline = STR_TO_DATE(?, "%d/%m/%Y"), description = ? WHERE id = ?';
-		con.query(sql, [status, name, deadline, description, taskId], function (err, result) {
-			if (err) {
-				console.error('Erro ao atualizar tarefa:', err);
-				return res.status(500).json({ error: 'Erro interno do servidor' });
-			}
+    // Convertendo a data para o formato correto (YYYY-MM-DD)
+    const formattedDeadline = deadline ? deadline.split('/').reverse().join('-') : null;
 
-			console.log('Tarefa atualizada com sucesso');
-			return res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
-		});
-	} else {
-		console.log("Erro: Campos inválidos");
-		return res.status(400).json({ error: 'Campos inválidos' });
-	}
+    const sql = 'UPDATE tasks SET status = ?, name = ?, deadline = STR_TO_DATE(?, "%Y-%m-%d"), description = ? WHERE id = ?';
+
+    // Adicionando console.log para verificar o comando SQL
+    console.log('Comando SQL:', sql);
+    console.log('Parâmetros:', [status, name, formattedDeadline, description, taskId]);
+
+    con.query(sql, [status, name, formattedDeadline, description, taskId], function (err, result) {
+        if (err) {
+            console.error('Erro ao atualizar tarefa:', err);
+            return res.status(500).json({ error: 'Erro interno do servidor' });
+        }
+
+        console.log('Tarefa atualizada com sucesso');
+        return res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
+    });
 });
+
 
 // FUNÇÃO PARA ATUALIZAR EVIDENCIAS NO BANCO DE DADOS
 app.post('/updateevidence', function (req, res) {
