@@ -29,7 +29,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "Fla*741137a",
+	password: "fatec",
 	database: "db"
 });
 
@@ -122,7 +122,7 @@ app.get("/logProcess", (req, res) => {
 app.get("/logTask", (req, res) => {
 	con.connect(function (err) {
 		if (err) throw err;
-		console.log("Dados solicitados para tabela de processos");
+		console.log("Dados solicitados para tabela de log test");
 
 		var sql = 'SELECT * FROM log_tasks';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
@@ -135,7 +135,7 @@ app.get("/logTask", (req, res) => {
 app.get("/log_users", (req, res) => {
 	con.connect(function (err) {
 		if (err) throw err;
-		console.log("Dados solicitados para tabela de processos");
+		console.log("Dados solicitados para tabela log usuários");
 
 		var sql = 'SELECT * FROM log_users';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {

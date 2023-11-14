@@ -22,13 +22,14 @@ import Admin from './pages/Admin.tsx';
 import TestComponent from './Components/Testes/teste.tsx';
 import LogPage from './Components/Layout/LogPage.tsx';
 import DataTableUser from './Components/LogDataTable/logdatatableuser.tsx';
-
+import LogTask from './Components/Testes/logtask';
 
 const App:React.FC = ()=> (
  <>
     <ThemeProvider theme={dark}>
       <GlobalStyle/>
       <Provider store={store}>
+        
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
@@ -41,6 +42,7 @@ const App:React.FC = ()=> (
           <Route path="/admin" element={<Admin />} />
           <Route path="/datatable" element={<DataTable />} />
           <Route path="/datatableuser" element={<DataTableUser />} />
+          <Route path="/datatabletask" element={<LogTask />} />
           <Route path="/logs" element={<LogPage name='LogPage'/>} />
         </Routes>
       </Provider>
