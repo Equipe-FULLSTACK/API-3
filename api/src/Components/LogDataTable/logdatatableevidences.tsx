@@ -15,17 +15,20 @@ import { useNavigate } from 'react-router-dom';
 
 interface Row{
     id: number,
-    process: number,
+    originalid: number,
+    changetime: string,
+    task: number,
     active: boolean,
-    status: string, 
+    status: string,
     name: string,
-    created: string ,
-    deadline: string,
-    description: string ,
+    created: string,
+    description: string,
+    type: string,
+    url: string,
 }
 
 
-export default function DataTableTask() {
+export default function DataTableEvidencia() {
   const API_URL = 'http://localhost:3000';
   const [data, setdata] = useState<Row[]>([]);
   
@@ -54,8 +57,8 @@ export default function DataTableTask() {
   
   const fetchLogTask = async () => {
     try {
-      console.log('API fetchTasks enviado a rota ', API_URL, '/logTask - GET');
-      const response = await axios.get(`${API_URL}/logTask`);
+      console.log('API fetchTasks enviado a rota ', API_URL, '/log_evidences - GET');
+      const response = await axios.get(`${API_URL}/log_evidences`);
       return response.data;
     } catch (error) {
       console.error('Erro ao buscar tarefas:', error);
@@ -85,62 +88,67 @@ export default function DataTableTask() {
   
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'process', headerName: 'process', width: 130 },
+    { field: 'originalid', headerName: 'originalid', width: 130 },
+    { field: 'changetime', headerName: 'changetime', width: 130 },
+    { field: 'task', headerName: 'task', width: 130 },
     { field: 'active', headerName: 'active', width: 130 },
     { field: 'status', headerName: 'status', width: 130 },
     { field: 'name', headerName: 'name', width: 130 },
     { field: 'created', headerName: 'created', width: 130 },
-    { field: 'deadline', headerName: 'deadline', width: 130 },
     { field: 'description', headerName: 'description', width: 130 },
+    { field: 'type', headerName: 'type', width: 130 },
+    { field: 'url', headerName: 'editevidences', width: 130 },
   ];
   
   const rows: Row[] = data.map((row) => ({
     id: row.id,
-    process: row.process,
+    originalid: row.originalid,
+    changetime: row.changetime,
+    task: row.task,
     active: row.active,
     status: row.status,
     name: row.name,
     created: row.created,
-    deadline: row.deadline,
     description: row.description,
+    type: row.type,
+    url: row.url,
   }));
   
   
     return (
-      <div>
-          <NavBar userName={name} pageName={'NavBar'} />
-              <Divider />
-              <Modal>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus soluta velit, earum aperiam quas dolorum nesciunt inventore ullam tempore expedita neque beatae? Quidem ipsum enim porro, fugiat exercitationem asperiores omnis?</p>
-              </Modal>
-              <Wrapper
-                  display='flex'
-                  flexDirection='collum'
-                  justifyContent='flex-start'
-                  flexWrap='nowrap'
-              >
-  
-                  <SideBar pageName={'SideBar'} />
-                  {/* <LogProcess pageName={'LogProcess'}/> */}
-                  <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  initialState={{
-                 pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
-                   },
-                   }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-        />
-  
-  
-              </Wrapper>
-  
-              <Footer pageName={'Footer'} />
-  
-  
-      </div>
-  
+    <div>
+        <NavBar userName={name} pageName={'NavBar'} />
+            <Divider />
+            <Modal>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus soluta velit, earum aperiam quas dolorum nesciunt inventore ullam tempore expedita neque beatae? Quidem ipsum enim porro, fugiat exercitationem asperiores omnis?</p>
+            </Modal>
+            <Wrapper
+                display='flex'
+                flexDirection='collum'
+                justifyContent='flex-start'
+                flexWrap='nowrap'
+            >
+
+                <SideBar pageName={'SideBar'} />
+                {/* <LogProcess pageName={'LogProcess'}/> */}
+                <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{
+               pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+                 },
+                 }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+      />
+
+
+            </Wrapper>
+
+            <Footer pageName={'Footer'} />
+
+
+    </div>
     );
   }

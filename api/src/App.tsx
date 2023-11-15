@@ -23,6 +23,9 @@ import TestComponent from './Components/Testes/teste.tsx';
 import LogPage from './Components/Layout/LogPage.tsx';
 import DataTableUser from './Components/LogDataTable/logdatatableuser.tsx';
 import LogTask from './Components/Testes/logtask';
+import DataTableTask from './Components/LogDataTable/logdatatabletask.tsx';
+import DataTableRoles from './Components/LogDataTable/logdatatableroles.tsx';
+import DataTableEvidencia from './Components/LogDataTable/logdatatableevidences.tsx';
 
 const App:React.FC = ()=> (
  <>
@@ -42,7 +45,9 @@ const App:React.FC = ()=> (
           <Route path="/admin" element={<Admin />} />
           <Route path="/datatable" element={<DataTable />} />
           <Route path="/datatableuser" element={<DataTableUser />} />
-          <Route path="/datatabletask" element={<LogTask />} />
+          <Route path="/datatabletask" element={<DataTableTask />} />
+          <Route path="/datatableroles" element={<DataTableRoles />} />
+          <Route path="/datatableevidencia" element={<DataTableEvidencia />} />
           <Route path="/logs" element={<LogPage name='LogPage'/>} />
         </Routes>
       </Provider>

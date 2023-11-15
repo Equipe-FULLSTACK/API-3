@@ -29,7 +29,7 @@ const limiter = rateLimit({
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "fatec",
+	password: "iannatacao",
 	database: "db"
 });
 
@@ -138,6 +138,32 @@ app.get("/log_users", (req, res) => {
 		console.log("Dados solicitados para tabela log usuários");
 
 		var sql = 'SELECT * FROM log_users';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+app.get("/log_roles", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados para tabela log usuários");
+
+		var sql = 'SELECT * FROM log_roles';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+app.get("/log_evidences", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados para tabela log usuários");
+
+		var sql = 'SELECT * FROM log_evidences';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
 			if (err) throw err;
 			res.json(result);
