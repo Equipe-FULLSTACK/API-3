@@ -134,11 +134,9 @@ export default function DataTableTask() {
           checkboxSelection
         />
   
-  
-              </Wrapper>
-  
-              <Footer pageName={'Footer'} />
-  
+  </Wrapper>
+
+            <Footer pageName={'Footer'} />
   
       </div>
   

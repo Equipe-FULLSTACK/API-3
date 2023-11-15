@@ -26,6 +26,7 @@ import LogTask from './Components/Testes/logtask';
 import DataTableTask from './Components/LogDataTable/logdatatabletask.tsx';
 import DataTableRoles from './Components/LogDataTable/logdatatableroles.tsx';
 import DataTableEvidencia from './Components/LogDataTable/logdatatableevidences.tsx';
+import DataTableRender from './Components/LogDataTable/datatablerender.tsx';
 
 const App:React.FC = ()=> (
  <>
@@ -48,6 +49,7 @@ const App:React.FC = ()=> (
           <Route path="/datatabletask" element={<DataTableTask />} />
           <Route path="/datatableroles" element={<DataTableRoles />} />
           <Route path="/datatableevidencia" element={<DataTableEvidencia />} />
+          <Route path="/datatablerender" element={<DataTableRender />} />
           <Route path="/logs" element={<LogPage name='LogPage'/>} />
         </Routes>
       </Provider>

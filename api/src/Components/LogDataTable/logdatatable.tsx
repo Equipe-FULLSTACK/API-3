@@ -121,10 +121,9 @@ const rows: Row[] = data.map((row) => ({
                 flexDirection='collum'
                 justifyContent='flex-start'
                 flexWrap='nowrap'
-            >
-
-                <SideBar pageName={'SideBar'} />
-                {/* <LogProcess pageName={'LogProcess'}/> */}
+                >
+            
+            <SideBar pageName={'SideBar'} />
                 <DataGrid
                 rows={rows}
                 columns={columns}
@@ -137,8 +136,7 @@ const rows: Row[] = data.map((row) => ({
         checkboxSelection
       />
 
-
-            </Wrapper>
+    </Wrapper>
 
             <Footer pageName={'Footer'} />
 
