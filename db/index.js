@@ -171,6 +171,46 @@ app.get("/log_evidences", (req, res) => {
 	});
 });
 
+app.get("/log_template_processes", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados para tabela log usuários");
+
+		var sql = 'SELECT * FROM log_template_processes';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+app.get("/log_template_processes", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados para tabela log usuários");
+
+		var sql = 'SELECT * FROM log_template_processes';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+app.get("/log_template_evidences", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados para tabela log usuários");
+
+		var sql = 'SELECT * FROM log_template_evidences';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
+
+
 
 
 
