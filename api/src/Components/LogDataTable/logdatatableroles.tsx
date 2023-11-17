@@ -4,7 +4,7 @@ import { Container, Divider, Modal } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { idID } from '@mui/material/locale';
-import './logdatatable.css'
+
 import SideBar from '../Slidebar/Slidebar';
 import { Wrapper } from '../Navbar/styles';
 import Footer from '../Footer/Footer';
@@ -39,22 +39,6 @@ export default function DataTableRoles() {
     name: string;
   }
   
-    const [name, setName] = useState('')
-    const navigate = useNavigate()
-  
-    axios.defaults.withCredentials = true;
-    useEffect(() =>{
-        axios.get('http://localhost:3000/ck')
-        .then( res => {
-            if(res.data.valid) {
-                setName(res.data.username);
-            } else {
-                navigate('/')
-            }
-            console.log(res)
-        })
-        .catch(err => console.log(err))
-    },[])
   
   
   
@@ -126,20 +110,6 @@ export default function DataTableRoles() {
   
     return (
     <div>
-        <NavBar userName={name} pageName={'NavBar'} />
-            <Divider />
-            <Modal>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus soluta velit, earum aperiam quas dolorum nesciunt inventore ullam tempore expedita neque beatae? Quidem ipsum enim porro, fugiat exercitationem asperiores omnis?</p>
-            </Modal>
-            <Wrapper
-                display='flex'
-                flexDirection='collum'
-                justifyContent='flex-start'
-                flexWrap='nowrap'
-            >
-
-                <SideBar pageName={'SideBar'} />
-                {/* <LogProcess pageName={'LogProcess'}/> */}
                 <DataGrid
                 rows={rows}
                 columns={columns}
@@ -153,10 +123,7 @@ export default function DataTableRoles() {
       />
 
 
-            </Wrapper>
-
-            <Footer pageName={'Footer'} />
-
+           
 
     </div>
     );
