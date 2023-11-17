@@ -1,5 +1,7 @@
 var multer = require('multer');
 
+var nodemailer = require('nodemailer');
+
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
@@ -17,7 +19,23 @@ var server = http.createServer(app);
 
 const cors = require('cors');
 
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'fullstacksjc@gmail.com',
+    pass: 'gatw bjje lkgp kuhy'
+  }
+});
 
+function sendEmail(email, title, content){
+	transporter.sendMail({ from: 'fullstacksjc@gmail.com', to: email, subject: title, text: content}, function(error, info){
+	  if (error) {
+		console.log(error);
+	  } else {
+		console.log('Email sent: ' + info.response);
+	  }
+	});
+}
 
 const PORT = process.env.PORT || 3000;
 
