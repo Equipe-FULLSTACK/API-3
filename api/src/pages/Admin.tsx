@@ -13,13 +13,15 @@ export default function Admin() {
   const [name, setName] = useState('')
   const [admin, setAdmin] = useState('')
   const navigate = useNavigate()
+  const [selectedRole, setSelectedRole] = useState('');
+
 
   useEffect(() => {
     fetch(`http://localhost:3000/us?us${id}`)
-      .then((response) => response.json())
-      .then((data) => setSeuJSON(data))
-      .catch((error) => console.error("Erro ao buscar o JSON", error));
-  }, []);
+    .then((response) => response.json())
+    .then((data) => setSeuJSON(data))
+    .catch((error) => console.error("Erro ao buscar o JSON", error));
+}, []);
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -28,54 +30,55 @@ export default function Admin() {
             if(res.data.valid) {
                 setName(res.data.username);
                 setAdmin(res.data.admin);
-                if(res.data.admin == 1){
+                setSelectedRole(res.data.role)
+                if(res.data.role == 1){
                   console.log('Usuario admin confirmado')
                 } else{
                   alert('Acesso Negado')
                   console.log(res)
-                  navigate('/')
-                  
+                  navigate('/')                  
                 }
-            } else {
-                alert('Acesso Negado')
-                navigate('/')
-            }
+            } else{
+              alert('Acesso Negado')
+              console.log(res)
+              navigate('/')}
             console.log(res)
         })
         .catch(err => console.log(err))
     },[])
 
-  const handleAdminToggle = (userId) => {
-    const userToUpdate = seuJSON.find((user) => user.id === userId);
-    const updatedValue = userToUpdate.admin === 1 ? 0 : 1;
-
-    fetch(`http://localhost:3000/atualizarAdmin/${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ admin: updatedValue }),
-    })
-      .then((response) => {
+    
+    const handleAtualizar = async (userID) => {
+      const userToUpdate = seuJSON.find((user) => user.id === userID);
+    
+      try {
+        const response = await fetch(`http://localhost:3000/atualizarRole/${userID}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ role: selectedRole }),
+        });
+    
         if (response.status === 200) {
           // Atualização bem-sucedida no servidor.
-          // Agora atualize o estado no cliente para refletir as alterações.
+          // Atualize o estado no cliente para refletir as alterações.
           const updatedUsers = seuJSON.map((user) => {
-            if (user.id === userId) {
-              user.admin = updatedValue;
+            if (user.id === userID) {
+              user.role = selectedRole;
             }
             return user;
           });
+    
           setSeuJSON(updatedUsers);
         }
-      })
-      .catch((error) => console.error("Erro ao atualizar admin:", error));
-  };
+      } catch (error) {
+        console.error("Erro ao atualizar a role:", error);
+      }
+    };
+    
 
-  const handleActiveToggle = (userActive) => {
-    // Implemente a lógica para alternar o status de admin para o usuário com o userId.
-    // Você pode enviar uma solicitação ao seu backend para atualizar o status do usuário.
-  };
+
 
   return (
     <>
@@ -97,8 +100,8 @@ export default function Admin() {
                       <tr >
                         <th className="admin-tr">Nome</th>
                         <th  className="admin-tr">E-mail</th>
-                        <th  className="admin-tr">Admin</th>
                         <th  className="admin-tr">Role</th>
+                        <th  className="admin-tr"></th>
                       </tr>
                       <tr className="admin-tr">
                         <td className="admin-td">
@@ -109,29 +112,21 @@ export default function Admin() {
                         </td>
                         <td className="admin-td">
                           <div>
-                            <label>
-                              <span className="admin-text"> Admin</span>
-                              <input
-                                className="admin-check"
-                                type="checkbox"
-                                checked={user.admin}
-                                onChange={() => handleAdminToggle(user.id)}
-                              />
-                            </label>
+                            <select
+                              name="role"
+                              id="role"
+                              value={user.role}
+                              onChange={(e) => setSelectedRole(e.target.value)}
+                            >
+                              <option value="1">Administrador</option>
+                              <option value="4">C-level</option>
+                              <option value="2">Gerente</option>
+                              <option value="3">Desenvolvedor</option>
+                            </select>
                           </div>
                         </td>
                         <td className="admin-td">
-                          <div className="admin-text">
-                            <label>
-                              <span className="admin-text">Ativo</span>
-                              <input
-                                className="admin-check"
-                                type="checkbox"
-                                checked={user.active}
-                                onChange={() => handleActiveToggle(user.id)}
-                              />
-                            </label>
-                          </div>
+                          <button onClick={() => handleAtualizar(user.id)}>Atualizar</button>
                         </td>
                       </tr>
                     </thead>
