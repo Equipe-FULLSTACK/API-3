@@ -60,4 +60,4 @@ Ao longo da Sprint, foi feito um levantamento de requisitos e implementadas nova
   ## <br>
   ## <a href="https://github.com/Equipe-FULLSTACK/API-3/tree/Sprint3">Terceira Sprint</a>
   ## <br>
-  ## <a href="">Quarta Sprint</a>
+  ## <a href="https://github.com/Equipe-FULLSTACK/API-3/tree/Sprint4">Quarta Sprint</a>
