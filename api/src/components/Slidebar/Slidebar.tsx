@@ -45,8 +45,7 @@ const SideBar: React.FC<dataSideBar> = ({pageName}) => {
                 <Link href='/admin'><img src={lock} alt="lock"/>Permissões</Link>
                 <Link href='#'><img src={detail} alt="lock"/>Editar Ordem</Link>
                 <Link href='#'><img src={notification} alt="lock"/>Notificações</Link>
-                <Link href='#'><img src={graph} alt="lock"/>Gráficos</Link>
-                <Link href='/datatable'><img src={graph} alt="lock"/>Logs</Link>      
+                <Link href='/datatablerender'><img src={graph} alt="lock"/>Logs</Link>      
             </Wrapper>  
 
           </Wrapper>
