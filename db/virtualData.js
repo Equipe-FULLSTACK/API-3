@@ -30,8 +30,34 @@ con.connect(function(err) {
 	});
 
 
+	//DADOS DE ROLES
+	var sql =`INSERT INTO roles (id, name, editroles, editusers, editprocesses, edittasks, edittemplates, editevidences, viewprocesses, viewtasks, viewevidences) VALUES 
+	('1', 'admin', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
+	('2', 'gerente', '0', '0', '1', '1', '1', '1', '1', '1', '1'),
+	('3', 'desenvolvedor', '0', '0', '0', '1', '1', '1', '1', '1', '1'),
+	('4', 'c-level', '0', '0', '0', '0', '0', '0', '1', '1', '1');`;
 
+	con.query(sql, function (err, result) {
+		if (err) throw err;
+		console.log("Inserido dados de roles para aplicação.");
+	});
+
+
+	// CREATE DEFAULT USERS
+	var sql = `INSERT INTO users (admin, name, nickname, password, phone, email, image, role) VALUES 
+	(1, "admin", "admin", "admin", "129999-9999", "admin@admin.com.br", "https://avatars.githubusercontent.com/u/127335772?v=4", 1),
+	(1, "leo", "leo", "leo", "123-456", "leo@leo.com", "", 3),
+	(1, "pedro", "pedro", "pedro", "654-321", "pedro@pedro.com", "", 2),
+	(1, "thiago", "thiago", "thiago", "456-123", "thiago@thiago.com", "", 3),
+	(1, "juliano", "juliano", "juliano", "123-456", "juliano@juliano.com", "", 2),
+	(1, "ian", "ian", "ian", "123-456", "ian@ian.com", "", 3),
+	(1, "jean", "jean", "jean", "123-456", "jean@jean.com", "", 3);`;
 	
+	con.query(sql, function (err, result) {
+		if (err) throw err;
+		console.log("Criado usuários padrão");
+	});
+
 	//DADOS GENÉRICOS TASKS
 	var sql = `INSERT INTO tasks (process, active, status, name, created, deadline, description) VALUES 
 	(1, 1, 'Andamento', 'Task 1: Revisar requisitos', NOW(), '2023-11-10', 'Revisão dos requisitos para o sistema de documentação de vendas'),

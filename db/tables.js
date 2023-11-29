@@ -50,14 +50,6 @@ con.connect(function(err) {
 		if (err) throw err;
 		console.log("Tabela USERS criada");
 	});
-
-	// CREATE USER DEFAULT ADMIN
-	var sql = 'INSERT INTO users (admin, name, nickname, password, phone, email, image) VALUES (1, "admin", "admin", "admin", "129999-9999", "admin@admin.com.br", "https://avatars.githubusercontent.com/u/127335772?v=4")';
-	con.query(sql, function (err, result) {
-		if (err) throw err;
-		console.log("Criado usuário admin padrão");
-	});
-
 	
 	
 	//PROCESSES
