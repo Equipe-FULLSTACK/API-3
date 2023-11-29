@@ -45,7 +45,7 @@ Ao longo da Sprint, foi feito um levantamento de requisitos e implementadas nova
 
 
  <br>
-  <div align="center"> <img src="/readme/burndown3.png "width="640" height="360"> </div>
+  <div align="center"> <img src="/readme/Burndown4SP.png "width="640" height="360"> </div>
   <br>
   
   
