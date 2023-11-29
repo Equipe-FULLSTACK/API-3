@@ -71,6 +71,7 @@ export default function Admin() {
           });
     
           setSeuJSON(updatedUsers);
+          alert(`Atualização Bem Sucedida`);
         }
       } catch (error) {
         console.error("Erro ao atualizar a role:", error);
@@ -115,7 +116,8 @@ export default function Admin() {
                             <select
                               name="role"
                               id="role"
-                              value={user.role}
+                              className="admin-combo"
+                              defaultValue={user.role}
                               onChange={(e) => setSelectedRole(e.target.value)}
                             >
                               <option value="1">Administrador</option>
@@ -126,7 +128,7 @@ export default function Admin() {
                           </div>
                         </td>
                         <td className="admin-td">
-                          <button onClick={() => handleAtualizar(user.id)}>Atualizar</button>
+                          <button className="admin-button" onClick={() => handleAtualizar(user.id)}>Atualizar</button>
                         </td>
                       </tr>
                     </thead>

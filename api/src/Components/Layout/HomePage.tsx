@@ -24,6 +24,7 @@ interface dataHomePage {
 
 const HomePage: React.FC<dataHomePage> = () => {
     const [name, setName] = useState('')
+    const [selectedRole, setSelectedRole] = useState('');
     const navigate = useNavigate()
 
     axios.defaults.withCredentials = true;
@@ -32,6 +33,7 @@ const HomePage: React.FC<dataHomePage> = () => {
         .then( res => {
             if(res.data.valid) {
                 setName(res.data.username);
+                setSelectedRole(res.data.role)
             } else {
                 navigate('/')
             }
@@ -53,8 +55,8 @@ const HomePage: React.FC<dataHomePage> = () => {
                 justifyContent='flex-start'
                 flexWrap='nowrap'
             >
-
-                <SideBar pageName={'SideBar'} />
+                {selectedRole == '1' ? <SideBar pageName={'SideBar'} /> : null}
+                
                 <Process pageName={'Process'} dataProcess={[]} bg={''} />
 
 

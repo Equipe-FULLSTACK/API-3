@@ -56,3 +56,15 @@
   background-color: #54c5ce;
   color: black;
 }
+
+.admin-button {
+  background-color: #54c5ce;
+  color: black;
+  font-size: medium;
+  font-size: large;
+}
+
+.admin-combo {
+  background-color: #D9D9D9;
+  color: black;
+}
