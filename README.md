@@ -25,11 +25,8 @@ Equipe FULLSTACK - API 3º Semestre
   <img src="/readme/autentic.png" width="640" height="360"><br>
   <img src="/readme/processos.png" width="640" height="360"><br>
   <img src="/readme/task.png" width="640" height="360"><br>
-<<<<<<< HEAD
   <img src="/readme/adminFinal.png" width="640" height="360"><br>
-=======
   <img src="/readme/admin_final.png" width="640" height="360"><br>
->>>>>>> main
   </div>
  
  
