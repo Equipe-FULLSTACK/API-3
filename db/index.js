@@ -83,6 +83,7 @@ app.get("/", (req, res) => {
 		console.log("Conectado");
 
 		var sql = 'SELECT id, status, name, DATE_FORMAT(created, "%y-%m-%d %H:%i:%S") AS created, DATE_FORMAT(deadline, "%y-%m-%d %H:%i:%S") AS deadline, description FROM processes';
+		console.log(`rodando`)
 		con.query(sql, function (err, result, fields) {
 			if (err) throw err;
 			res.json(result);
@@ -321,20 +322,20 @@ app.get("/roles", (req, res) => {
 // FUNÇÃO QUE FAZ O CADASTRO DE NOVOS USUÁRIOS NO BANCO DE DADOS
 app.post('/register', function (req, res) {
 	const { login, apelido, email, senha, tel } = req.body;
-	const { authorization } = req.headers;
+	console.log(`recebidos os dados: ${login}, ${apelido}, ${email}, ${senha}, ${tel}`)
 	if (login != "" && apelido != "" && email != "" && senha != "" && tel != "") {
 		con.connect(function (err) {
 			if (err) throw err;
 			console.log("Inserindo");
-			var sql = 'INSERT INTO users (admin, name, password, email, phone) VALUES (false, ?, ?, ?, ?)';
-			con.query(sql, [login, senha, email, tel], function (err, result) {
+			var sql = 'INSERT INTO users (admin, name, nickname, password, phone, email, image, role) VALUES (0, ?, ?, ?, ?, ?, "", 4)';
+			con.query(sql, [login, apelido, senha, tel, email ], function (err, result) {
 				if (err) throw err;
 			});
+			console.log("usuario cadastrado com sucesso")
 		});
 	} else {
 		console.log("Erro");
 	}
-	return res.redirect('http://localhost:5173/');
 });
 
 

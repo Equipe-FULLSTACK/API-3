@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { DataProcess } from "../Components/Process/Process";
 import '../static/css/cadastro.css';
 import emailjs from '@emailjs/browser';
+import axios from "axios";
+
 
 interface CadastroProps {
     setDataProcess: React.Dispatch<React.SetStateAction<DataProcess[]>>;
@@ -11,17 +13,10 @@ export function Cadastro({ setDataProcess }: CadastroProps) {
     const form = useRef<HTMLFormElement>(null);
     const [authString, setAuthString] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
-    const [sequenciaAleatoria, setSequenciaAleatoria] = useState<string>('');
-
-    useEffect(() => {
-        const sequence = gerarAleatorio();
-        setSequenciaAleatoria(sequence);
-    }, [])
 
     const openModal = () => {
         setModalOpen(true);
         sendEmail();
-      
     }
 
     const closeModal = () => {
@@ -29,53 +24,38 @@ export function Cadastro({ setDataProcess }: CadastroProps) {
     }
 
     function handleModalSubmit() {
-        if (authString === 'gfs5f') {
-            closeModal();
-        } else if (authString === sequenciaAleatoria) {
-            closeModal();
-        } else {
-            alert('Autenticação inválida');
-        }
+        const values = {
+            login: document.getElementById('login')?.value,
+            apelido: document.getElementById('apelido')?.value,
+            senha: document.getElementById('senha')?.value,
+            tel: document.getElementById('tel')?.value,
+            email: document.getElementById('email')?.value,
+        };
+    
+        axios.post('http://localhost:3000/register', values)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.error('Erro na solicitação Axios:', err);
+                // Add custom error handling here if needed
+            });
+    
+        closeModal();
+
+        alert(`Dados enviados com sucesso`);
     }
 
     function sendEmail() {
-        if (form.current) {
-
-        const inputSequencia = document.createElement('input');
-        inputSequencia.type = 'hidden';
-        inputSequencia.name = 'sequencia';
-        inputSequencia.value = sequenciaAleatoria;
-
-        // Adicionando o campo de input oculto ao formulário
-        form.current.appendChild(inputSequencia);
-
+        if (form.current){
             emailjs.sendForm('service_rm2otvc', 'template_o19yk8l', form.current, 'uTQ5qjDTE9qEl_Ekt')
           .then((result) => {
               console.log(result.text);
           }, (error) => {
               console.log(error.text);
           });
-
-          form.current.removeChild(inputSequencia);
         }
     }
-
-    function gerarAleatorio(): string {
-        const caracteres: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let aleatorio: string = '';
-      
-        for (let i = 0; i < 5; i++) {
-          const randomIndex: number = Math.floor(Math.random() * caracteres.length);
-          aleatorio += caracteres.charAt(randomIndex);
-        }
-      
-        return aleatorio;
-      }
-      
-      // Exemplo de uso da função
-     
-      console.log(sequenciaAleatoria);
-      
 
     return (
         <div className="cadastro-containerC" id="fundo">
@@ -122,11 +102,9 @@ export function Cadastro({ setDataProcess }: CadastroProps) {
                         <p>Digite seu Telefone</p>
                     </div>
 
-                    <input type="tel"  name="tel" id="tel" placeholder="Telefone" />
-
+                    <input type="tel" name="tel" id="tel" placeholder="Telefone" />
 
                     <button type="button" onClick={openModal}>Cadastrar</button>
-
 
                 </form>
                 <div className="cadastro-criar-contaC">
