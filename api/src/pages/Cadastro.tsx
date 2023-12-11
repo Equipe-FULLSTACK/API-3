@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import { DataProcess } from "../Components/Process/Process";
 import '../static/css/cadastro.css';
 import emailjs from '@emailjs/browser';
+import axios from "axios";
+
 
 interface CadastroProps {
     setDataProcess: React.Dispatch<React.SetStateAction<DataProcess[]>>;
@@ -22,12 +24,26 @@ export function Cadastro({ setDataProcess }: CadastroProps) {
     }
 
     function handleModalSubmit() {
-        
-        if (authString === 'gfs5f') {
-            closeModal();
-        } else {
-            alert('Autenticação inválida');
-        }
+        const values = {
+            login: document.getElementById('login')?.value,
+            apelido: document.getElementById('apelido')?.value,
+            senha: document.getElementById('senha')?.value,
+            tel: document.getElementById('tel')?.value,
+            email: document.getElementById('email')?.value,
+        };
+    
+        axios.post('http://localhost:3000/register', values)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.error('Erro na solicitação Axios:', err);
+                // Add custom error handling here if needed
+            });
+    
+        closeModal();
+
+        alert(`Dados enviados com sucesso`);
     }
 
     function sendEmail() {
