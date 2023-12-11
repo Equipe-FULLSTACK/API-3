@@ -22,6 +22,7 @@ import date from '../../../assets/icons/icon_calendar.png'
 import hour from '../../../assets/icons/icon_hour.png'
 import save from '../../../assets/icons/icon_save.png'
 import attach from '../../../assets/icons/attach.png'
+import ModalAttachment from '../ModalAttachment/ModalAttachment';
 
 
 interface dataProcessModal {
@@ -55,11 +56,14 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     const tasks = useSelector((state: RootState) => state.tasks.tasks);
     const process = useSelector((state: RootState) => state.processes.processes);
     const processModalId = useSelector((state: RootState) => state.modal.processId);
-    
+
 
     /// CARREGA VARIAVEL AUXILIAR MANIPULACAO NO COMPONENTE
     const [dataProcess, setDataProcess] = useState<ProcessToRedux[]>(useSelector((state: RootState) => state.processes.processes));
     const [dataTasks, setDataTasks] = useState<TaskToRedux[]>(useSelector((state: RootState) => state.tasks.tasks));
+
+    /// MANIPULACAO ANEXOS MODAL
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     /// ALIMENTA VARIAVEL AUXILIAR
     useEffect(() => {
@@ -72,7 +76,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     console.log('dataTasks', dataTasks); */
 
 
-    
+
     const [tasksFiltradas, setTasksFiltradas] = useState<TaskToRedux[]>(useSelector((state: RootState) => state.tasks.tasks));
 
 
@@ -82,7 +86,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
         setTasksFiltradas(filteredTasks);
     }, [processModalId, dataTasks]);
 
-    
+
 
 
 
@@ -109,7 +113,7 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
         .map((f) => f.status)[0]; // Acesso ao primeiro elemento do array
 
     let statusProcess;
-    
+
 
     if (dataProcessStatus === 'Atrasada') {
         statusProcess = 'Atrasada';
@@ -168,51 +172,51 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
 
 
     const addNewTask = (newTaskData: TaskToRedux) => {
-        
+
         newTaskData.process = processModalId;
         newTaskData.active = 1;
         newTaskData.name = '';
         newTaskData.description = '';
         newTaskData.deadline = '';
         newTaskData.status = 'Pendente';
-        
-        console.log('ModalProcess - addNewTask ',newTaskData);
+
+        console.log('ModalProcess - addNewTask ', newTaskData);
 
         dispatch(createTask(newTaskData));
-      
-        stopEditing(); 
-      };
 
-
-/* 
-    const addNewTask = () => {
-
-        const createdTaskLocal(task: TaskToRedux)
-
-
-        dispatch(createTask(editedTaskFields: TaskToRedux)
-
-        const newTask: TaskToRedux = {
-            id: tasks.length + 1,
-            process: processModalId, //
-            name: '',
-            description: '',
-            created: '',
-            status: 'Em Andamento',
-            deadline: '',
-            active: 1, 
-        }; 
-
-        // Disparar a ação ADD_TASK usando dispatch
-        dispatch({ type: 'ADD_TASK', payload: newTask });
-
-        // Restante do seu código para atualizar localmente as tasksFiltradas, se necessário
-        const updatedTasks = [...tasksFiltradas, newTask];
-        setTasksFiltradas(updatedTasks);
-
-
+        stopEditing();
     };
-*/
+
+
+    /* 
+        const addNewTask = () => {
+    
+            const createdTaskLocal(task: TaskToRedux)
+    
+    
+            dispatch(createTask(editedTaskFields: TaskToRedux)
+    
+            const newTask: TaskToRedux = {
+                id: tasks.length + 1,
+                process: processModalId, //
+                name: '',
+                description: '',
+                created: '',
+                status: 'Em Andamento',
+                deadline: '',
+                active: 1, 
+            }; 
+    
+            // Disparar a ação ADD_TASK usando dispatch
+            dispatch({ type: 'ADD_TASK', payload: newTask });
+    
+            // Restante do seu código para atualizar localmente as tasksFiltradas, se necessário
+            const updatedTasks = [...tasksFiltradas, newTask];
+            setTasksFiltradas(updatedTasks);
+    
+    
+        };
+    */
     const [selectedFiles, setSelectedFiles] = useState<Record<number, File | null>>({});
 
 
@@ -222,12 +226,12 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
 
         if (selectedFile) {
             setSelectedFiles((prev) => ({ ...prev, [taskId]: selectedFile }));
-            
+
 
             const formData = new FormData();
             formData.append('file', selectedFile);
             fileInput.value = '';
-            
+
             fetch('/seu-endpoint-de-upload', {
                 method: 'POST',
                 body: formData,
@@ -246,6 +250,15 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
     }
 
 
+
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -378,8 +391,8 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                             >
                                                 <option className={'Pendente'} value="Pendente">Pendente</option>
                                                 <option className={'Atrasada'} value="Atrasada">Atrasada</option>
-                                                <option className={'Concluida'}value="Concluida">Completada</option>
-                                                <option className={'Andamento'}value="Andamento">Andamento</option>
+                                                <option className={'Concluida'} value="Concluida">Completada</option>
+                                                <option className={'Andamento'} value="Andamento">Andamento</option>
                                             </select>
 
                                         </>
@@ -431,6 +444,19 @@ const ModalProcess: React.FC<dataProcessModal> = () => {
                                                             />
                                                         </label>
                                                     </button>
+                                                    
+                                                    /* <div>
+                                                        <button onClick={handleOpenModal}>
+                                                            <i className="material-icons"><img src={attach} alt="Attach File" /></i>
+                                                        </button>
+
+                                                        <ModalAttachment
+                                                            isOpen={isModalOpen}
+                                                            handleClose={handleCloseModal}
+                                                            idNumber={task.id}
+                                                        />
+                                                    </div>*/
+
                                                 )}
 
                                                 {selectedFiles[task.id] ? (
