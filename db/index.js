@@ -111,7 +111,6 @@ app.get("/p", (req, res) => {
 app.get("/t", (req, res) => {
 	con.connect(function (err) {
 		if (err) throw err;
-		console.log("Dados solicitados para tabela de tarefas");
 
 		var sql = 'SELECT id, process, active, status, name, DATE_FORMAT(CONVERT(created, date), "%d/%m/%Y") AS created, DATE_FORMAT(CONVERT(deadline, date), "%d/%m/%Y") AS deadline, description FROM tasks';
 		con.query(sql, req.url.substring(4), function (err, result, fields) {
@@ -121,6 +120,19 @@ app.get("/t", (req, res) => {
 	});
 });
 
+// FUNÇÃO PARA RECEBER OS JSON DAS EVIDENCIAS NA ROTA localhost:3000/e
+app.get("/e", (req, res) => {
+	con.connect(function (err) {
+		if (err) throw err;
+		console.log("Dados solicitados");
+
+		var sql = 'SELECT id, active, status, name, DATE_FORMAT(CONVERT(created, date), "%d/%m/%Y") AS created, DATE_FORMAT(CONVERT(updated, date), "%d/%m/%Y") AS updated, description, type, url FROM evidences';
+		con.query(sql, req.url.substring(4), function (err, result, fields) {
+			if (err) throw err;
+			res.json(result);
+		});
+	});
+});
 
 
 ///// ROTA PARA COLETA DAS LOGS
